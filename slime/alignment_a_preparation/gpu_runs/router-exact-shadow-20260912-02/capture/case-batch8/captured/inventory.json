@@ -1,0 +1,13 @@
+{
+  "sample_count": 8,
+  "trace_coverage_count": 8,
+  "trace_shape_suffix": [
+    48,
+    8
+  ],
+  "raw_trace_bytes": 2055168,
+  "training_topology_gate": "not_run",
+  "alignment_replay_gate": "not_run",
+  "actual_dispatch_route_gate": "not_run",
+  "timing_use": "capture overhead included; not performance benchmark"
+}

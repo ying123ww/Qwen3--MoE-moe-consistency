@@ -1,0 +1,62 @@
+{
+  "0": {
+    "kernel_count": 2610,
+    "unlinked": 0,
+    "families": {
+      "attention_output": {
+        "calls": 864,
+        "gpu_ms": 44.57478000000003,
+        "cpu_mm_ms": 84.09763199999998,
+        "cpu_launch_ms": 5.8196030000000025
+      },
+      "attention_qkv": {
+        "calls": 864,
+        "gpu_ms": 48.85594200000005,
+        "cpu_mm_ms": 92.72494199999997,
+        "cpu_launch_ms": 7.158238999999998
+      },
+      "lm_head": {
+        "calls": 18,
+        "gpu_ms": 11.873088000000001,
+        "cpu_mm_ms": 1.8145439999999997,
+        "cpu_launch_ms": 0.14666900000000002
+      },
+      "router": {
+        "calls": 864,
+        "gpu_ms": 76.89097899999983,
+        "cpu_mm_ms": 85.47850099999991,
+        "cpu_launch_ms": 5.396229999999999
+      }
+    }
+  },
+  "4": {
+    "kernel_count": 2610,
+    "unlinked": 0,
+    "families": {
+      "attention_output": {
+        "calls": 864,
+        "gpu_ms": 44.612404000000026,
+        "cpu_mm_ms": 83.40407700000003,
+        "cpu_launch_ms": 5.820027000000002
+      },
+      "attention_qkv": {
+        "calls": 864,
+        "gpu_ms": 48.10832600000002,
+        "cpu_mm_ms": 91.54436000000005,
+        "cpu_launch_ms": 7.164536999999998
+      },
+      "lm_head": {
+        "calls": 18,
+        "gpu_ms": 12.992917,
+        "cpu_mm_ms": 1.8108690000000003,
+        "cpu_launch_ms": 0.14115099999999997
+      },
+      "router": {
+        "calls": 864,
+        "gpu_ms": 76.88457999999997,
+        "cpu_mm_ms": 83.88765800000009,
+        "cpu_launch_ms": 5.6112410000000015
+      }
+    }
+  }
+}

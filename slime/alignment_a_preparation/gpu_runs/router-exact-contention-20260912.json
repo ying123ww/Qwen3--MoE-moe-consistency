@@ -1,0 +1,12 @@
+{
+  "time": 1789193793.8849,
+  "gpu_processes": "pid, process_name, used_gpu_memory [MiB]\n126701, sglang::scheduler, 54160 MiB\n126702, sglang::scheduler, 56458 MiB\n",
+  "gpus": "index, memory.used [MiB], utilization.gpu [%]\n0, 1 MiB, 0 %\n1, 1 MiB, 0 %\n2, 1 MiB, 0 %\n3, 1 MiB, 0 %\n4, 1 MiB, 0 %\n5, 1 MiB, 0 %\n6, 54170 MiB, 0 %\n7, 56468 MiB, 0 %\n",
+  "removed_own_scratch": [
+    "/dev/shm/router-exact-off-20260912-01",
+    "/public/home/yingxy2024/moe-consistency/.a-tmp/router-exact-off-20260912-01",
+    "/dev/shm/router-exact-shadow-20260912-01",
+    "/public/home/yingxy2024/moe-consistency/.a-tmp/router-exact-shadow-20260912-01"
+  ],
+  "external_processes_stopped": false
+}

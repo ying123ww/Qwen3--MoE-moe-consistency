@@ -1,0 +1,1 @@
+Stopped before training: inherited HTTP proxy targets unavailable node-local port 27772. Default health access failed; direct health_generate returned 200. Retry sets worker-only proxy variables empty and NO_PROXY=*. No numerical conclusion from this attempt.

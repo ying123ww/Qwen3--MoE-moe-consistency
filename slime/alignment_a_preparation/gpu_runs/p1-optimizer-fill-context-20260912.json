@@ -1,0 +1,258 @@
+{
+  "count": 9233,
+  "inclusive_s": 1.6711629439999927,
+  "longest": [
+    {
+      "fill": {
+        "ph": "X",
+        "cat": "cpu_op",
+        "name": "aten::fill_",
+        "pid": 103386,
+        "tid": 103386,
+        "ts": 6087634791977.419,
+        "dur": 143455.971,
+        "args": {
+          "External id": 146600,
+          "Record function id": 0,
+          "Ev Idx": 144792
+        }
+      },
+      "parents": [
+        [
+          "aten::abs",
+          258130.777
+        ],
+        [
+          "aten::abs",
+          258220.053
+        ],
+        [
+          "Optimizer.step#StatelessAdam.step",
+          809429.178
+        ],
+        [
+          "Optimizer.step#HybridDeviceOptimizer.step",
+          936366.12
+        ],
+        [
+          "P1/optimizer_step",
+          15401887.217
+        ],
+        [
+          "P1/train_rpc",
+          27611512.896
+        ]
+      ]
+    },
+    {
+      "fill": {
+        "ph": "X",
+        "cat": "cpu_op",
+        "name": "aten::fill_",
+        "pid": 103386,
+        "tid": 103386,
+        "ts": 6087647326031.4,
+        "dur": 4796.07,
+        "args": {
+          "External id": 185221,
+          "Record function id": 0,
+          "Ev Idx": 183413
+        }
+      },
+      "parents": [
+        [
+          "aten::abs",
+          6327.889
+        ],
+        [
+          "aten::abs",
+          6357.867
+        ],
+        [
+          "Optimizer.step#StatelessAdam.step",
+          14587.766
+        ],
+        [
+          "Optimizer.step#HybridDeviceOptimizer.step",
+          14418980.216
+        ],
+        [
+          "P1/optimizer_step",
+          15401887.217
+        ],
+        [
+          "P1/train_rpc",
+          27611512.896
+        ]
+      ]
+    },
+    {
+      "fill": {
+        "ph": "X",
+        "cat": "cpu_op",
+        "name": "aten::fill_",
+        "pid": 103386,
+        "tid": 103386,
+        "ts": 6087645556953.373,
+        "dur": 4478.081,
+        "args": {
+          "External id": 179083,
+          "Record function id": 0,
+          "Ev Idx": 177275
+        }
+      },
+      "parents": [
+        [
+          "aten::abs",
+          5735.537
+        ],
+        [
+          "aten::abs",
+          5770.161
+        ],
+        [
+          "Optimizer.step#StatelessAdam.step",
+          12641.017
+        ],
+        [
+          "Optimizer.step#HybridDeviceOptimizer.step",
+          14418980.216
+        ],
+        [
+          "P1/optimizer_step",
+          15401887.217
+        ],
+        [
+          "P1/train_rpc",
+          27611512.896
+        ]
+      ]
+    },
+    {
+      "fill": {
+        "ph": "X",
+        "cat": "cpu_op",
+        "name": "aten::fill_",
+        "pid": 103386,
+        "tid": 103386,
+        "ts": 6087641780680.524,
+        "dur": 2450.743,
+        "args": {
+          "External id": 164234,
+          "Record function id": 0,
+          "Ev Idx": 162426
+        }
+      },
+      "parents": [
+        [
+          "aten::abs",
+          2995.98
+        ],
+        [
+          "aten::abs",
+          3028.586
+        ],
+        [
+          "Optimizer.step#StatelessAdam.step",
+          6930.885
+        ],
+        [
+          "Optimizer.step#HybridDeviceOptimizer.step",
+          14418980.216
+        ],
+        [
+          "P1/optimizer_step",
+          15401887.217
+        ],
+        [
+          "P1/train_rpc",
+          27611512.896
+        ]
+      ]
+    },
+    {
+      "fill": {
+        "ph": "X",
+        "cat": "cpu_op",
+        "name": "aten::fill_",
+        "pid": 103386,
+        "tid": 103386,
+        "ts": 6087641429418.138,
+        "dur": 2281.651,
+        "args": {
+          "External id": 163056,
+          "Record function id": 0,
+          "Ev Idx": 161248
+        }
+      },
+      "parents": [
+        [
+          "aten::abs",
+          3368.651
+        ],
+        [
+          "aten::abs",
+          3395.179
+        ],
+        [
+          "Optimizer.step#StatelessAdam.step",
+          11379.469
+        ],
+        [
+          "Optimizer.step#HybridDeviceOptimizer.step",
+          14418980.216
+        ],
+        [
+          "P1/optimizer_step",
+          15401887.217
+        ],
+        [
+          "P1/train_rpc",
+          27611512.896
+        ]
+      ]
+    },
+    {
+      "fill": {
+        "ph": "X",
+        "cat": "cpu_op",
+        "name": "aten::fill_",
+        "pid": 103386,
+        "tid": 103386,
+        "ts": 6087641937339.501,
+        "dur": 2227.964,
+        "args": {
+          "External id": 165102,
+          "Record function id": 0,
+          "Ev Idx": 163294
+        }
+      },
+      "parents": [
+        [
+          "aten::abs",
+          3906.893
+        ],
+        [
+          "aten::abs",
+          3975.428
+        ],
+        [
+          "Optimizer.step#StatelessAdam.step",
+          15743.246
+        ],
+        [
+          "Optimizer.step#HybridDeviceOptimizer.step",
+          14418980.216
+        ],
+        [
+          "P1/optimizer_step",
+          15401887.217
+        ],
+        [
+          "P1/train_rpc",
+          27611512.896
+        ]
+      ]
+    }
+  ]
+}

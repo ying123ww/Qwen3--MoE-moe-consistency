@@ -1,0 +1,6 @@
+{
+  "status": "invalid_cuda_capture",
+  "native_training_completed": true,
+  "routepack_not_started": true,
+  "reason": "PyTorch dynamic toggle smoke drops all CUDA events; plain profiler captures kernels. Superseded by separate-window retry."
+}

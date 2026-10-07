@@ -1,0 +1,7 @@
+build
+*.egg-info
+*.so
+.idea
+dist
+**/__pycache__/
+.vscode

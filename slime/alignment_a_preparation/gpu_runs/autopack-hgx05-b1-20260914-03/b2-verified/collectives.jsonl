@@ -1,0 +1,6 @@
+{"step": 0, "group_id": 0, "slot": 0, "training_tokens": 1647, "layout_padding_tokens": 401, "EP_excess": 114970.0, "max_EP_peak_ratio": 1.939697265625}
+{"step": 0, "group_id": 0, "slot": 1, "training_tokens": 1839, "layout_padding_tokens": 209, "EP_excess": 61535.0, "max_EP_peak_ratio": 1.71484375}
+{"step": 0, "group_id": 0, "slot": 2, "training_tokens": 1236, "layout_padding_tokens": 812, "EP_excess": 234918.0, "max_EP_peak_ratio": 2.455322265625}
+{"step": 0, "group_id": 1, "slot": 0, "training_tokens": 1778, "layout_padding_tokens": 270, "EP_excess": 76452.0, "max_EP_peak_ratio": 1.821533203125}
+{"step": 0, "group_id": 1, "slot": 1, "training_tokens": 1116, "layout_padding_tokens": 932, "EP_excess": 268167.0, "max_EP_peak_ratio": 2.583251953125}
+{"step": 0, "group_id": 1, "slot": 2, "training_tokens": 1149, "layout_padding_tokens": 899, "EP_excess": 257658.0, "max_EP_peak_ratio": 2.648681640625}

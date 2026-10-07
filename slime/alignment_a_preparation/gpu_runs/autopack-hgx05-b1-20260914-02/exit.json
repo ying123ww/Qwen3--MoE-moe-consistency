@@ -1,0 +1,8 @@
+{
+  "time": 1789354009.1641889,
+  "status": "blocked_external_gpu_contention",
+  "returncode": 1,
+  "gpu": "12382, 45926 MiB\n12383, 46450 MiB\n12384, 46358 MiB\n12385, 46172 MiB\n12386, 46450 MiB\n12387, 46358 MiB\n12388, 46358 MiB\n12389, 46018 MiB\n",
+  "external_process": "   PID   PPID COMMAND\n 12387  12111 /public/home/yingxy2024/.conda/envs/minwm/bin/python -u Wan21/wan_train.py --config_path Wan21/configs/ar_camera_tf.yaml --logdir logs/ar_camera_tf --sp_size 1 --packed-tf-flash-attention --no-selective-checkpoint-flash-attention\n",
+  "note": "External Wan21 job appeared after empty-GPU preflight; not terminated. B1 Ray shutdown completed; no B1 gate result."
+}

@@ -1,0 +1,11 @@
+{
+  "variant": "aligned",
+  "formal_batches": 20,
+  "warmup_batches": 3,
+  "median_s": 16.004968681998434,
+  "p95_s": 16.156171243358404,
+  "output_tokens_per_s": 63.9801314420404,
+  "input_tokens": 1218,
+  "output_tokens": 1024,
+  "scope": "blocking Engine.generate for 8 prompts: scheduling + prefill + decode + sampling + output logprobs + detokenization/IPC; excludes load, warmup, cache flush, reward, training and weight sync"
+}

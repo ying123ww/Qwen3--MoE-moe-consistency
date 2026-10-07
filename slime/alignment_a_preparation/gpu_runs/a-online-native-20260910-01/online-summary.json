@@ -1,0 +1,226 @@
+{
+  "variant": "native",
+  "independent_runs": 1,
+  "warmup_iterations": 1,
+  "formal_iterations": 5,
+  "median_total_s": 46.35976812100853,
+  "min_total_s": 43.643190335991676,
+  "max_total_s": 54.025511788990116,
+  "mean_phases_s": {
+    "rollout_reward_data": 14.030453684201348,
+    "rollout_offload": 0.5381078753998736,
+    "training_rpc_including_internal_transfers": 26.015622778394025,
+    "post_train_clear": 7.255206583067775e-06,
+    "rollout_weights_onload": 0.5938524191995385,
+    "weight_sync": 5.923111431000871,
+    "rollout_kv_onload": 0.0962037627963582
+  },
+  "formal_response_tokens": 5120,
+  "formal_training_input_tokens": 10590,
+  "response_tokens_per_e2e_s": 21.69612913142637,
+  "grad_norms": [
+    1.3581223251800951,
+    1.045706652128408,
+    2.3885698647601523,
+    1.5749638689528975,
+    2.0948874956390298,
+    2.325379461681062
+  ],
+  "nonzero_gradient_iterations": 6,
+  "iterations": [
+    {
+      "rollout_id": 1,
+      "warmup": true,
+      "total_s": 72.75701759000367,
+      "phases_s": {
+        "rollout_reward_data": 16.695321168997907,
+        "rollout_offload": 0.5218567840056494,
+        "training_rpc_including_internal_transfers": 48.08796364799491,
+        "post_train_clear": 7.609996828250587e-06,
+        "rollout_weights_onload": 0.39500834299542475,
+        "weight_sync": 6.970056472011493,
+        "rollout_kv_onload": 0.08680356400145683
+      }
+    },
+    {
+      "rollout_id": 2,
+      "warmup": false,
+      "total_s": 54.025511788990116,
+      "phases_s": {
+        "rollout_reward_data": 18.36976818399853,
+        "rollout_offload": 0.5083247419970576,
+        "training_rpc_including_internal_transfers": 26.31456040199555,
+        "post_train_clear": 1.0754010872915387e-05,
+        "rollout_weights_onload": 2.104960439988645,
+        "weight_sync": 6.645428511998034,
+        "rollout_kv_onload": 0.08245875500142574
+      }
+    },
+    {
+      "rollout_id": 3,
+      "warmup": false,
+      "total_s": 44.917865647003055,
+      "phases_s": {
+        "rollout_reward_data": 12.651456913998118,
+        "rollout_offload": 0.5509701020055218,
+        "training_rpc_including_internal_transfers": 26.00413037999533,
+        "post_train_clear": 5.112000508233905e-06,
+        "rollout_weights_onload": 0.20466276600200217,
+        "weight_sync": 5.4137208410102176,
+        "rollout_kv_onload": 0.09291953199135605
+      }
+    },
+    {
+      "rollout_id": 4,
+      "warmup": false,
+      "total_s": 47.04046013799962,
+      "phases_s": {
+        "rollout_reward_data": 14.017350980007905,
+        "rollout_offload": 0.5370081889996072,
+        "training_rpc_including_internal_transfers": 25.779613965991302,
+        "post_train_clear": 6.888003554195166e-06,
+        "rollout_weights_onload": 0.2001937870081747,
+        "weight_sync": 6.393360518995905,
+        "rollout_kv_onload": 0.11292580899316818
+      }
+    },
+    {
+      "rollout_id": 5,
+      "warmup": false,
+      "total_s": 46.35976812100853,
+      "phases_s": {
+        "rollout_reward_data": 12.730379529006314,
+        "rollout_offload": 0.5700629789935192,
+        "training_rpc_including_internal_transfers": 25.944418576997123,
+        "post_train_clear": 5.874011549167335e-06,
+        "rollout_weights_onload": 0.25440209299267735,
+        "weight_sync": 6.755524317006348,
+        "rollout_kv_onload": 0.1049747520009987
+      }
+    },
+    {
+      "rollout_id": 6,
+      "warmup": false,
+      "total_s": 43.643190335991676,
+      "phases_s": {
+        "rollout_reward_data": 12.383312813995872,
+        "rollout_offload": 0.5241733650036622,
+        "training_rpc_including_internal_transfers": 26.035390566990827,
+        "post_train_clear": 7.648006430827081e-06,
+        "rollout_weights_onload": 0.20504301000619307,
+        "weight_sync": 4.407522965993849,
+        "rollout_kv_onload": 0.08773996599484235
+      }
+    }
+  ],
+  "workload": [
+    {
+      "rollout_id": 1,
+      "samples": 8,
+      "response_tokens": 1024,
+      "training_input_tokens": 2242,
+      "response_lengths": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "prompt_sha256": "6981baa9a7c4b077eb6b7701dbf08a09ff6724617f8822ca7bba1ec00222c962",
+      "rollout_actor_reported_s": 16.637235403060913
+    },
+    {
+      "rollout_id": 2,
+      "samples": 8,
+      "response_tokens": 1024,
+      "training_input_tokens": 2166,
+      "response_lengths": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "prompt_sha256": "ad390f59c5868c2ab3323b5b0e588fc7aad363d3cf10637bb2ad6cb92d7e9821",
+      "rollout_actor_reported_s": 18.339894771575928
+    },
+    {
+      "rollout_id": 3,
+      "samples": 8,
+      "response_tokens": 1024,
+      "training_input_tokens": 2264,
+      "response_lengths": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "prompt_sha256": "7b840aeb69329b4a963140e872912ada8476c09a2fbb0b0818e673c2416e92b6",
+      "rollout_actor_reported_s": 12.6266028881073
+    },
+    {
+      "rollout_id": 4,
+      "samples": 8,
+      "response_tokens": 1024,
+      "training_input_tokens": 1892,
+      "response_lengths": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "prompt_sha256": "0f180218b30f2339b1d6675c69db6557b8c43536263e20ce809b6ec159ffb065",
+      "rollout_actor_reported_s": 14.00039029121399
+    },
+    {
+      "rollout_id": 5,
+      "samples": 8,
+      "response_tokens": 1024,
+      "training_input_tokens": 2042,
+      "response_lengths": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "prompt_sha256": "a806b0926f037bd5e107e964e35b1630f702c051206f7f938e8136b938a2bdca",
+      "rollout_actor_reported_s": 12.713680505752563
+    },
+    {
+      "rollout_id": 6,
+      "samples": 8,
+      "response_tokens": 1024,
+      "training_input_tokens": 2226,
+      "response_lengths": [
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128,
+        128
+      ],
+      "prompt_sha256": "f506d0416002d969dc11585e39b2b7712c29f6b0f3e799baa7cacd58c93b89e9",
+      "rollout_actor_reported_s": 12.36967945098877
+    }
+  ]
+}

@@ -1,0 +1,34 @@
+import logging
+import os
+from contextlib import contextmanager
+from torch_memory_saver.hooks.base import HookUtilBase
+from torch_memory_saver.utils import get_binary_path_from_package, change_env
+
+logger = logging.getLogger(__name__)
+
+
+class HookUtilModePreload(HookUtilBase):
+    def get_path_binary(self):
+        env_ld_preload = os.environ.get("LD_PRELOAD", "")
+        
+        interest_paths = [p for p in env_ld_preload.split(":") if "torch_memory_saver" in p]
+        assert len(interest_paths) == 1, (
+            f"TorchMemorySaver observes invalid LD_PRELOAD. "
+            f"You can use configure_subprocess() utility, "
+            f"or directly specify `LD_PRELOAD=/path/to/torch_memory_saver_cpp.some-postfix.so python your_script.py. "
+            f'(LD_PRELOAD="{env_ld_preload}" process_id={os.getpid()})'
+        )
+        return interest_paths[0]
+
+
+@contextmanager
+def configure_subprocess():
+    """Configure environment variables for subprocesses. Only needed for hook_mode=preload."""
+    lib_path = str(get_binary_path_from_package("torch_memory_saver_hook_mode_preload"))
+
+    current_preload = os.environ.get("LD_PRELOAD", "")
+
+    new_preload = f"{lib_path}:{current_preload}" if current_preload else lib_path
+
+    with change_env("LD_PRELOAD", new_preload):
+        yield

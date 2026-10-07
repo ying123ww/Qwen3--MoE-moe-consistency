@@ -1,0 +1,21 @@
+{
+  "native": {
+    "runtime_manifest": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-gpu-compare-20260914/plans/native/runtime.json",
+    "E": 36957810.0,
+    "swaps": 0,
+    "adapter_recorded_native_smoke_passed": true
+  },
+  "routepack": {
+    "runtime_manifest": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-gpu-compare-20260914/plans/routepack/runtime.json",
+    "E": 35802633.0,
+    "swaps": 18,
+    "adapter_recorded_native_smoke_passed": true
+  },
+  "random": {
+    "runtime_manifest": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-gpu-compare-20260914/plans/random/runtime.json",
+    "E": 36684722.0,
+    "swaps": 18,
+    "adapter_recorded_native_smoke_passed": true
+  },
+  "note": "Smoke uses recorded native B2; actual runtime independently rebuilds native schedule and verifies exact match."
+}

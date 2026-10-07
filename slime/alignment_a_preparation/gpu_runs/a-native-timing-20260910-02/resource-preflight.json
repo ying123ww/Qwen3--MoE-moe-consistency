@@ -1,0 +1,275 @@
+{
+  "cpu_affinity": [
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    64,
+    65,
+    66,
+    67,
+    68,
+    69,
+    70,
+    71,
+    72,
+    73,
+    74,
+    75,
+    76,
+    77,
+    78,
+    79,
+    80,
+    81,
+    82,
+    83,
+    84,
+    85,
+    86,
+    87,
+    88,
+    89,
+    90,
+    91,
+    92,
+    93,
+    94,
+    95
+  ],
+  "ray_cpus": 64,
+  "host_memory": {
+    "MemTotal": 1622497628160,
+    "MemFree": 1375299006464,
+    "MemAvailable": 1530369286144,
+    "Buffers": 394100736,
+    "Cached": 155967184896,
+    "SwapCached": 459849728,
+    "Active": 19226071040,
+    "Inactive": 148146536448,
+    "Active(anon)": 10974986240,
+    "Inactive(anon)": 517832704,
+    "Active(file)": 8251084800,
+    "Inactive(file)": 147628703744,
+    "Unevictable": 1076719616,
+    "Mlocked": 1073741824,
+    "SwapTotal": 34359734272,
+    "SwapFree": 33791143936,
+    "Dirty": 32768,
+    "Writeback": 0,
+    "AnonPages": 11629785088,
+    "Mapped": 196681728,
+    "Shmem": 478474240,
+    "Slab": 11354779648,
+    "SReclaimable": 1005109248,
+    "SUnreclaim": 10349670400,
+    "KernelStack": 132612096,
+    "PageTables": 96374784,
+    "NFS_Unstable": 0,
+    "Bounce": 0,
+    "WritebackTmp": 0,
+    "CommitLimit": 845608546304,
+    "Committed_AS": 58430574592,
+    "VmallocTotal": 35184372087808,
+    "VmallocUsed": 23614586880,
+    "VmallocChunk": 34335255035904,
+    "HardwareCorrupted": 0,
+    "AnonHugePages": 8518631424,
+    "CmaTotal": 0,
+    "CmaFree": 0,
+    "HugePages_Total": 0,
+    "HugePages_Free": 0,
+    "HugePages_Rsvd": 0,
+    "HugePages_Surp": 0,
+    "Hugepagesize": 2097152,
+    "DirectMap4k": 76537962496,
+    "DirectMap2M": 664784601088,
+    "DirectMap1G": 907311841280
+  },
+  "effective_memory_available_bytes": 1071023648768,
+  "cgroup_memory_readable": true,
+  "cgroups": [
+    {
+      "path": "/sys/fs/cgroup/systemd/system.slice/sshd.service",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/systemd/system.slice",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/systemd",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/blkio",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/cpu,cpuacct",
+      "values": {
+        "cpu.cfs_quota_us": "-1",
+        "cpu.cfs_period_us": "100000"
+      }
+    },
+    {
+      "path": "/sys/fs/cgroup/cpuset/slurm/uid_2772/job_999484/step_extern",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/cpuset/slurm/uid_2772/job_999484",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/cpuset/slurm/uid_2772",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/cpuset/slurm",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/cpuset",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/perf_event",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/net_cls,net_prio",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/memory/slurm/uid_2772/job_999484/step_extern",
+      "values": {
+        "memory.limit_in_bytes": "1099511627776",
+        "memory.usage_in_bytes": "28487979008",
+        "memory.failcnt": "0"
+      }
+    },
+    {
+      "path": "/sys/fs/cgroup/memory/slurm/uid_2772/job_999484",
+      "values": {
+        "memory.limit_in_bytes": "1099511627776",
+        "memory.usage_in_bytes": "28487979008",
+        "memory.failcnt": "0"
+      }
+    },
+    {
+      "path": "/sys/fs/cgroup/memory/slurm/uid_2772",
+      "values": {
+        "memory.limit_in_bytes": "9223372036854771712",
+        "memory.usage_in_bytes": "28490231808",
+        "memory.failcnt": "0"
+      }
+    },
+    {
+      "path": "/sys/fs/cgroup/memory/slurm",
+      "values": {
+        "memory.limit_in_bytes": "9223372036854771712",
+        "memory.usage_in_bytes": "29434953728",
+        "memory.failcnt": "0"
+      }
+    },
+    {
+      "path": "/sys/fs/cgroup/memory",
+      "values": {
+        "memory.limit_in_bytes": "9223372036854771712",
+        "memory.usage_in_bytes": "33330585600",
+        "memory.failcnt": "0"
+      }
+    },
+    {
+      "path": "/sys/fs/cgroup/hugetlb",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/freezer/slurm/uid_2772/job_999484/step_extern",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/freezer/slurm/uid_2772/job_999484",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/freezer/slurm/uid_2772",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/freezer/slurm",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/freezer",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/pids/system.slice/sshd.service",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/pids/system.slice",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/pids",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/devices/slurm/uid_2772/job_999484/step_extern",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/devices/slurm/uid_2772/job_999484",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/devices/slurm/uid_2772",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/devices/slurm",
+      "values": {}
+    },
+    {
+      "path": "/sys/fs/cgroup/devices",
+      "values": {}
+    }
+  ],
+  "temp_free_bytes": 810784985088,
+  "shm_free_bytes": 810784985088,
+  "pressure": {},
+  "thresholds_gib": {
+    "memory": 512,
+    "disk": 20
+  }
+}

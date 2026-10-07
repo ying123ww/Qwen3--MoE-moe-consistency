@@ -1,0 +1,28 @@
+--- /public/home/yingxy2024/.codex/qwen3-v89-regression/runtime_env.yaml	2026-08-22
++++ /public/home/yingxy2024/.codex/qwen3-v89-regression/runtime_env.yaml	2026-08-22
+@@ -17,13 +17,6 @@
+   TORCH_COMPILE_DISABLE: "1"
+   NVTE_ALLOW_NONDETERMINISTIC_ALGO: "0"
+   TE_DISABLE_FA3: "TRUE"
+-  SLIME_LAYERWISE_ALIGNMENT_DUMP_DIR: ""
+-  SLIME_LAYERWISE_ALIGNMENT_DUMP_LAYERS: "47"
+-  SLIME_LAYERWISE_ALIGNMENT_GLOBAL_MODULE_SUFFIXES: "decoder.final_layernorm"
+-  SLIME_LAYERWISE_ALIGNMENT_MODULE_SUFFIXES: ""
+-  SLIME_LAYERWISE_ALIGNMENT_ALL_INPUT_SUFFIXES: ""
+-  SLIME_LAYERWISE_ALIGNMENT_CAPTURE_FUSED_LAYERNORM: "0"
+-  SLIME_LAYERWISE_ALIGNMENT_CAPTURE_MODULE_PARAMS: "0"
+   SLIME_QWEN3_FIXED_DEEPEP_CONFIG: '{"normal_dispatch":{"num_sms":20,"num_max_nvl_chunked_send_tokens":9,"num_max_nvl_chunked_recv_tokens":256,"num_max_rdma_chunked_send_tokens":6,"num_max_rdma_chunked_recv_tokens":128},"normal_combine":{"num_sms":20,"num_max_nvl_chunked_send_tokens":9,"num_max_nvl_chunked_recv_tokens":256,"num_max_rdma_chunked_send_tokens":6,"num_max_rdma_chunked_recv_tokens":128}}'
+   MEGATRON_USE_SGLANG_QWEN3_INPUT_NORM_QKV: "1"
+   MEGATRON_USE_SGLANG_QWEN3_QK_NORM: "1"
+@@ -35,10 +28,3 @@
+   MEGATRON_USE_SGLANG_FUSED_RESIDUAL_RMS: "1"
+   MEGATRON_QWEN3_SGLANG_ATTENTION_TP_SIZE: "2"
+   SGLANG_USE_UNIFIED_ATTENTION_FOR_DECODE: "1"
+-  SGLANG_TENSOR_DUMP_LAYER_OUTPUTS_ONLY: "1"
+-  SGLANG_TENSOR_DUMP_MODULE_SUFFIXES: ""
+-  SGLANG_TENSOR_DUMP_ALL_INPUT_SUFFIXES: ""
+-  SGLANG_TENSOR_DUMP_ALL_OUTPUT_SUFFIXES: ""
+-  SGLANG_TENSOR_DUMP_MODULE_PARAMS: "0"
+-  SGLANG_TENSOR_DUMP_ROUTER_OUTPUTS: "0"
+-  SGLANG_TENSOR_DUMP_MOE_STAGES: "0"
+-  SGLANG_TENSOR_DUMP_CHUNK_SIZE: "64"

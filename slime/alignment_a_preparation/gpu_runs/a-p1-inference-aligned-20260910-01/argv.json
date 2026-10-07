@@ -1,0 +1,1 @@
+["/public/home/yingxy2024/.conda/envs/slime/bin/python", "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_tools/inference_benchmark.py", "--run", "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-inference-aligned-20260910-01", "--variant", "aligned", "--warmup", "3", "--steps", "1", "--profile"]

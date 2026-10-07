@@ -1,0 +1,1212 @@
+{
+  "host": "ai_hgx_05",
+  "torch": "2.11.0+cu129",
+  "affinity": [
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31
+  ],
+  "cpu_only": true,
+  "cuda_initialized": false,
+  "source": "/public/home/yingxy2024/moe-consistency/slime/slime/backends/megatron_utils/stateless_adam.py",
+  "source_sha256": "795a7f9be09744364b06a5d3170db46ab4528857a68a3afa425c03895da7ae1b",
+  "parameter_bytes": 301989888,
+  "scope": "32 CPU FP32 parameters, synthetic fixed gradients, 3 warmup + 5 measured steps, 3 alternating rounds in one process; no H2D or full training",
+  "rows": [
+    {
+      "rep": 0,
+      "threads": 1,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.14580282499082386,
+        0.1501037748530507,
+        0.14686276600696146,
+        0.14641852490603924,
+        0.145890454063192
+      ],
+      "median_s": 0.14641852490603924,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 1,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.12544056889601052,
+        0.12507857684977353,
+        0.12775025004521012,
+        0.1285089950542897,
+        0.1255211120005697
+      ],
+      "median_s": 0.1255211120005697,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 1,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.12700186390429735,
+        0.12241903482936323,
+        0.12189250299707055,
+        0.1233352068811655,
+        0.12306517199613154
+      ],
+      "median_s": 0.12306517199613154,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 1,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.10687540215440094,
+        0.10668880701996386,
+        0.10727378586307168,
+        0.10705267614684999,
+        0.10685645299963653
+      ],
+      "median_s": 0.10687540215440094,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 2,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.10283511690795422,
+        0.10259493696503341,
+        0.1050495698582381,
+        0.1048245660495013,
+        0.10377669287845492
+      ],
+      "median_s": 0.10377669287845492,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 2,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.09626017394475639,
+        0.09718811511993408,
+        0.09701410494744778,
+        0.09661334892734885,
+        0.09635182190686464
+      ],
+      "median_s": 0.09661334892734885,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 2,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.09771503414958715,
+        0.09712104103527963,
+        0.09703367087058723,
+        0.09713848307728767,
+        0.09787129401229322
+      ],
+      "median_s": 0.09713848307728767,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 2,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.06328256498090923,
+        0.06334279500879347,
+        0.06314974301494658,
+        0.06357461400330067,
+        0.06459729187190533
+      ],
+      "median_s": 0.06334279500879347,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 4,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.04110978706739843,
+        0.04132216004654765,
+        0.0415056839119643,
+        0.04607294499874115,
+        0.041130570927634835
+      ],
+      "median_s": 0.04132216004654765,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 4,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.06051585800014436,
+        0.06095040217041969,
+        0.060291635105386376,
+        0.06109581491909921,
+        0.0611232069786638
+      ],
+      "median_s": 0.06095040217041969,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 4,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.06063362304121256,
+        0.060513994889333844,
+        0.06327401800081134,
+        0.06187770399264991,
+        0.061400381149724126
+      ],
+      "median_s": 0.061400381149724126,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 4,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.033917503198608756,
+        0.03403761307708919,
+        0.03393747704103589,
+        0.033969292882829905,
+        0.033849930856376886
+      ],
+      "median_s": 0.03393747704103589,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 8,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        1.4055935330688953,
+        1.3390553949866444,
+        1.363518175901845,
+        1.391513432143256,
+        1.3568812648300081
+      ],
+      "median_s": 1.363518175901845,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 8,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.04487103410065174,
+        0.045072492910549045,
+        0.045162961818277836,
+        0.04456311906687915,
+        0.04279348207637668
+      ],
+      "median_s": 0.04487103410065174,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 8,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.04248677613213658,
+        0.04333703080192208,
+        0.04238206590525806,
+        0.043991191778331995,
+        0.04277423000894487
+      ],
+      "median_s": 0.04277423000894487,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 0,
+      "threads": 8,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.02078834199346602,
+        0.020944399060681462,
+        0.020413358928635716,
+        0.02052716608159244,
+        0.020715584978461266
+      ],
+      "median_s": 0.020715584978461266,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 8,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.020382686983793974,
+        0.020077066961675882,
+        0.020152533892542124,
+        0.02009051409550011,
+        0.020158051047474146
+      ],
+      "median_s": 0.020152533892542124,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 8,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.04476428800262511,
+        0.044694350101053715,
+        0.04285052604973316,
+        0.04292002599686384,
+        0.043067992897704244
+      ],
+      "median_s": 0.043067992897704244,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 8,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.04236214910633862,
+        0.04226701590232551,
+        0.0425219158641994,
+        0.0421847989782691,
+        0.042436269111931324
+      ],
+      "median_s": 0.04236214910633862,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 8,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.04546849709004164,
+        0.04565267404541373,
+        0.04532691487111151,
+        0.045362253906205297,
+        0.04514693794772029
+      ],
+      "median_s": 0.045362253906205297,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 4,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.03364620078355074,
+        0.03369223093613982,
+        0.03358574095182121,
+        0.03366574109531939,
+        0.033607701072469354
+      ],
+      "median_s": 0.03364620078355074,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 4,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.05971050192601979,
+        0.059972996823489666,
+        0.05946984887123108,
+        0.05973460618406534,
+        0.059307171031832695
+      ],
+      "median_s": 0.05971050192601979,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 4,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.059950486989691854,
+        0.059981973143294454,
+        0.060767821967601776,
+        0.06027742405422032,
+        0.06044909101910889
+      ],
+      "median_s": 0.06027742405422032,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 4,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.06477543199434876,
+        0.06552508496679366,
+        0.06687386613339186,
+        0.06525799399241805,
+        0.06561006302945316
+      ],
+      "median_s": 0.06552508496679366,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 2,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.06017338088713586,
+        0.060069984989240766,
+        0.06011999701149762,
+        0.059987856075167656,
+        0.06015486107207835
+      ],
+      "median_s": 0.06011999701149762,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 2,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.09531796397641301,
+        0.094866877887398,
+        0.09466280019842088,
+        0.09568939288146794,
+        0.0960671182256192
+      ],
+      "median_s": 0.09531796397641301,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 2,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.06734176189638674,
+        0.06701739691197872,
+        0.06741697387769818,
+        0.06780757219530642,
+        0.06766741001047194
+      ],
+      "median_s": 0.06741697387769818,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 2,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.07374790403991938,
+        0.07375614298507571,
+        0.07341866404749453,
+        0.07376325107179582,
+        0.07397649995982647
+      ],
+      "median_s": 0.07375614298507571,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 1,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.11549822008237243,
+        0.11409147083759308,
+        0.11440701480023563,
+        0.1139340428635478,
+        0.11427778098732233
+      ],
+      "median_s": 0.11427778098732233,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 1,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.1700890779029578,
+        0.17055372707545757,
+        0.1729045941028744,
+        0.1724784409161657,
+        0.17065310198813677
+      ],
+      "median_s": 0.17065310198813677,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 1,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.1745919471140951,
+        0.1732238249387592,
+        0.16981158195994794,
+        0.1674107420258224,
+        0.16973154805600643
+      ],
+      "median_s": 0.16981158195994794,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 1,
+      "threads": 1,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.18041314207948744,
+        0.17800747184082866,
+        0.18048295099288225,
+        0.1801872542127967,
+        0.17779378802515566
+      ],
+      "median_s": 0.1801872542127967,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 1,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.18130153883248568,
+        0.18064668285660446,
+        0.17865540296770632,
+        0.18144944217056036,
+        0.17972411587834358
+      ],
+      "median_s": 0.18064668285660446,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 1,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.16634358605369925,
+        0.16872009309008718,
+        0.16889775916934013,
+        0.16628082911483943,
+        0.1688183571677655
+      ],
+      "median_s": 0.16872009309008718,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 1,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.16943621984682977,
+        0.16829704004339874,
+        0.16793659911490977,
+        0.16966092796064913,
+        0.16760572115890682
+      ],
+      "median_s": 0.16829704004339874,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 1,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.11460531014017761,
+        0.11459729704074562,
+        0.11486970284022391,
+        0.11448119301348925,
+        0.11467697308398783
+      ],
+      "median_s": 0.11460531014017761,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 2,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.07266380288638175,
+        0.07326648384332657,
+        0.07312078191898763,
+        0.07336395094171166,
+        0.07326478697359562
+      ],
+      "median_s": 0.07326478697359562,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 2,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.06742848316207528,
+        0.06721428595483303,
+        0.067487598862499,
+        0.06779928295873106,
+        0.06761525082401931
+      ],
+      "median_s": 0.067487598862499,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 2,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.09513223194517195,
+        0.09583307104185224,
+        0.0947989400010556,
+        0.09546407288871706,
+        0.09559791698120534
+      ],
+      "median_s": 0.09546407288871706,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 2,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.06063366704620421,
+        0.06025177286937833,
+        0.060520160011947155,
+        0.06041148002259433,
+        0.06023327400907874
+      ],
+      "median_s": 0.06041148002259433,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 4,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.06329415715299547,
+        0.06377235287800431,
+        0.06333921593613923,
+        0.06366243213415146,
+        0.06358902994543314
+      ],
+      "median_s": 0.06358902994543314,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 4,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.06004678504541516,
+        0.06018424988724291,
+        0.06009554001502693,
+        0.05992910196073353,
+        0.061031512916088104
+      ],
+      "median_s": 0.06009554001502693,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 4,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.06019494216889143,
+        0.06004324904642999,
+        0.05927203898318112,
+        0.059882954927161336,
+        0.05952184018678963
+      ],
+      "median_s": 0.059882954927161336,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 4,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.03258904302492738,
+        0.03259019902907312,
+        0.032701870892196894,
+        0.03250760887749493,
+        0.03262662794440985
+      ],
+      "median_s": 0.03259019902907312,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 8,
+      "variant": "original",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        1.314450252102688,
+        1.3363804798573256,
+        1.2791308618616313,
+        1.3077433330472559,
+        1.283101229928434
+      ],
+      "median_s": 1.3077433330472559,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 8,
+      "variant": "original",
+      "deterministic": true,
+      "fill": false,
+      "seconds": [
+        0.04276701807975769,
+        0.04575780313462019,
+        0.04319525393657386,
+        0.04276624578051269,
+        0.043556767981499434
+      ],
+      "median_s": 0.04319525393657386,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 8,
+      "variant": "original",
+      "deterministic": false,
+      "fill": true,
+      "seconds": [
+        0.04270592308603227,
+        0.04295276687480509,
+        0.043124605203047395,
+        0.043181543005630374,
+        0.04373626597225666
+      ],
+      "median_s": 0.043124605203047395,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    },
+    {
+      "rep": 2,
+      "threads": 8,
+      "variant": "inplace_mul",
+      "deterministic": true,
+      "fill": true,
+      "seconds": [
+        0.02147238701581955,
+        0.020138832041993737,
+        0.020086746895685792,
+        0.02012978703714907,
+        0.02035281714051962
+      ],
+      "median_s": 0.020138832041993737,
+      "sha256": "9f0c29f0ca0fd25fa8acf1106fe2a4efb2a18b436900bc3b5505ab1e636b6595"
+    }
+  ],
+  "profiles": [
+    {
+      "name": "original-det1-fill1",
+      "fills": [
+        {
+          "name": "aten::fill_",
+          "parent": "aten::empty",
+          "self_cpu_us": 7.335000000000036,
+          "stack": []
+        },
+        {
+          "name": "aten::fill_",
+          "parent": "aten::empty",
+          "self_cpu_us": 1.1319999999999482,
+          "stack": []
+        },
+        {
+          "name": "aten::fill_",
+          "parent": "aten::abs",
+          "self_cpu_us": 1021.263,
+          "stack": []
+        },
+        {
+          "name": "aten::fill_",
+          "parent": "aten::empty_strided",
+          "self_cpu_us": 0.43200000000001637,
+          "stack": []
+        },
+        {
+          "name": "aten::fill_",
+          "parent": "aten::empty_strided",
+          "self_cpu_us": 0.5520000000001346,
+          "stack": []
+        }
+      ],
+      "operators": [
+        {
+          "name": "Optimizer.step#StatelessAdam.step",
+          "count": 1,
+          "self_cpu_us": 337.44299999999976
+        },
+        {
+          "name": "aten::abs",
+          "count": 2,
+          "self_cpu_us": 451.17799999999966
+        },
+        {
+          "name": "aten::empty",
+          "count": 2,
+          "self_cpu_us": 15.851000000000113
+        },
+        {
+          "name": "aten::fill_",
+          "count": 5,
+          "self_cpu_us": 1030.7140000000002
+        },
+        {
+          "name": "aten::set_",
+          "count": 1,
+          "self_cpu_us": 5.23599999999999
+        },
+        {
+          "name": "aten::mul",
+          "count": 1,
+          "self_cpu_us": 953.797
+        },
+        {
+          "name": "aten::to",
+          "count": 2,
+          "self_cpu_us": 6.434999999999491
+        },
+        {
+          "name": "aten::_to_copy",
+          "count": 2,
+          "self_cpu_us": 22.344000000000506
+        },
+        {
+          "name": "aten::empty_strided",
+          "count": 2,
+          "self_cpu_us": 9.836999999999762
+        },
+        {
+          "name": "aten::copy_",
+          "count": 2,
+          "self_cpu_us": 10.367999999999938
+        },
+        {
+          "name": "aten::add_",
+          "count": 1,
+          "self_cpu_us": 157.87900000000036
+        },
+        {
+          "name": "aten::addcdiv_",
+          "count": 1,
+          "self_cpu_us": 585.1060000000002
+        }
+      ]
+    },
+    {
+      "name": "original-det1-fill0",
+      "fills": [],
+      "operators": [
+        {
+          "name": "Optimizer.step#StatelessAdam.step",
+          "count": 1,
+          "self_cpu_us": 293.6229999999996
+        },
+        {
+          "name": "aten::abs",
+          "count": 2,
+          "self_cpu_us": 1381.2830000000001
+        },
+        {
+          "name": "aten::empty",
+          "count": 1,
+          "self_cpu_us": 4.656000000000006
+        },
+        {
+          "name": "aten::mul",
+          "count": 1,
+          "self_cpu_us": 1214.097
+        },
+        {
+          "name": "aten::to",
+          "count": 2,
+          "self_cpu_us": 4.7309999999999945
+        },
+        {
+          "name": "aten::_to_copy",
+          "count": 2,
+          "self_cpu_us": 14.667999999999665
+        },
+        {
+          "name": "aten::empty_strided",
+          "count": 2,
+          "self_cpu_us": 5.04300000000012
+        },
+        {
+          "name": "aten::copy_",
+          "count": 2,
+          "self_cpu_us": 9.997000000000071
+        },
+        {
+          "name": "aten::add_",
+          "count": 1,
+          "self_cpu_us": 202.45100000000048
+        },
+        {
+          "name": "aten::addcdiv_",
+          "count": 1,
+          "self_cpu_us": 583.8530000000001
+        }
+      ]
+    },
+    {
+      "name": "original-det0-fill1",
+      "fills": [],
+      "operators": [
+        {
+          "name": "Optimizer.step#StatelessAdam.step",
+          "count": 1,
+          "self_cpu_us": 262.9430000000002
+        },
+        {
+          "name": "aten::abs",
+          "count": 2,
+          "self_cpu_us": 527.736
+        },
+        {
+          "name": "aten::empty",
+          "count": 1,
+          "self_cpu_us": 4.4010000000000105
+        },
+        {
+          "name": "aten::mul",
+          "count": 1,
+          "self_cpu_us": 547.6569999999999
+        },
+        {
+          "name": "aten::to",
+          "count": 2,
+          "self_cpu_us": 5.57000000000005
+        },
+        {
+          "name": "aten::_to_copy",
+          "count": 2,
+          "self_cpu_us": 12.288999999999987
+        },
+        {
+          "name": "aten::empty_strided",
+          "count": 2,
+          "self_cpu_us": 3.4049999999999727
+        },
+        {
+          "name": "aten::copy_",
+          "count": 2,
+          "self_cpu_us": 9.698000000000093
+        },
+        {
+          "name": "aten::add_",
+          "count": 1,
+          "self_cpu_us": 215.10899999999992
+        },
+        {
+          "name": "aten::addcdiv_",
+          "count": 1,
+          "self_cpu_us": 599.0359999999998
+        }
+      ]
+    },
+    {
+      "name": "inplace_mul-det1-fill1",
+      "fills": [
+        {
+          "name": "aten::fill_",
+          "parent": "aten::empty",
+          "self_cpu_us": 5.76400000000001,
+          "stack": []
+        },
+        {
+          "name": "aten::fill_",
+          "parent": "aten::empty",
+          "self_cpu_us": 1.25,
+          "stack": []
+        },
+        {
+          "name": "aten::fill_",
+          "parent": "aten::abs",
+          "self_cpu_us": 1281.366,
+          "stack": []
+        },
+        {
+          "name": "aten::fill_",
+          "parent": "aten::empty_strided",
+          "self_cpu_us": 0.681999999999789,
+          "stack": []
+        },
+        {
+          "name": "aten::fill_",
+          "parent": "aten::empty_strided",
+          "self_cpu_us": 0.3580000000001746,
+          "stack": []
+        }
+      ],
+      "operators": [
+        {
+          "name": "Optimizer.step#StatelessAdam.step",
+          "count": 1,
+          "self_cpu_us": 293.34300000000076
+        },
+        {
+          "name": "aten::abs",
+          "count": 2,
+          "self_cpu_us": 979.848
+        },
+        {
+          "name": "aten::empty",
+          "count": 2,
+          "self_cpu_us": 9.65300000000002
+        },
+        {
+          "name": "aten::fill_",
+          "count": 5,
+          "self_cpu_us": 1289.42
+        },
+        {
+          "name": "aten::set_",
+          "count": 1,
+          "self_cpu_us": 4.1580000000000155
+        },
+        {
+          "name": "aten::mul_",
+          "count": 1,
+          "self_cpu_us": 226.77700000000004
+        },
+        {
+          "name": "aten::to",
+          "count": 2,
+          "self_cpu_us": 4.457999999999629
+        },
+        {
+          "name": "aten::_to_copy",
+          "count": 2,
+          "self_cpu_us": 13.414999999999964
+        },
+        {
+          "name": "aten::empty_strided",
+          "count": 2,
+          "self_cpu_us": 7.366999999999734
+        },
+        {
+          "name": "aten::copy_",
+          "count": 2,
+          "self_cpu_us": 9.231000000000222
+        },
+        {
+          "name": "aten::add_",
+          "count": 1,
+          "self_cpu_us": 214.2430000000004
+        },
+        {
+          "name": "aten::addcdiv_",
+          "count": 1,
+          "self_cpu_us": 605.8219999999997
+        }
+      ]
+    }
+  ],
+  "branch_checks": [
+    {
+      "bias_correction": true,
+      "maximize": true,
+      "adam_w_mode": true,
+      "decay": 0.0,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": true,
+      "maximize": true,
+      "adam_w_mode": true,
+      "decay": 0.1,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": true,
+      "maximize": true,
+      "adam_w_mode": false,
+      "decay": 0.0,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": true,
+      "maximize": true,
+      "adam_w_mode": false,
+      "decay": 0.1,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": true,
+      "maximize": false,
+      "adam_w_mode": true,
+      "decay": 0.0,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": true,
+      "maximize": false,
+      "adam_w_mode": true,
+      "decay": 0.1,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": true,
+      "maximize": false,
+      "adam_w_mode": false,
+      "decay": 0.0,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": true,
+      "maximize": false,
+      "adam_w_mode": false,
+      "decay": 0.1,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": false,
+      "maximize": true,
+      "adam_w_mode": true,
+      "decay": 0.0,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": false,
+      "maximize": true,
+      "adam_w_mode": true,
+      "decay": 0.1,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": false,
+      "maximize": true,
+      "adam_w_mode": false,
+      "decay": 0.0,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": false,
+      "maximize": true,
+      "adam_w_mode": false,
+      "decay": 0.1,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": false,
+      "maximize": false,
+      "adam_w_mode": true,
+      "decay": 0.0,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": false,
+      "maximize": false,
+      "adam_w_mode": true,
+      "decay": 0.1,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": false,
+      "maximize": false,
+      "adam_w_mode": false,
+      "decay": 0.0,
+      "bits_equal": true
+    },
+    {
+      "bias_correction": false,
+      "maximize": false,
+      "adam_w_mode": false,
+      "decay": 0.1,
+      "bits_equal": true
+    }
+  ]
+}

@@ -1,0 +1,27 @@
+{
+  "archives": [
+    {
+      "method": "native",
+      "path": "/storage/data/yingxy2024/routepack-evidence-20260916/ap-components-native-20260916-02.tar.gz",
+      "bytes": 880281084,
+      "sha256": "4fafae047cf996a44372b92d0ed4a28fcd968657a2172d73f9d5a8e2dbc51bfc",
+      "trace_count": 24,
+      "summary_count": 8,
+      "source_path": "/tmp/ap-components-native-20260916-02/components",
+      "original_tmp_preserved": true,
+      "gzip_integrity_passed": true
+    },
+    {
+      "method": "routepack",
+      "path": "/storage/data/yingxy2024/routepack-evidence-20260916/ap-components-routepack-20260916-02.tar.gz",
+      "bytes": 879389281,
+      "sha256": "748d5287e2fef101e7e0b7460495f5212cbe6cb918fe8dda5105efc386bad65b",
+      "trace_count": 24,
+      "summary_count": 8,
+      "source_path": "/tmp/ap-components-routepack-20260916-02/components",
+      "original_tmp_preserved": true,
+      "gzip_integrity_passed": true
+    }
+  ],
+  "scope": "Only valid 20260916-02 per-phase traces and per-rank summaries; invalid01 excluded."
+}

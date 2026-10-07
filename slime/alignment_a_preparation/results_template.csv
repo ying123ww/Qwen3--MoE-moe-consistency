@@ -1,0 +1,3 @@
+run_id,variant,scope,data_sha256,checkpoint_id,optimizer_mode,lr,warmup_steps,measured_steps,input_tokens_per_step,target_tokens_per_step,step_time_median_s,step_time_p95_s,input_tokens_per_s,peak_allocated_gib,peak_reserved_gib,logprob_max_abs,mismatched_tokens,gpu_model,notes
+,native-controlled,fixed_rollout_train_replay,,,stateless-reset,0,,,2242,1024,,,,,,,,,NOT RUN; empty cells mean unknown
+,aligned-controlled,fixed_rollout_train_replay,,,stateless-reset,0,,,2242,1024,,,,,,,,,NOT RUN; empty cells mean unknown

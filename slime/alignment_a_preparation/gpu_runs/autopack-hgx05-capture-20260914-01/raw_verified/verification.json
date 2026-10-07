@@ -1,0 +1,188 @@
+{
+  "capture_directory": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-hgx05-capture-20260914-01/capture/captured",
+  "run_id": "autopack-hgx05-20260914-01",
+  "sample_count": 32,
+  "unique_route_hashes": 32,
+  "shapes": [
+    [
+      322,
+      48,
+      8
+    ],
+    [
+      265,
+      48,
+      8
+    ],
+    [
+      279,
+      48,
+      8
+    ],
+    [
+      332,
+      48,
+      8
+    ],
+    [
+      284,
+      48,
+      8
+    ],
+    [
+      222,
+      48,
+      8
+    ],
+    [
+      253,
+      48,
+      8
+    ],
+    [
+      236,
+      48,
+      8
+    ],
+    [
+      221,
+      48,
+      8
+    ],
+    [
+      276,
+      48,
+      8
+    ],
+    [
+      272,
+      48,
+      8
+    ],
+    [
+      256,
+      48,
+      8
+    ],
+    [
+      262,
+      48,
+      8
+    ],
+    [
+      339,
+      48,
+      8
+    ],
+    [
+      256,
+      48,
+      8
+    ],
+    [
+      260,
+      48,
+      8
+    ],
+    [
+      280,
+      48,
+      8
+    ],
+    [
+      225,
+      48,
+      8
+    ],
+    [
+      247,
+      48,
+      8
+    ],
+    [
+      234,
+      48,
+      8
+    ],
+    [
+      288,
+      48,
+      8
+    ],
+    [
+      252,
+      48,
+      8
+    ],
+    [
+      284,
+      48,
+      8
+    ],
+    [
+      334,
+      48,
+      8
+    ],
+    [
+      225,
+      48,
+      8
+    ],
+    [
+      297,
+      48,
+      8
+    ],
+    [
+      274,
+      48,
+      8
+    ],
+    [
+      327,
+      48,
+      8
+    ],
+    [
+      321,
+      48,
+      8
+    ],
+    [
+      220,
+      48,
+      8
+    ],
+    [
+      303,
+      48,
+      8
+    ],
+    [
+      287,
+      48,
+      8
+    ]
+  ],
+  "total_input_tokens": 8765,
+  "response_tokens": 4096,
+  "traced_token_rows": 8733,
+  "raw_trace_bytes": 13413888,
+  "logical_expert_id_range": [
+    0,
+    127
+  ],
+  "total_assignments": 3353472,
+  "hash_shape_range_topk_gate": "passed",
+  "per_expert_axes": [
+    "sample",
+    "layer",
+    "logical_expert"
+  ],
+  "scope": "raw prompt+response-1 routes only; no synthetic terminal/padding and no inferred EP owner",
+  "identity_note": "Capture-local IDs are qualified with explicit run ID in samples_verified.jsonl; null source rollout IDs preserved, no training schedule inferred",
+  "training_topology_gate": "not_run",
+  "training_dispatch_gate": "not_run",
+  "alignment_replay_gate": "not_run"
+}

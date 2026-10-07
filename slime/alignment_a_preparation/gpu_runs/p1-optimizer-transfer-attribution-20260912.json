@@ -1,0 +1,1218 @@
+{
+  "method": "GPU memcpy -> CUDA runtime by correlation; CPU copy by External id. Include launches in CPU optimizer scope. CPU durations inclusive; GPU durations additive, not critical-path savings.",
+  "analysis_sha256": "d507b50703f87452f377baadb940bd9c5b6cad368a65bca625a75829d039e033",
+  "results": [
+    {
+      "optimizer_wall_s": 15.401887217,
+      "adam_scopes": {
+        "count": 1537,
+        "duration_s": 14.550266787999977,
+        "bytes": 0
+      },
+      "copies_by_launch_scope": {
+        "Memcpy HtoD (Pageable -> Device)": {
+          "gpu": {
+            "count": 1537,
+            "duration_s": 3.080768442999996,
+            "bytes": 15266061312
+          },
+          "runtime_api": {
+            "count": 1537,
+            "duration_s": 4.501065235000008,
+            "bytes": 0
+          },
+          "linked_cpu_operators": {
+            "aten::copy_": 1537
+          },
+          "launches_inside_adam_scope": 1537,
+          "bytes_histogram": {
+            "6291456": 768,
+            "12582912": 768,
+            "770546688": 1
+          }
+        },
+        "Memcpy DtoH (Device -> Pinned)": {
+          "gpu": {
+            "count": 1538,
+            "duration_s": 1.6541320950000002,
+            "bytes": 15266061316
+          },
+          "runtime_api": {
+            "count": 1538,
+            "duration_s": 0.5295706990000005,
+            "bytes": 0
+          },
+          "linked_cpu_operators": {
+            "aten::_local_scalar_dense": 1,
+            "aten::copy_": 1537
+          },
+          "launches_inside_adam_scope": 0,
+          "bytes_histogram": {
+            "4": 1,
+            "6291456": 768,
+            "12582912": 768,
+            "770546688": 1
+          }
+        }
+      },
+      "window_memcpy_without_optimizer_launch": {},
+      "cuda_runtime_inclusive": {
+        "cudaEventQuery": {
+          "count": 14,
+          "duration_s": 0.000177046,
+          "bytes": 0
+        },
+        "cudaEventRecord": {
+          "count": 15,
+          "duration_s": 1.4028999999999997e-05,
+          "bytes": 0
+        },
+        "cudaEventRecordWithFlags": {
+          "count": 4622,
+          "duration_s": 0.016302885999999947,
+          "bytes": 0
+        },
+        "cudaEventSynchronize": {
+          "count": 1537,
+          "duration_s": 0.13864552599999996,
+          "bytes": 0
+        },
+        "cudaGetFuncBySymbol": {
+          "count": 5,
+          "duration_s": 6.647e-06,
+          "bytes": 0
+        },
+        "cudaLaunchKernel": {
+          "count": 3450,
+          "duration_s": 0.11592741299999977,
+          "bytes": 0
+        },
+        "cudaMemGetInfo": {
+          "count": 1,
+          "duration_s": 2.9138e-05,
+          "bytes": 0
+        },
+        "cudaMemcpyAsync": {
+          "count": 3075,
+          "duration_s": 5.030635933999998,
+          "bytes": 0
+        },
+        "cudaStreamGetCaptureInfo_v2": {
+          "count": 5,
+          "duration_s": 7.247000000000001e-06,
+          "bytes": 0
+        },
+        "cudaStreamIsCapturing": {
+          "count": 10787,
+          "duration_s": 0.010727805000000003,
+          "bytes": 0
+        },
+        "cudaStreamSynchronize": {
+          "count": 1,
+          "duration_s": 0.009238196,
+          "bytes": 0
+        },
+        "cudaStreamWaitEvent": {
+          "count": 3094,
+          "duration_s": 0.010608967999999965,
+          "bytes": 0
+        },
+        "cudaThreadExchangeStreamCaptureMode": {
+          "count": 12,
+          "duration_s": 4.9584e-05,
+          "bytes": 0
+        }
+      },
+      "selected_cpu_operator_inclusive": {
+        "aten::copy_": {
+          "count": 9222,
+          "duration_s": 10.198046052000048,
+          "bytes": 0
+        },
+        "aten::abs": {
+          "count": 3074,
+          "duration_s": 6.480446636000002,
+          "bytes": 0
+        },
+        "aten::mul": {
+          "count": 1537,
+          "duration_s": 1.8240839220000002,
+          "bytes": 0
+        },
+        "aten::add_": {
+          "count": 1537,
+          "duration_s": 1.0719208870000025,
+          "bytes": 0
+        },
+        "aten::addcdiv_": {
+          "count": 1537,
+          "duration_s": 2.301232025000003,
+          "bytes": 0
+        }
+      },
+      "examples": [
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 0,
+            "tid": 60,
+            "ts": 6087645735178.147,
+            "dur": 4055.48,
+            "args": {
+              "External id": 179631,
+              "device": 0,
+              "context": 1,
+              "stream": 60,
+              "correlation": 811300,
+              "bytes": 12582912,
+              "memory bandwidth (GB/s)": 3.1026936392239635
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 103386,
+            "tid": 103386,
+            "ts": 6087645734743.392,
+            "dur": 4429.284,
+            "args": {
+              "External id": 179631,
+              "cbid": 41,
+              "correlation": 811300
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 103386,
+            "tid": 103386,
+            "ts": 6087645734704.796,
+            "dur": 4516.223,
+            "args": {
+              "External id": 179631,
+              "Record function id": 0,
+              "Ev Idx": 177823
+            }
+          }
+        },
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 0,
+            "tid": 60,
+            "ts": 6087645755146.72,
+            "dur": 3560.192,
+            "args": {
+              "External id": 179662,
+              "device": 0,
+              "context": 1,
+              "stream": 60,
+              "correlation": 811386,
+              "bytes": 12582912,
+              "memory bandwidth (GB/s)": 3.5343352268641692
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 103386,
+            "tid": 103386,
+            "ts": 6087645754745.541,
+            "dur": 3923.433,
+            "args": {
+              "External id": 179662,
+              "cbid": 41,
+              "correlation": 811386
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 103386,
+            "tid": 103386,
+            "ts": 6087645754732.056,
+            "dur": 3972.733,
+            "args": {
+              "External id": 179662,
+              "Record function id": 0,
+              "Ev Idx": 177854
+            }
+          }
+        },
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 0,
+            "tid": 60,
+            "ts": 6087645767801.822,
+            "dur": 3152.392,
+            "args": {
+              "External id": 179693,
+              "device": 0,
+              "context": 1,
+              "stream": 60,
+              "correlation": 811472,
+              "bytes": 12582912,
+              "memory bandwidth (GB/s)": 3.9915441988179134
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 103386,
+            "tid": 103386,
+            "ts": 6087645767406.022,
+            "dur": 3506.443,
+            "args": {
+              "External id": 179693,
+              "cbid": 41,
+              "correlation": 811472
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 103386,
+            "tid": 103386,
+            "ts": 6087645767394.575,
+            "dur": 3558.185,
+            "args": {
+              "External id": 179693,
+              "Record function id": 0,
+              "Ev Idx": 177885
+            }
+          }
+        }
+      ],
+      "trace": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-native-20260910-01/profiles/train/train-rollout3-rank0.json.gz",
+      "trace_sha256": "a5da423351841957caef248b2010e79927dd086d524a43187e78feee1a570b97"
+    },
+    {
+      "optimizer_wall_s": 15.433331745999999,
+      "adam_scopes": {
+        "count": 1612,
+        "duration_s": 14.626451400999976,
+        "bytes": 0
+      },
+      "copies_by_launch_scope": {
+        "Memcpy HtoD (Pageable -> Device)": {
+          "gpu": {
+            "count": 1612,
+            "duration_s": 3.2020899509999983,
+            "bytes": 15266061312
+          },
+          "runtime_api": {
+            "count": 1612,
+            "duration_s": 4.709640526000003,
+            "bytes": 0
+          },
+          "linked_cpu_operators": {
+            "aten::copy_": 1612
+          },
+          "launches_inside_adam_scope": 1612,
+          "bytes_histogram": {
+            "512": 22,
+            "4096": 1,
+            "8192": 21,
+            "1048576": 11,
+            "3850240": 1,
+            "6291456": 768,
+            "12582912": 768,
+            "33554432": 10,
+            "41943040": 10
+          }
+        },
+        "Memcpy DtoH (Device -> Pinned)": {
+          "gpu": {
+            "count": 1613,
+            "duration_s": 1.7221563740000034,
+            "bytes": 15266061316
+          },
+          "runtime_api": {
+            "count": 1613,
+            "duration_s": 0.5826628460000002,
+            "bytes": 0
+          },
+          "linked_cpu_operators": {
+            "aten::_local_scalar_dense": 1,
+            "aten::copy_": 1612
+          },
+          "launches_inside_adam_scope": 0,
+          "bytes_histogram": {
+            "4": 1,
+            "512": 22,
+            "4096": 1,
+            "8192": 21,
+            "1048576": 11,
+            "3850240": 1,
+            "6291456": 768,
+            "12582912": 768,
+            "33554432": 10,
+            "41943040": 10
+          }
+        }
+      },
+      "window_memcpy_without_optimizer_launch": {},
+      "cuda_runtime_inclusive": {
+        "cudaEventQuery": {
+          "count": 14,
+          "duration_s": 0.00018421399999999998,
+          "bytes": 0
+        },
+        "cudaEventRecord": {
+          "count": 15,
+          "duration_s": 1.3453000000000001e-05,
+          "bytes": 0
+        },
+        "cudaEventRecordWithFlags": {
+          "count": 4847,
+          "duration_s": 0.01656050900000005,
+          "bytes": 0
+        },
+        "cudaEventSynchronize": {
+          "count": 1612,
+          "duration_s": 0.031322737000000024,
+          "bytes": 0
+        },
+        "cudaGetFuncBySymbol": {
+          "count": 5,
+          "duration_s": 7.443e-06,
+          "bytes": 0
+        },
+        "cudaLaunchKernel": {
+          "count": 3601,
+          "duration_s": 0.12449281800000002,
+          "bytes": 0
+        },
+        "cudaMemGetInfo": {
+          "count": 1,
+          "duration_s": 3.0310999999999998e-05,
+          "bytes": 0
+        },
+        "cudaMemcpyAsync": {
+          "count": 3225,
+          "duration_s": 5.2923033720000054,
+          "bytes": 0
+        },
+        "cudaStreamGetCaptureInfo_v2": {
+          "count": 5,
+          "duration_s": 8.489e-06,
+          "bytes": 0
+        },
+        "cudaStreamIsCapturing": {
+          "count": 11313,
+          "duration_s": 0.011505319000000002,
+          "bytes": 0
+        },
+        "cudaStreamSynchronize": {
+          "count": 1,
+          "duration_s": 0.008580616,
+          "bytes": 0
+        },
+        "cudaStreamWaitEvent": {
+          "count": 3244,
+          "duration_s": 0.010215424999999995,
+          "bytes": 0
+        },
+        "cudaThreadExchangeStreamCaptureMode": {
+          "count": 12,
+          "duration_s": 1.8815e-05,
+          "bytes": 0
+        }
+      },
+      "selected_cpu_operator_inclusive": {
+        "aten::copy_": {
+          "count": 9672,
+          "duration_s": 10.589106175999987,
+          "bytes": 0
+        },
+        "aten::abs": {
+          "count": 3224,
+          "duration_s": 6.2657934240000115,
+          "bytes": 0
+        },
+        "aten::mul": {
+          "count": 1612,
+          "duration_s": 1.7913292400000023,
+          "bytes": 0
+        },
+        "aten::add_": {
+          "count": 1612,
+          "duration_s": 1.037190954000001,
+          "bytes": 0
+        },
+        "aten::addcdiv_": {
+          "count": 1612,
+          "duration_s": 2.3801805089999992,
+          "bytes": 0
+        }
+      },
+      "examples": [
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 4,
+            "tid": 60,
+            "ts": 6087643471483.352,
+            "dur": 1495.788,
+            "args": {
+              "External id": 173456,
+              "device": 4,
+              "context": 1,
+              "stream": 60,
+              "correlation": 799906,
+              "bytes": 6291456,
+              "memory bandwidth (GB/s)": 4.206114770274932
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 106319,
+            "tid": 106319,
+            "ts": 6087643471230.855,
+            "dur": 1694.835,
+            "args": {
+              "External id": 173456,
+              "cbid": 41,
+              "correlation": 799906
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 106319,
+            "tid": 106319,
+            "ts": 6087643471220.916,
+            "dur": 1733.122,
+            "args": {
+              "External id": 173456,
+              "Record function id": 0,
+              "Ev Idx": 171622
+            }
+          }
+        },
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 4,
+            "tid": 60,
+            "ts": 6087643480714.489,
+            "dur": 1180.688,
+            "args": {
+              "External id": 173487,
+              "device": 4,
+              "context": 1,
+              "stream": 60,
+              "correlation": 799992,
+              "bytes": 6291456,
+              "memory bandwidth (GB/s)": 5.3286355074329546
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 106319,
+            "tid": 106319,
+            "ts": 6087643480342.641,
+            "dur": 1502.916,
+            "args": {
+              "External id": 173487,
+              "cbid": 41,
+              "correlation": 799992
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 106319,
+            "tid": 106319,
+            "ts": 6087643480333.29,
+            "dur": 1535.083,
+            "args": {
+              "External id": 173487,
+              "Record function id": 0,
+              "Ev Idx": 171653
+            }
+          }
+        },
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 4,
+            "tid": 60,
+            "ts": 6087643488170.419,
+            "dur": 1591.817,
+            "args": {
+              "External id": 173518,
+              "device": 4,
+              "context": 1,
+              "stream": 60,
+              "correlation": 800078,
+              "bytes": 6291456,
+              "memory bandwidth (GB/s)": 3.9523739223792687
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 106319,
+            "tid": 106319,
+            "ts": 6087643487698.202,
+            "dur": 2018.81,
+            "args": {
+              "External id": 173518,
+              "cbid": 41,
+              "correlation": 800078
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 106319,
+            "tid": 106319,
+            "ts": 6087643487687.334,
+            "dur": 2053.002,
+            "args": {
+              "External id": 173518,
+              "Record function id": 0,
+              "Ev Idx": 171684
+            }
+          }
+        }
+      ],
+      "trace": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-native-20260910-01/profiles/train/train-rollout3-rank4.json.gz",
+      "trace_sha256": "0cb644bb224e337a3e5285bb2ac8829d43038d1bb119eeb41fce8b3b1ead8033"
+    },
+    {
+      "optimizer_wall_s": 15.411447295,
+      "adam_scopes": {
+        "count": 1537,
+        "duration_s": 14.54396305400003,
+        "bytes": 0
+      },
+      "copies_by_launch_scope": {
+        "Memcpy HtoD (Pageable -> Device)": {
+          "gpu": {
+            "count": 1537,
+            "duration_s": 3.2772876280000056,
+            "bytes": 15266061312
+          },
+          "runtime_api": {
+            "count": 1537,
+            "duration_s": 4.700031786000004,
+            "bytes": 0
+          },
+          "linked_cpu_operators": {
+            "aten::copy_": 1537
+          },
+          "launches_inside_adam_scope": 1537,
+          "bytes_histogram": {
+            "6291456": 768,
+            "12582912": 768,
+            "770546688": 1
+          }
+        },
+        "Memcpy DtoH (Device -> Pinned)": {
+          "gpu": {
+            "count": 1538,
+            "duration_s": 1.6452933739999973,
+            "bytes": 15266061316
+          },
+          "runtime_api": {
+            "count": 1538,
+            "duration_s": 0.5502773689999999,
+            "bytes": 0
+          },
+          "linked_cpu_operators": {
+            "aten::_local_scalar_dense": 1,
+            "aten::copy_": 1537
+          },
+          "launches_inside_adam_scope": 0,
+          "bytes_histogram": {
+            "4": 1,
+            "6291456": 768,
+            "12582912": 768,
+            "770546688": 1
+          }
+        }
+      },
+      "window_memcpy_without_optimizer_launch": {},
+      "cuda_runtime_inclusive": {
+        "cudaEventQuery": {
+          "count": 13,
+          "duration_s": 0.00014680000000000002,
+          "bytes": 0
+        },
+        "cudaEventRecord": {
+          "count": 15,
+          "duration_s": 1.6683e-05,
+          "bytes": 0
+        },
+        "cudaEventRecordWithFlags": {
+          "count": 4622,
+          "duration_s": 0.01670979899999998,
+          "bytes": 0
+        },
+        "cudaEventSynchronize": {
+          "count": 1537,
+          "duration_s": 0.13936782000000045,
+          "bytes": 0
+        },
+        "cudaGetFuncBySymbol": {
+          "count": 5,
+          "duration_s": 7.538999999999999e-06,
+          "bytes": 0
+        },
+        "cudaLaunchKernel": {
+          "count": 3450,
+          "duration_s": 0.12099491399999958,
+          "bytes": 0
+        },
+        "cudaMemGetInfo": {
+          "count": 1,
+          "duration_s": 2.7756e-05,
+          "bytes": 0
+        },
+        "cudaMemcpyAsync": {
+          "count": 3075,
+          "duration_s": 5.250309155000001,
+          "bytes": 0
+        },
+        "cudaStreamGetCaptureInfo_v2": {
+          "count": 5,
+          "duration_s": 1.5732e-05,
+          "bytes": 0
+        },
+        "cudaStreamIsCapturing": {
+          "count": 10787,
+          "duration_s": 0.011271365999999979,
+          "bytes": 0
+        },
+        "cudaStreamSynchronize": {
+          "count": 1,
+          "duration_s": 0.008142388,
+          "bytes": 0
+        },
+        "cudaStreamWaitEvent": {
+          "count": 3094,
+          "duration_s": 0.010124488000000017,
+          "bytes": 0
+        },
+        "cudaThreadExchangeStreamCaptureMode": {
+          "count": 10,
+          "duration_s": 3.759800000000001e-05,
+          "bytes": 0
+        }
+      },
+      "selected_cpu_operator_inclusive": {
+        "aten::copy_": {
+          "count": 9222,
+          "duration_s": 10.52147700599992,
+          "bytes": 0
+        },
+        "aten::abs": {
+          "count": 3074,
+          "duration_s": 6.101722310000005,
+          "bytes": 0
+        },
+        "aten::mul": {
+          "count": 1537,
+          "duration_s": 1.783543712999997,
+          "bytes": 0
+        },
+        "aten::add_": {
+          "count": 1537,
+          "duration_s": 1.0450021559999996,
+          "bytes": 0
+        },
+        "aten::addcdiv_": {
+          "count": 1537,
+          "duration_s": 2.4296958029999995,
+          "bytes": 0
+        }
+      },
+      "examples": [
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 0,
+            "tid": 60,
+            "ts": 6088145960903.233,
+            "dur": 787.473,
+            "args": {
+              "External id": 322103,
+              "device": 0,
+              "context": 1,
+              "stream": 60,
+              "correlation": 1361095,
+              "bytes": 6291456,
+              "memory bandwidth (GB/s)": 7.989424399312738
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 11944,
+            "tid": 11944,
+            "ts": 6088145960697.909,
+            "dur": 946.81,
+            "args": {
+              "External id": 322103,
+              "cbid": 41,
+              "correlation": 1361095
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 11944,
+            "tid": 11944,
+            "ts": 6088145960690.705,
+            "dur": 968.483,
+            "args": {
+              "External id": 322103,
+              "Record function id": 0,
+              "Ev Idx": 320534
+            }
+          }
+        },
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 0,
+            "tid": 60,
+            "ts": 6088145965940.006,
+            "dur": 1751.04,
+            "args": {
+              "External id": 322134,
+              "device": 0,
+              "context": 1,
+              "stream": 60,
+              "correlation": 1361181,
+              "bytes": 6291456,
+              "memory bandwidth (GB/s)": 3.592982456140351
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 11944,
+            "tid": 11944,
+            "ts": 6088145965620.236,
+            "dur": 2024.84,
+            "args": {
+              "External id": 322134,
+              "cbid": 41,
+              "correlation": 1361181
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 11944,
+            "tid": 11944,
+            "ts": 6088145965602.694,
+            "dur": 2072.245,
+            "args": {
+              "External id": 322134,
+              "Record function id": 0,
+              "Ev Idx": 320565
+            }
+          }
+        },
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 0,
+            "tid": 60,
+            "ts": 6088145970956.075,
+            "dur": 984.174,
+            "args": {
+              "External id": 322165,
+              "device": 0,
+              "context": 1,
+              "stream": 60,
+              "correlation": 1361267,
+              "bytes": 6291456,
+              "memory bandwidth (GB/s)": 6.392625694236995
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 11944,
+            "tid": 11944,
+            "ts": 6088145970768.348,
+            "dur": 1130.31,
+            "args": {
+              "External id": 322165,
+              "cbid": 41,
+              "correlation": 1361267
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 11944,
+            "tid": 11944,
+            "ts": 6088145970762.004,
+            "dur": 1151.584,
+            "args": {
+              "External id": 322165,
+              "Record function id": 0,
+              "Ev Idx": 320596
+            }
+          }
+        }
+      ],
+      "trace": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-aligned-20260910-01/profiles/train/train-rollout3-rank0.json.gz",
+      "trace_sha256": "6506199201e9a49cb80029cbeb4db0c773fd1370eaee58ff209e8c563f33a413"
+    },
+    {
+      "optimizer_wall_s": 15.512413843000001,
+      "adam_scopes": {
+        "count": 1612,
+        "duration_s": 14.725835534999968,
+        "bytes": 0
+      },
+      "copies_by_launch_scope": {
+        "Memcpy HtoD (Pageable -> Device)": {
+          "gpu": {
+            "count": 1612,
+            "duration_s": 3.3100333829999995,
+            "bytes": 15266061312
+          },
+          "runtime_api": {
+            "count": 1612,
+            "duration_s": 4.821276325000006,
+            "bytes": 0
+          },
+          "linked_cpu_operators": {
+            "aten::copy_": 1612
+          },
+          "launches_inside_adam_scope": 1612,
+          "bytes_histogram": {
+            "512": 22,
+            "4096": 1,
+            "8192": 21,
+            "1048576": 11,
+            "3850240": 1,
+            "6291456": 768,
+            "12582912": 768,
+            "33554432": 10,
+            "41943040": 10
+          }
+        },
+        "Memcpy DtoH (Device -> Pinned)": {
+          "gpu": {
+            "count": 1613,
+            "duration_s": 1.7107770369999993,
+            "bytes": 15266061316
+          },
+          "runtime_api": {
+            "count": 1613,
+            "duration_s": 0.5722620629999996,
+            "bytes": 0
+          },
+          "linked_cpu_operators": {
+            "aten::_local_scalar_dense": 1,
+            "aten::copy_": 1612
+          },
+          "launches_inside_adam_scope": 0,
+          "bytes_histogram": {
+            "4": 1,
+            "512": 22,
+            "4096": 1,
+            "8192": 21,
+            "1048576": 11,
+            "3850240": 1,
+            "6291456": 768,
+            "12582912": 768,
+            "33554432": 10,
+            "41943040": 10
+          }
+        }
+      },
+      "window_memcpy_without_optimizer_launch": {},
+      "cuda_runtime_inclusive": {
+        "cudaEventQuery": {
+          "count": 12,
+          "duration_s": 0.000135705,
+          "bytes": 0
+        },
+        "cudaEventRecord": {
+          "count": 15,
+          "duration_s": 1.3390999999999996e-05,
+          "bytes": 0
+        },
+        "cudaEventRecordWithFlags": {
+          "count": 4847,
+          "duration_s": 0.016866931,
+          "bytes": 0
+        },
+        "cudaEventSynchronize": {
+          "count": 1612,
+          "duration_s": 0.031266783000000006,
+          "bytes": 0
+        },
+        "cudaGetFuncBySymbol": {
+          "count": 5,
+          "duration_s": 4.371e-06,
+          "bytes": 0
+        },
+        "cudaLaunchKernel": {
+          "count": 3601,
+          "duration_s": 0.12348476200000001,
+          "bytes": 0
+        },
+        "cudaMemGetInfo": {
+          "count": 1,
+          "duration_s": 2.9354e-05,
+          "bytes": 0
+        },
+        "cudaMemcpyAsync": {
+          "count": 3225,
+          "duration_s": 5.393538387999997,
+          "bytes": 0
+        },
+        "cudaStreamGetCaptureInfo_v2": {
+          "count": 5,
+          "duration_s": 7.738e-06,
+          "bytes": 0
+        },
+        "cudaStreamIsCapturing": {
+          "count": 11313,
+          "duration_s": 0.011838171999999977,
+          "bytes": 0
+        },
+        "cudaStreamSynchronize": {
+          "count": 1,
+          "duration_s": 0.009115323,
+          "bytes": 0
+        },
+        "cudaStreamWaitEvent": {
+          "count": 3244,
+          "duration_s": 0.010707270000000043,
+          "bytes": 0
+        },
+        "cudaThreadExchangeStreamCaptureMode": {
+          "count": 8,
+          "duration_s": 1.1904999999999999e-05,
+          "bytes": 0
+        }
+      },
+      "selected_cpu_operator_inclusive": {
+        "aten::copy_": {
+          "count": 9672,
+          "duration_s": 10.788443452000022,
+          "bytes": 0
+        },
+        "aten::abs": {
+          "count": 3224,
+          "duration_s": 6.235527983000005,
+          "bytes": 0
+        },
+        "aten::mul": {
+          "count": 1612,
+          "duration_s": 1.7985546870000002,
+          "bytes": 0
+        },
+        "aten::add_": {
+          "count": 1612,
+          "duration_s": 1.055527395000002,
+          "bytes": 0
+        },
+        "aten::addcdiv_": {
+          "count": 1612,
+          "duration_s": 2.3899644709999976,
+          "bytes": 0
+        }
+      },
+      "examples": [
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 4,
+            "tid": 60,
+            "ts": 6088143917994.95,
+            "dur": 3833.291,
+            "args": {
+              "External id": 316304,
+              "device": 4,
+              "context": 1,
+              "stream": 60,
+              "correlation": 1350131,
+              "bytes": 12582912,
+              "memory bandwidth (GB/s)": 3.2825350332129757
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 12594,
+            "tid": 12594,
+            "ts": 6088143917657.857,
+            "dur": 4114.298,
+            "args": {
+              "External id": 316304,
+              "cbid": 41,
+              "correlation": 1350131
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 12594,
+            "tid": 12594,
+            "ts": 6088143917652.016,
+            "dur": 4156.329,
+            "args": {
+              "External id": 316304,
+              "Record function id": 0,
+              "Ev Idx": 314467
+            }
+          }
+        },
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 4,
+            "tid": 60,
+            "ts": 6088143931349.995,
+            "dur": 3720.108,
+            "args": {
+              "External id": 316335,
+              "device": 4,
+              "context": 1,
+              "stream": 60,
+              "correlation": 1350217,
+              "bytes": 12582912,
+              "memory bandwidth (GB/s)": 3.3824050269508303
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 12594,
+            "tid": 12594,
+            "ts": 6088143930960.555,
+            "dur": 4033.84,
+            "args": {
+              "External id": 316335,
+              "cbid": 41,
+              "correlation": 1350217
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 12594,
+            "tid": 12594,
+            "ts": 6088143930943.393,
+            "dur": 4087.453,
+            "args": {
+              "External id": 316335,
+              "Record function id": 0,
+              "Ev Idx": 314498
+            }
+          }
+        },
+        {
+          "gpu": {
+            "ph": "X",
+            "cat": "gpu_memcpy",
+            "name": "Memcpy HtoD (Pageable -> Device)",
+            "pid": 4,
+            "tid": 60,
+            "ts": 6088143943871.676,
+            "dur": 3552.494,
+            "args": {
+              "External id": 316366,
+              "device": 4,
+              "context": 1,
+              "stream": 60,
+              "correlation": 1350303,
+              "bytes": 12582912,
+              "memory bandwidth (GB/s)": 3.5419938781036646
+            }
+          },
+          "runtime": {
+            "ph": "X",
+            "cat": "cuda_runtime",
+            "name": "cudaMemcpyAsync",
+            "pid": 12594,
+            "tid": 12594,
+            "ts": 6088143943647.315,
+            "dur": 3733.729,
+            "args": {
+              "External id": 316366,
+              "cbid": 41,
+              "correlation": 1350303
+            }
+          },
+          "cpu_operator": {
+            "ph": "X",
+            "cat": "cpu_op",
+            "name": "aten::copy_",
+            "pid": 12594,
+            "tid": 12594,
+            "ts": 6088143943640.724,
+            "dur": 3767.075,
+            "args": {
+              "External id": 316366,
+              "Record function id": 0,
+              "Ev Idx": 314529
+            }
+          }
+        }
+      ],
+      "trace": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-aligned-20260910-01/profiles/train/train-rollout3-rank4.json.gz",
+      "trace_sha256": "1deae520fabe96e1c9136209317549dedc894a74dab91be7e882b4536bc4d397"
+    }
+  ]
+}

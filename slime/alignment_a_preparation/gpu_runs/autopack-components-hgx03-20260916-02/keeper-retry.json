@@ -1,0 +1,14 @@
+{
+  "status": "verified_training",
+  "pid": 7247,
+  "pgid": 7247,
+  "log": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-components-hgx03-20260916-02/keepalive-retry.log",
+  "allocator": "default",
+  "CUDA_LAUNCH_BLOCKING": "1",
+  "torchrun_pid": 7258,
+  "first_backward_completed": true,
+  "gpu_utilization_percent_range": [
+    95,
+    98
+  ]
+}

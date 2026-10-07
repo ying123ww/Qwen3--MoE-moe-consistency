@@ -1,0 +1,6 @@
+{
+  "host": "ai_hgx_03",
+  "allocation": "1000742",
+  "scope": "Actual node probe: torch.empty(16,dtype=torch.bfloat16,pin_memory=True), then detach().clone(), then float()",
+  "stdout": {"torch": "2.11.0+cu129", "pinned_bf16": true, "clone_pinned": false, "clone_float_pinned": false}
+}

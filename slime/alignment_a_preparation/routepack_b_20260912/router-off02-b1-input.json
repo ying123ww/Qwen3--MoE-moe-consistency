@@ -1,0 +1,7 @@
+{
+  "samples": 8,
+  "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/routepack_b_20260912/router-off02-b1-rollout.pt",
+  "sha256": "579bad398e66df38978264cd09da3ae1643798c0cd51ae1000f411d302909754",
+  "source_capture": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/router-exact-off-20260912-02/capture/case-batch8/captured",
+  "gpu_gate_completed": false
+}

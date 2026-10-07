@@ -1,0 +1,175 @@
+{
+  "scope": "same synthetic fixture seed19; five search seeds; 500 candidate/20 iteration/20 swap caps; batch25",
+  "results": [
+    {
+      "seed": 0,
+      "mode": "routepack",
+      "native": 68574.0,
+      "E": 64858.0,
+      "random_E": 58846.0,
+      "swaps": 18,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 352.5516130030155,
+        "search": 62.11886368691921,
+        "validation_and_report": 395.70493809878826,
+        "total": 810.3757407516241
+      },
+      "determinism": true
+    },
+    {
+      "seed": 0,
+      "mode": "sampled_best",
+      "native": 68574.0,
+      "E": 48806.0,
+      "random_E": 57566.0,
+      "swaps": 19,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 328.4519277513027,
+        "search": 132.819140329957,
+        "validation_and_report": 319.9834171682596,
+        "total": 781.2548037618399
+      },
+      "determinism": true
+    },
+    {
+      "seed": 1,
+      "mode": "routepack",
+      "native": 68574.0,
+      "E": 64858.0,
+      "random_E": 53334.0,
+      "swaps": 18,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 304.94221299886703,
+        "search": 58.69686417281628,
+        "validation_and_report": 302.59195901453495,
+        "total": 666.2312895059586
+      },
+      "determinism": true
+    },
+    {
+      "seed": 1,
+      "mode": "sampled_best",
+      "native": 68574.0,
+      "E": 48802.0,
+      "random_E": 53334.0,
+      "swaps": 20,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 323.5330395400524,
+        "search": 137.3930163681507,
+        "validation_and_report": 323.5394600778818,
+        "total": 784.4659760594368
+      },
+      "determinism": true
+    },
+    {
+      "seed": 2,
+      "mode": "routepack",
+      "native": 68574.0,
+      "E": 64858.0,
+      "random_E": 57058.0,
+      "swaps": 18,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 330.42415976524353,
+        "search": 72.68473319709301,
+        "validation_and_report": 332.03849382698536,
+        "total": 735.1478151977062
+      },
+      "determinism": true
+    },
+    {
+      "seed": 2,
+      "mode": "sampled_best",
+      "native": 68574.0,
+      "E": 48810.0,
+      "random_E": 57030.0,
+      "swaps": 19,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 336.4526331424713,
+        "search": 152.18807943165302,
+        "validation_and_report": 335.30404046177864,
+        "total": 823.9450734108686
+      },
+      "determinism": true
+    },
+    {
+      "seed": 3,
+      "mode": "routepack",
+      "native": 68574.0,
+      "E": 64858.0,
+      "random_E": 55782.0,
+      "swaps": 18,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 386.834554374218,
+        "search": 59.266433119773865,
+        "validation_and_report": 305.4310027509928,
+        "total": 751.5323255211115
+      },
+      "determinism": true
+    },
+    {
+      "seed": 3,
+      "mode": "sampled_best",
+      "native": 68574.0,
+      "E": 48978.0,
+      "random_E": 55754.0,
+      "swaps": 19,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 326.2854292988777,
+        "search": 145.97073197364807,
+        "validation_and_report": 314.3183123320341,
+        "total": 786.5748815238476
+      },
+      "determinism": true
+    },
+    {
+      "seed": 4,
+      "mode": "routepack",
+      "native": 68574.0,
+      "E": 64858.0,
+      "random_E": 54738.0,
+      "swaps": 18,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 318.9797941595316,
+        "search": 64.08446468412876,
+        "validation_and_report": 316.4232224225998,
+        "total": 699.4877438992262
+      },
+      "determinism": true
+    },
+    {
+      "seed": 4,
+      "mode": "sampled_best",
+      "native": 68574.0,
+      "E": 48802.0,
+      "random_E": 54938.0,
+      "swaps": 17,
+      "matched": true,
+      "candidates": 500,
+      "cpu_ms": {
+        "prepare": 377.86287255585194,
+        "search": 150.86420625448227,
+        "validation_and_report": 312.68999725580215,
+        "total": 841.4173796772957
+      },
+      "determinism": true
+    }
+  ]
+}

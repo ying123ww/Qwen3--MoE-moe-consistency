@@ -1,0 +1,222 @@
+[
+  {
+    "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-native-20260910-01/profiles/train/train-rollout3-rank0.json.gz",
+    "gaps": [
+      {
+        "start_relative_s": 1.5060874794921875,
+        "duration_ms": 275.4186533203125,
+        "overlapping_sync_api_names": [],
+        "largest_overlapping_events": [
+          {
+            "cat": "cpu_op",
+            "name": "c10d::reduce_scatter_tensor_coalesced_",
+            "overlap_ms": 275.4186533203125,
+            "event_ms": 416.05510200000003,
+            "tid": 103386
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 275.4186533203125,
+            "event_ms": 416.016478,
+            "tid": 103386
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 275.4186533203125,
+            "event_ms": 415.82624300000003,
+            "tid": 103386
+          },
+          {
+            "cat": "cuda_runtime",
+            "name": "cudaGetDeviceProperties_v2",
+            "overlap_ms": 2.59223828125,
+            "event_ms": 2.592238,
+            "tid": 103386
+          }
+        ]
+      },
+      {
+        "start_relative_s": 0.403962216796875,
+        "duration_ms": 176.1116416015625,
+        "overlapping_sync_api_names": [],
+        "largest_overlapping_events": [
+          {
+            "cat": "cpu_op",
+            "name": "_VocabParallelLogProbEntropy",
+            "overlap_ms": 176.1116416015625,
+            "event_ms": 203.102192,
+            "tid": 103386
+          },
+          {
+            "cat": "cpu_op",
+            "name": "c10d::allreduce_",
+            "overlap_ms": 176.1116416015625,
+            "event_ms": 199.218079,
+            "tid": 103386
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 176.1116416015625,
+            "event_ms": 199.17929800000002,
+            "tid": 103386
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 176.1116416015625,
+            "event_ms": 199.04107000000002,
+            "tid": 103386
+          },
+          {
+            "cat": "cuda_runtime",
+            "name": "cudaGetDeviceProperties_v2",
+            "overlap_ms": 2.654166015625,
+            "event_ms": 2.654166,
+            "tid": 103386
+          }
+        ]
+      },
+      {
+        "start_relative_s": 1.9732095390625,
+        "duration_ms": 173.210486328125,
+        "overlapping_sync_api_names": [],
+        "largest_overlapping_events": [
+          {
+            "cat": "cpu_op",
+            "name": "c10d::reduce_scatter_tensor_coalesced_",
+            "overlap_ms": 173.210486328125,
+            "event_ms": 308.28472700000003,
+            "tid": 103386
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 173.210486328125,
+            "event_ms": 308.24373599999996,
+            "tid": 103386
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 173.210486328125,
+            "event_ms": 308.054173,
+            "tid": 103386
+          }
+        ]
+      }
+    ]
+  },
+  {
+    "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-native-20260910-01/profiles/train/train-rollout3-rank4.json.gz",
+    "gaps": [
+      {
+        "start_relative_s": 1.5576698623046874,
+        "duration_ms": 223.717080078125,
+        "overlapping_sync_api_names": [],
+        "largest_overlapping_events": [
+          {
+            "cat": "cpu_op",
+            "name": "c10d::reduce_scatter_tensor_coalesced_",
+            "overlap_ms": 223.717080078125,
+            "event_ms": 363.513899,
+            "tid": 106319
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 223.717080078125,
+            "event_ms": 363.44023599999997,
+            "tid": 106319
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 223.717080078125,
+            "event_ms": 363.212705,
+            "tid": 106319
+          }
+        ]
+      },
+      {
+        "start_relative_s": 0.429678943359375,
+        "duration_ms": 177.919267578125,
+        "overlapping_sync_api_names": [],
+        "largest_overlapping_events": [
+          {
+            "cat": "cpu_op",
+            "name": "_VocabParallelLogProbEntropy",
+            "overlap_ms": 177.919267578125,
+            "event_ms": 204.45507500000002,
+            "tid": 106319
+          },
+          {
+            "cat": "cpu_op",
+            "name": "c10d::allreduce_",
+            "overlap_ms": 174.713330078125,
+            "event_ms": 197.639682,
+            "tid": 106319
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 174.668328125,
+            "event_ms": 197.587248,
+            "tid": 106319
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 174.6257333984375,
+            "event_ms": 197.44072500000001,
+            "tid": 106319
+          },
+          {
+            "cat": "cuda_runtime",
+            "name": "cudaGetDeviceProperties_v2",
+            "overlap_ms": 12.1391884765625,
+            "event_ms": 12.139188,
+            "tid": 106319
+          },
+          {
+            "cat": "cuda_runtime",
+            "name": "cudaMemGetInfo",
+            "overlap_ms": 1.3632001953125,
+            "event_ms": 1.545369,
+            "tid": 106319
+          }
+        ]
+      },
+      {
+        "start_relative_s": 1.9732403330078125,
+        "duration_ms": 173.070705078125,
+        "overlapping_sync_api_names": [],
+        "largest_overlapping_events": [
+          {
+            "cat": "cpu_op",
+            "name": "c10d::reduce_scatter_tensor_coalesced_",
+            "overlap_ms": 173.070705078125,
+            "event_ms": 308.17019799999997,
+            "tid": 106319
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 173.070705078125,
+            "event_ms": 308.13128600000005,
+            "tid": 106319
+          },
+          {
+            "cat": "cpu_op",
+            "name": "record_param_comms",
+            "overlap_ms": 173.070705078125,
+            "event_ms": 307.95105099999995,
+            "tid": 106319
+          }
+        ]
+      }
+    ]
+  }
+]

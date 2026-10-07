@@ -1,0 +1,236 @@
+{
+  "source": "actual_b1_rank_schedules",
+  "cells": [
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 0,
+      "source_rank": 0,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample0"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 1,
+      "source_rank": 0,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample11",
+        "autopack-hgx05-b1-20260914-03:sample18"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 2,
+      "source_rank": 0,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample23"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 0,
+      "source_rank": 1,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample1",
+        "autopack-hgx05-b1-20260914-03:sample5"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 1,
+      "source_rank": 1,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample12",
+        "autopack-hgx05-b1-20260914-03:sample29"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 2,
+      "source_rank": 1,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample25"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 0,
+      "source_rank": 2,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample2",
+        "autopack-hgx05-b1-20260914-03:sample8"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 1,
+      "source_rank": 2,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample13"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 2,
+      "source_rank": 2,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample26"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 0,
+      "source_rank": 3,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample3"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 1,
+      "source_rank": 3,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample14",
+        "autopack-hgx05-b1-20260914-03:sample21"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 2,
+      "source_rank": 3,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample27"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 0,
+      "source_rank": 4,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample4",
+        "autopack-hgx05-b1-20260914-03:sample17"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 1,
+      "source_rank": 4,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample15"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 2,
+      "source_rank": 4,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample28"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 0,
+      "source_rank": 5,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample6",
+        "autopack-hgx05-b1-20260914-03:sample7"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 1,
+      "source_rank": 5,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample16"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 2,
+      "source_rank": 5,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample30"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 0,
+      "source_rank": 6,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample9"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 1,
+      "source_rank": 6,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample20"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 2,
+      "source_rank": 6,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample31"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 0,
+      "source_rank": 7,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample10",
+        "autopack-hgx05-b1-20260914-03:sample24"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 1,
+      "source_rank": 7,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample22"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 2,
+      "source_rank": 7,
+      "sample_ids": [
+        "autopack-hgx05-b1-20260914-03:sample19"
+      ]
+    }
+  ],
+  "num_microbatches": [
+    3
+  ],
+  "global_batch_sizes": [
+    32
+  ],
+  "rollout_execution_id": 0
+}

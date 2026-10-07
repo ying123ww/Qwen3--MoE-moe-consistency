@@ -1,0 +1,430 @@
+{
+  "results": [
+    {
+      "path": "/tmp/ap-components-native-20260916-01/components/components-rank0.json",
+      "sha256": "771f45b348548c67fa15cd22240f1426200d792503228d4c118cb2157323bed7",
+      "windows": [
+        {
+          "window": "forward",
+          "cpu_window_wall_ms": 2019.328106,
+          "gpu": {
+            "events": 0,
+            "duration_sum_ms": 0.0,
+            "interval_union_ms": 0.0,
+            "streams": []
+          },
+          "categories": {
+            "kernel": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            },
+            "gpu_memcpy": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            },
+            "gpu_memset": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            }
+          },
+          "unattributed_to_component": {
+            "events": 0,
+            "duration_sum_ms": 0.0,
+            "interval_union_ms": 0.0,
+            "streams": []
+          },
+          "unattributed_gpu_duration_fraction": null,
+          "components": [
+            {
+              "component": "aligned_triton_moe",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 63.03573400000001,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "combine",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 10.693223000000003,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "combine_postprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1.2696969999999999,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "combine_preprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 19.081625000000003,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "dispatch",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 794.0328180000004,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "dispatch_postprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 426.878359,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "dispatch_preprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 8.363134999999998,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "expert_wrapper",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 68.82747,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "get_permuted_hidden_states_by_experts",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 425.68340000000006,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "get_restored_hidden_states_by_experts",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 17.96142699999999,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "moe",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1422.9085400000001,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "token_dispatch",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 792.9550050000001,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            }
+          ]
+        },
+        {
+          "window": "backward",
+          "cpu_window_wall_ms": 13340.847119999999,
+          "gpu": {
+            "events": 0,
+            "duration_sum_ms": 0.0,
+            "interval_union_ms": 0.0,
+            "streams": []
+          },
+          "categories": {
+            "kernel": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            },
+            "gpu_memcpy": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            },
+            "gpu_memset": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            }
+          },
+          "unattributed_to_component": {
+            "events": 0,
+            "duration_sum_ms": 0.0,
+            "interval_union_ms": 0.0,
+            "streams": []
+          },
+          "unattributed_gpu_duration_fraction": null,
+          "components": [
+            {
+              "component": "aligned_triton_moe",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 63.93781900000002,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "combine",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 11.331304999999997,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "combine_postprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1.4764620000000004,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "combine_preprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 18.585779000000002,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "dispatch",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1037.9252230000002,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "dispatch_postprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 435.754125,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "dispatch_preprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 9.792153999999998,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "expert_wrapper",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 217.480564,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "get_permuted_hidden_states_by_experts",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 434.49570100000005,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "get_restored_hidden_states_by_experts",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 17.319068999999995,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "moe",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1835.5822350000005,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "native_TE_linear_fc1",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 64.72754900000001,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "native_TE_linear_fc2",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 64.331792,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "token_dispatch",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1036.791424,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            }
+          ]
+        },
+        {
+          "window": "optimizer",
+          "cpu_window_wall_ms": 11448.454974,
+          "gpu": {
+            "events": 0,
+            "duration_sum_ms": 0.0,
+            "interval_union_ms": 0.0,
+            "streams": []
+          },
+          "categories": {
+            "kernel": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            },
+            "gpu_memcpy": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            },
+            "gpu_memset": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            }
+          },
+          "unattributed_to_component": {
+            "events": 0,
+            "duration_sum_ms": 0.0,
+            "interval_union_ms": 0.0,
+            "streams": []
+          },
+          "unattributed_gpu_duration_fraction": null,
+          "components": []
+        }
+      ],
+      "linkage": {},
+      "gpu_events_outside_windows": {
+        "events": 0,
+        "duration_sum_ms": 0.0,
+        "interval_union_ms": 0.0,
+        "streams": []
+      },
+      "limitations": [
+        "CPU annotation durations are host inclusive time, never device kernel duration.",
+        "GPU attribution uses CUDA API correlation plus containing same-thread component ranges. External IDs are checked as supplementary linkage evidence.",
+        "Missing range attribution (especially native backward kernels) remains unattributed rather than guessed.",
+        "Components are nested inclusive and not additive. GPU duration sum can exceed interval union with multi-stream concurrency.",
+        "GPU union is observed activity coverage, not full component latency or isolated compute, and is not additive across components.",
+        "Synchronized selected-window boundaries perturb scheduling and exclude other microbatches and loss forward; no throughput or cross-rank arrival-time claim."
+      ],
+      "gpu_activity_available": false,
+      "gpu_activity_event_count": 0,
+      "validation_error": "CPU-only trace: no kernel, memcpy or CUDA runtime activity; no device attribution claim"
+    }
+  ]
+}

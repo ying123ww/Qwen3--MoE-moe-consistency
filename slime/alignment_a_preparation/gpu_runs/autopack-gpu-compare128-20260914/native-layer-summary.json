@@ -1,0 +1,479 @@
+{
+  "topology_path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-gpu-compare128-20260914/plans/input/topology.json",
+  "topology_sha256": "f06059f501cbf098eca09f2499befd26a5359276b19118db25582e0f4181c97c",
+  "schedule_path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-gpu-compare128-20260914/plans/native/schedule.json",
+  "schedule_sha256": "72d75c27b90400a0f9bbf964a3038bf22528da652db694ff12d0c908dc004e60",
+  "ep_groups": [
+    [
+      0,
+      1,
+      2,
+      3
+    ],
+    [
+      4,
+      5,
+      6,
+      7
+    ]
+  ],
+  "rank_div_four_matches_topology": true,
+  "limitations": [
+    "Durations are current-stream inclusive intervals, not isolated expert compute. Communication dependencies, host enqueue gaps and rank arrival skew can affect them.",
+    "Maximum duration rank is not necessarily the latest-finishing rank: events contain durations without cross-rank aligned absolute timestamps.",
+    "Forward and replay-backward recompute are separate; recompute timings do not include all autograd backward kernels.",
+    "MoE and expert intervals are nested: do not add their durations. Sums of per-collective rank maxima are not step time.",
+    "Ordinal slot join requires one train step/context, PP=TP=CP=1, matching replay order and validated equal layer-slot-stage coverage.",
+    "One attributed round of a fixed batch gives descriptive evidence, not a causal routing-skew proof or independent batch replication."
+  ],
+  "results": [
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-gpu-compare128-20260914/timing_native-01/timing.json",
+      "sha256": "e69a762f1e540bf443713d5ff00b6cd05ff472848ad63ad0d25777875a232681",
+      "coverage": [
+        {
+          "round": 0,
+          "rank": 0,
+          "moe_calls": 1248,
+          "expert_calls": 1248,
+          "expert_calls_without_outer_moe": 0,
+          "moe_calls_without_expert_hook": 0
+        },
+        {
+          "round": 0,
+          "rank": 1,
+          "moe_calls": 1248,
+          "expert_calls": 1248,
+          "expert_calls_without_outer_moe": 0,
+          "moe_calls_without_expert_hook": 0
+        },
+        {
+          "round": 0,
+          "rank": 2,
+          "moe_calls": 1248,
+          "expert_calls": 1248,
+          "expert_calls_without_outer_moe": 0,
+          "moe_calls_without_expert_hook": 0
+        },
+        {
+          "round": 0,
+          "rank": 3,
+          "moe_calls": 1248,
+          "expert_calls": 1248,
+          "expert_calls_without_outer_moe": 0,
+          "moe_calls_without_expert_hook": 0
+        },
+        {
+          "round": 0,
+          "rank": 4,
+          "moe_calls": 1248,
+          "expert_calls": 1248,
+          "expert_calls_without_outer_moe": 0,
+          "moe_calls_without_expert_hook": 0
+        },
+        {
+          "round": 0,
+          "rank": 5,
+          "moe_calls": 1248,
+          "expert_calls": 1248,
+          "expert_calls_without_outer_moe": 0,
+          "moe_calls_without_expert_hook": 0
+        },
+        {
+          "round": 0,
+          "rank": 6,
+          "moe_calls": 1248,
+          "expert_calls": 1248,
+          "expert_calls_without_outer_moe": 0,
+          "moe_calls_without_expert_hook": 0
+        },
+        {
+          "round": 0,
+          "rank": 7,
+          "moe_calls": 1248,
+          "expert_calls": 1248,
+          "expert_calls_without_outer_moe": 0,
+          "moe_calls_without_expert_hook": 0
+        }
+      ],
+      "summary": [
+        {
+          "group_id": 0,
+          "ranks": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "stage": "replay_backward",
+          "kind": "experts",
+          "collective_count": 624,
+          "rank_duration_ms": {
+            "count": 2496,
+            "mean": 9.306132514316301,
+            "median": 9.207295894622803,
+            "p95": 12.935167789459229,
+            "maximum": 21.134336471557617
+          },
+          "max_duration_ms": {
+            "count": 624,
+            "mean": 11.401068315292017,
+            "median": 11.100160121917725,
+            "p95": 14.928589057922364,
+            "maximum": 21.134336471557617
+          },
+          "duration_spread_ms": {
+            "count": 624,
+            "mean": 2.094935800975714,
+            "median": 1.7140479683876038,
+            "p95": 4.690982359647753,
+            "maximum": 9.628672361373901
+          },
+          "max_over_mean": {
+            "count": 624,
+            "mean": 1.2237104349060335,
+            "median": 1.1861644700973333,
+            "p95": 1.5164137859930162,
+            "maximum": 1.8368636759395331
+          },
+          "max_duration_rank_counts": {
+            "0": 152,
+            "1": 208,
+            "3": 172,
+            "2": 92
+          }
+        },
+        {
+          "group_id": 0,
+          "ranks": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "stage": "replay_backward",
+          "kind": "moe",
+          "collective_count": 624,
+          "rank_duration_ms": {
+            "count": 2496,
+            "mean": 32.06849276561003,
+            "median": 27.232768058776855,
+            "p95": 46.89484691619873,
+            "maximum": 710.982666015625
+          },
+          "max_duration_ms": {
+            "count": 624,
+            "mean": 40.566524841846565,
+            "median": 36.784128189086914,
+            "p95": 48.412621116638185,
+            "maximum": 710.982666015625
+          },
+          "duration_spread_ms": {
+            "count": 624,
+            "mean": 8.498032076236528,
+            "median": 7.6990721225738525,
+            "p95": 13.071897029876709,
+            "maximum": 306.7584009170532
+          },
+          "max_over_mean": {
+            "count": 624,
+            "mean": 1.2435864514677792,
+            "median": 1.222704214852961,
+            "p95": 1.43204140630931,
+            "maximum": 2.025060014479684
+          },
+          "max_duration_rank_counts": {
+            "0": 146,
+            "2": 118,
+            "1": 173,
+            "3": 187
+          }
+        },
+        {
+          "group_id": 0,
+          "ranks": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "stage": "replay_forward",
+          "kind": "experts",
+          "collective_count": 624,
+          "rank_duration_ms": {
+            "count": 2496,
+            "mean": 5.326668304797167,
+            "median": 5.219327926635742,
+            "p95": 7.382528185844421,
+            "maximum": 49.92204666137695
+          },
+          "max_duration_ms": {
+            "count": 624,
+            "mean": 6.595866246101184,
+            "median": 6.330367803573608,
+            "p95": 8.62776346206665,
+            "maximum": 49.92204666137695
+          },
+          "duration_spread_ms": {
+            "count": 624,
+            "mean": 1.2691979413040173,
+            "median": 0.9680639505386353,
+            "p95": 2.924352091550827,
+            "maximum": 32.94079911708832
+          },
+          "max_over_mean": {
+            "count": 624,
+            "mean": 1.2280498124376606,
+            "median": 1.185479005554778,
+            "p95": 1.5198687005723475,
+            "maximum": 2.939833868576247
+          },
+          "max_duration_rank_counts": {
+            "0": 151,
+            "1": 211,
+            "3": 169,
+            "2": 93
+          }
+        },
+        {
+          "group_id": 0,
+          "ranks": [
+            0,
+            1,
+            2,
+            3
+          ],
+          "stage": "replay_forward",
+          "kind": "moe",
+          "collective_count": 624,
+          "rank_duration_ms": {
+            "count": 2496,
+            "mean": 21.941775169128025,
+            "median": 20.973055839538574,
+            "p95": 28.751872539520264,
+            "maximum": 118.48806762695312
+          },
+          "max_duration_ms": {
+            "count": 624,
+            "mean": 25.489299648847336,
+            "median": 25.234944343566895,
+            "p95": 30.237337303161624,
+            "maximum": 118.48806762695312
+          },
+          "duration_spread_ms": {
+            "count": 624,
+            "mean": 3.547524479719309,
+            "median": 3.604480266571045,
+            "p95": 6.127333855628967,
+            "maximum": 7.851521015167236
+          },
+          "max_over_mean": {
+            "count": 624,
+            "mean": 1.1624740352208551,
+            "median": 1.1564206400525325,
+            "p95": 1.2826688991702782,
+            "maximum": 1.3034683057319267
+          },
+          "max_duration_rank_counts": {
+            "1": 189,
+            "0": 158,
+            "2": 102,
+            "3": 175
+          }
+        },
+        {
+          "group_id": 1,
+          "ranks": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "stage": "replay_backward",
+          "kind": "experts",
+          "collective_count": 624,
+          "rank_duration_ms": {
+            "count": 2496,
+            "mean": 9.355475694705278,
+            "median": 9.183231830596924,
+            "p95": 12.725503921508789,
+            "maximum": 65.77049255371094
+          },
+          "max_duration_ms": {
+            "count": 624,
+            "mean": 11.457426046713804,
+            "median": 11.117056369781494,
+            "p95": 14.994125175476075,
+            "maximum": 65.77049255371094
+          },
+          "duration_spread_ms": {
+            "count": 624,
+            "mean": 2.1019503520085263,
+            "median": 1.6934401988983154,
+            "p95": 5.064921832084656,
+            "maximum": 43.117053389549255
+          },
+          "max_over_mean": {
+            "count": 624,
+            "mean": 1.2200377714738235,
+            "median": 1.1837760827209907,
+            "p95": 1.53693114374436,
+            "maximum": 2.9033336650163712
+          },
+          "max_duration_rank_counts": {
+            "7": 196,
+            "6": 75,
+            "5": 209,
+            "4": 144
+          }
+        },
+        {
+          "group_id": 1,
+          "ranks": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "stage": "replay_backward",
+          "kind": "moe",
+          "collective_count": 624,
+          "rank_duration_ms": {
+            "count": 2496,
+            "mean": 33.60455831350424,
+            "median": 26.695680618286133,
+            "p95": 47.46854496002197,
+            "maximum": 779.2896118164062
+          },
+          "max_duration_ms": {
+            "count": 624,
+            "mean": 43.7403208384147,
+            "median": 36.22758483886719,
+            "p95": 51.27285633087158,
+            "maximum": 779.2896118164062
+          },
+          "duration_spread_ms": {
+            "count": 624,
+            "mean": 10.135762524910461,
+            "median": 5.253760099411011,
+            "p95": 16.596850800514222,
+            "maximum": 504.3307375907898
+          },
+          "max_over_mean": {
+            "count": 624,
+            "mean": 1.248932922844815,
+            "median": 1.1821562198921796,
+            "p95": 1.5299544991262692,
+            "maximum": 2.9919574942982647
+          },
+          "max_duration_rank_counts": {
+            "5": 197,
+            "4": 245,
+            "7": 58,
+            "6": 124
+          }
+        },
+        {
+          "group_id": 1,
+          "ranks": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "stage": "replay_forward",
+          "kind": "experts",
+          "collective_count": 624,
+          "rank_duration_ms": {
+            "count": 2496,
+            "mean": 5.317772717430041,
+            "median": 5.223423957824707,
+            "p95": 7.248639941215515,
+            "maximum": 12.321791648864746
+          },
+          "max_duration_ms": {
+            "count": 624,
+            "mean": 6.472955075594095,
+            "median": 6.317056179046631,
+            "p95": 8.525824308395386,
+            "maximum": 12.321791648864746
+          },
+          "duration_spread_ms": {
+            "count": 624,
+            "mean": 1.1551823581640537,
+            "median": 0.9538559913635254,
+            "p95": 2.8315772712230687,
+            "maximum": 5.6289278864860535
+          },
+          "max_over_mean": {
+            "count": 624,
+            "mean": 1.215432757141547,
+            "median": 1.1796899573510389,
+            "p95": 1.5200108809307689,
+            "maximum": 1.8800832513081511
+          },
+          "max_duration_rank_counts": {
+            "4": 146,
+            "6": 74,
+            "5": 207,
+            "7": 197
+          }
+        },
+        {
+          "group_id": 1,
+          "ranks": [
+            4,
+            5,
+            6,
+            7
+          ],
+          "stage": "replay_forward",
+          "kind": "moe",
+          "collective_count": 624,
+          "rank_duration_ms": {
+            "count": 2496,
+            "mean": 21.772226031774128,
+            "median": 20.65049648284912,
+            "p95": 29.604095935821533,
+            "maximum": 65.36089324951172
+          },
+          "max_duration_ms": {
+            "count": 624,
+            "mean": 25.42118562490512,
+            "median": 25.612799644470215,
+            "p95": 32.17459259033203,
+            "maximum": 65.36089324951172
+          },
+          "duration_spread_ms": {
+            "count": 624,
+            "mean": 3.648959593130992,
+            "median": 2.7878401279449463,
+            "p95": 7.235545945167542,
+            "maximum": 10.824445724487305
+          },
+          "max_over_mean": {
+            "count": 624,
+            "mean": 1.1618591744433266,
+            "median": 1.1286773290291048,
+            "p95": 1.3224329864946867,
+            "maximum": 1.428995089201141
+          },
+          "max_duration_rank_counts": {
+            "5": 184,
+            "4": 246,
+            "7": 74,
+            "6": 120
+          }
+        }
+      ],
+      "formal_measured_max_rank_step_s": {
+        "count": 5,
+        "mean": 141.17832259675487,
+        "median": 141.05493984092027,
+        "p95": 142.32982966108247,
+        "maximum": 142.4080641248729
+      },
+      "attribution_rounds": 1
+    }
+  ]
+}

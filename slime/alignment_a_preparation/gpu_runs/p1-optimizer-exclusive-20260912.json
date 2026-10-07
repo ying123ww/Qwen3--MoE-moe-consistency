@@ -1,0 +1,466 @@
+{
+  "method": "Exclusive optimizer main-thread wall attribution: CUDA API takes priority; innermost CPU op otherwise. CPU math durations include internal thread waits; they are not CPU core time. GPU overlap is observed intersection, not causal speedup. Missing host spans are unattributed, not assumed Python overhead.",
+  "source_sha256": "ddbc30851eec30130a9b13c9cde52b477317dc79dbf7fe4c3bae70a834759ece",
+  "results": [
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-native-20260910-01/profiles/train/train-rollout3-rank0.json.gz",
+      "sha256": "a5da423351841957caef248b2010e79927dd086d524a43187e78feee1a570b97",
+      "optimizer_wall_s": 15.401887216796874,
+      "exclusive_main_thread_s": {
+        "unattributed_host": 1.199753341796875,
+        "other_cpu_ops/aten::view": 0.0017568251953125,
+        "other_cpu_ops/aten::slice": 0.00266480078125,
+        "other_cpu_ops/aten::as_strided": 0.0064286591796875,
+        "other_cpu_ops/aten::zeros": 1.66376953125e-05,
+        "allocation_ops": 0.22585552734375,
+        "other_cpu_ops/aten::fill_": 1.603597435546875,
+        "api/other": 0.1537194033203125,
+        "other_cpu_ops/aten::zero_": 8.9189453125e-06,
+        "other_cpu_ops/aten::pow": 2.7501953125e-05,
+        "other_cpu_ops/aten::result_type": 1.197265625e-06,
+        "copy_ops_outside_api": 0.2317291845703125,
+        "other_cpu_ops/c10d::allreduce_": 3.78642578125e-05,
+        "other_cpu_ops/record_param_comms": 0.0005929892578125,
+        "other_cpu_ops/aten::item": 3.3896484375e-06,
+        "other_cpu_ops/aten::_local_scalar_dense": 1.23818359375e-05,
+        "api/D2H": 0.5295706826171875,
+        "wait/cudaStreamSynchronize": 0.0092381962890625,
+        "other_cpu_ops/aten::detach": 0.0010631611328125,
+        "other_cpu_ops/detach": 0.0008890166015625,
+        "wait/cudaEventSynchronize": 0.138645525390625,
+        "math/aten::abs": 1.6596405869140625,
+        "other_cpu_ops/aten::set_": 0.0067782568359375,
+        "math/aten::mul": 1.77128440234375,
+        "math/aten::add_": 1.038299033203125,
+        "math/aten::addcdiv_": 2.3012320263671877,
+        "other_cpu_ops/aten::expand_as": 0.006853646484375,
+        "other_cpu_ops/aten::expand": 0.0109873759765625,
+        "api/H2D": 4.501065232421875,
+        "other_cpu_ops/c10d::allgather_into_tensor_coalesced_": 0.000134015625
+      },
+      "main_thread": [
+        103386,
+        103386
+      ],
+      "other_observed_cpu_tids": [],
+      "suboptimizer_count": 1537,
+      "h2d_calls_inside_suboptimizer": 1537,
+      "transfer_bytes": {
+        "H2D": 15266061312,
+        "D2H": 15266061316
+      },
+      "gpu_observed_overlap": {
+        "H2D": {
+          "union_s": 3.08076844140625,
+          "overlap_cpu_math_s": 0.000234859375,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 3.0018984306640624,
+          "before_first_cpu_math_s": 0.0
+        },
+        "D2H": {
+          "union_s": 1.654132095703125,
+          "overlap_cpu_math_s": 0.0027679912109375,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 0.4915098251953125,
+          "before_first_cpu_math_s": 0.1087806552734375
+        },
+        "H2D_D2H_intersection_s": 0.00250443359375
+      },
+      "h2d_by_size": [
+        {
+          "copies": 768,
+          "api_s": 2.196716432000004,
+          "gpu_s": 0.9614849430000006,
+          "bytes_each": 6291456,
+          "suboptimizer_scopes": 768,
+          "scope_total_s": 5.423667187999994
+        },
+        {
+          "copies": 768,
+          "api_s": 2.212348328999998,
+          "gpu_s": 2.0275462829999986,
+          "bytes_each": 12582912,
+          "suboptimizer_scopes": 768,
+          "scope_total_s": 8.317170421999995
+        },
+        {
+          "copies": 1,
+          "api_s": 0.092000474,
+          "gpu_s": 0.09173721700000001,
+          "bytes_each": 770546688,
+          "suboptimizer_scopes": 1,
+          "scope_total_s": 0.8094291779999999
+        }
+      ]
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-native-20260910-01/profiles/train/train-rollout3-rank4.json.gz",
+      "sha256": "0cb644bb224e337a3e5285bb2ac8829d43038d1bb119eeb41fce8b3b1ead8033",
+      "optimizer_wall_s": 15.43333174609375,
+      "exclusive_main_thread_s": {
+        "unattributed_host": 1.259104681640625,
+        "other_cpu_ops/aten::view": 0.0021110068359375,
+        "other_cpu_ops/aten::slice": 0.002914826171875,
+        "other_cpu_ops/aten::as_strided": 0.006834013671875,
+        "other_cpu_ops/aten::zeros": 1.62353515625e-05,
+        "allocation_ops": 0.1167984794921875,
+        "other_cpu_ops/aten::fill_": 1.53413401953125,
+        "api/other": 0.1629246728515625,
+        "other_cpu_ops/aten::zero_": 9.9775390625e-06,
+        "other_cpu_ops/aten::pow": 2.73916015625e-05,
+        "other_cpu_ops/aten::result_type": 1.4091796875e-06,
+        "copy_ops_outside_api": 0.2490911064453125,
+        "other_cpu_ops/c10d::allreduce_": 3.31123046875e-05,
+        "other_cpu_ops/record_param_comms": 0.0006143271484375,
+        "other_cpu_ops/aten::item": 3.1298828125e-06,
+        "other_cpu_ops/aten::_local_scalar_dense": 1.25439453125e-05,
+        "api/D2H": 0.5826628330078125,
+        "wait/cudaStreamSynchronize": 0.0085806162109375,
+        "other_cpu_ops/aten::detach": 0.0011248046875,
+        "other_cpu_ops/detach": 0.0009512900390625,
+        "wait/cudaEventSynchronize": 0.031322736328125,
+        "math/aten::abs": 1.6205459580078125,
+        "other_cpu_ops/aten::set_": 0.0068438876953125,
+        "math/aten::mul": 1.7360287265625,
+        "math/aten::add_": 1.0018868671875,
+        "math/aten::addcdiv_": 2.3801805087890626,
+        "other_cpu_ops/aten::expand_as": 0.0070227880859375,
+        "other_cpu_ops/aten::expand": 0.0117669765625,
+        "api/H2D": 4.7096405107421875,
+        "other_cpu_ops/c10d::allgather_into_tensor_coalesced_": 0.00014230859375
+      },
+      "main_thread": [
+        106319,
+        106319
+      ],
+      "other_observed_cpu_tids": [],
+      "suboptimizer_count": 1612,
+      "h2d_calls_inside_suboptimizer": 1612,
+      "transfer_bytes": {
+        "H2D": 15266061312,
+        "D2H": 15266061316
+      },
+      "gpu_observed_overlap": {
+        "H2D": {
+          "union_s": 3.2020899482421874,
+          "overlap_cpu_math_s": 0.000253828125,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 3.116658869140625,
+          "before_first_cpu_math_s": 0.0
+        },
+        "D2H": {
+          "union_s": 1.722156365234375,
+          "overlap_cpu_math_s": 0.04481185546875,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 0.530719005859375,
+          "before_first_cpu_math_s": 0.0002159306640625
+        },
+        "H2D_D2H_intersection_s": 0.0026901083984375
+      },
+      "h2d_by_size": [
+        {
+          "copies": 22,
+          "api_s": 0.00016821799999999998,
+          "gpu_s": 2.5343999999999986e-05,
+          "bytes_each": 512,
+          "suboptimizer_scopes": 22,
+          "scope_total_s": 0.005025341000000001
+        },
+        {
+          "copies": 1,
+          "api_s": 2.7681e-05,
+          "gpu_s": 2.3488e-05,
+          "bytes_each": 4096,
+          "suboptimizer_scopes": 1,
+          "scope_total_s": 0.001838578
+        },
+        {
+          "copies": 21,
+          "api_s": 0.00017130299999999998,
+          "gpu_s": 3.0270999999999995e-05,
+          "bytes_each": 8192,
+          "suboptimizer_scopes": 21,
+          "scope_total_s": 0.004965484000000001
+        },
+        {
+          "copies": 11,
+          "api_s": 0.002774251,
+          "gpu_s": 0.000733206,
+          "bytes_each": 1048576,
+          "suboptimizer_scopes": 11,
+          "scope_total_s": 0.021606432000000002
+        },
+        {
+          "copies": 1,
+          "api_s": 0.00034363799999999995,
+          "gpu_s": 0.00026207600000000003,
+          "bytes_each": 3850240,
+          "suboptimizer_scopes": 1,
+          "scope_total_s": 0.0015388589999999998
+        },
+        {
+          "copies": 768,
+          "api_s": 2.2169218099999997,
+          "gpu_s": 0.9579043169999993,
+          "bytes_each": 6291456,
+          "suboptimizer_scopes": 768,
+          "scope_total_s": 5.383179545999998
+        },
+        {
+          "copies": 768,
+          "api_s": 2.228709129999996,
+          "gpu_s": 2.041315015,
+          "bytes_each": 12582912,
+          "suboptimizer_scopes": 768,
+          "scope_total_s": 8.344185293999997
+        },
+        {
+          "copies": 10,
+          "api_s": 0.09020487599999999,
+          "gpu_s": 0.087117203,
+          "bytes_each": 33554432,
+          "suboptimizer_scopes": 10,
+          "scope_total_s": 0.34649266
+        },
+        {
+          "copies": 10,
+          "api_s": 0.17031961899999998,
+          "gpu_s": 0.11467903099999999,
+          "bytes_each": 41943040,
+          "suboptimizer_scopes": 10,
+          "scope_total_s": 0.517619207
+        }
+      ]
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-aligned-20260910-01/profiles/train/train-rollout3-rank0.json.gz",
+      "sha256": "6506199201e9a49cb80029cbeb4db0c773fd1370eaee58ff209e8c563f33a413",
+      "optimizer_wall_s": 15.411447294921874,
+      "exclusive_main_thread_s": {
+        "unattributed_host": 1.2167063525390625,
+        "other_cpu_ops/aten::view": 0.001703794921875,
+        "other_cpu_ops/aten::slice": 0.0027711484375,
+        "other_cpu_ops/aten::as_strided": 0.006903779296875,
+        "other_cpu_ops/aten::zeros": 1.74853515625e-05,
+        "allocation_ops": 0.1082114853515625,
+        "other_cpu_ops/aten::fill_": 1.506394837890625,
+        "api/other": 0.159285638671875,
+        "other_cpu_ops/aten::zero_": 9.6240234375e-06,
+        "other_cpu_ops/aten::pow": 2.7095703125e-05,
+        "other_cpu_ops/aten::result_type": 1.6767578125e-06,
+        "copy_ops_outside_api": 0.2413264033203125,
+        "other_cpu_ops/c10d::allreduce_": 3.34189453125e-05,
+        "other_cpu_ops/record_param_comms": 0.00069984375,
+        "other_cpu_ops/aten::item": 3.279296875e-06,
+        "other_cpu_ops/aten::_local_scalar_dense": 1.22353515625e-05,
+        "api/D2H": 0.5502773701171875,
+        "wait/cudaStreamSynchronize": 0.0081423876953125,
+        "other_cpu_ops/aten::detach": 0.001078802734375,
+        "other_cpu_ops/detach": 0.0008501201171875,
+        "wait/cudaEventSynchronize": 0.1393677880859375,
+        "math/aten::abs": 1.565933546875,
+        "other_cpu_ops/aten::set_": 0.006571849609375,
+        "math/aten::mul": 1.73288876171875,
+        "math/aten::add_": 1.0142441796875,
+        "math/aten::addcdiv_": 2.429695796875,
+        "other_cpu_ops/aten::expand_as": 0.006917484375,
+        "other_cpu_ops/aten::expand": 0.01116883984375,
+        "api/H2D": 4.700031774414063,
+        "other_cpu_ops/c10d::allgather_into_tensor_coalesced_": 0.0001704931640625
+      },
+      "main_thread": [
+        11944,
+        11944
+      ],
+      "other_observed_cpu_tids": [],
+      "suboptimizer_count": 1537,
+      "h2d_calls_inside_suboptimizer": 1537,
+      "transfer_bytes": {
+        "H2D": 15266061312,
+        "D2H": 15266061316
+      },
+      "gpu_observed_overlap": {
+        "H2D": {
+          "union_s": 3.2772876328125,
+          "overlap_cpu_math_s": 0.0001904072265625,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 3.1972978798828127,
+          "before_first_cpu_math_s": 0.0
+        },
+        "D2H": {
+          "union_s": 1.6452933544921875,
+          "overlap_cpu_math_s": 0.002445708984375,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 0.4922372919921875,
+          "before_first_cpu_math_s": 0.109322513671875
+        },
+        "H2D_D2H_intersection_s": 0.0024854267578125
+      },
+      "h2d_by_size": [
+        {
+          "copies": 768,
+          "api_s": 2.1708686250000024,
+          "gpu_s": 0.9429421139999998,
+          "bytes_each": 6291456,
+          "suboptimizer_scopes": 768,
+          "scope_total_s": 5.238330917999999
+        },
+        {
+          "copies": 768,
+          "api_s": 2.3483568880000023,
+          "gpu_s": 2.153997619999998,
+          "bytes_each": 12582912,
+          "suboptimizer_scopes": 768,
+          "scope_total_s": 8.536973176999997
+        },
+        {
+          "copies": 1,
+          "api_s": 0.180806273,
+          "gpu_s": 0.180347894,
+          "bytes_each": 770546688,
+          "suboptimizer_scopes": 1,
+          "scope_total_s": 0.768658959
+        }
+      ]
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-p1-train-aligned-20260910-01/profiles/train/train-rollout3-rank4.json.gz",
+      "sha256": "1deae520fabe96e1c9136209317549dedc894a74dab91be7e882b4536bc4d397",
+      "optimizer_wall_s": 15.512413842773437,
+      "exclusive_main_thread_s": {
+        "unattributed_host": 1.225175421875,
+        "other_cpu_ops/aten::view": 0.0017340751953125,
+        "other_cpu_ops/aten::slice": 0.00280028515625,
+        "other_cpu_ops/aten::as_strided": 0.0068857587890625,
+        "other_cpu_ops/aten::zeros": 1.57236328125e-05,
+        "allocation_ops": 0.1125486103515625,
+        "other_cpu_ops/aten::fill_": 1.522002125,
+        "api/other": 0.1630319619140625,
+        "other_cpu_ops/aten::zero_": 9.4208984375e-06,
+        "other_cpu_ops/aten::pow": 2.7677734375e-05,
+        "other_cpu_ops/aten::result_type": 1.77734375e-06,
+        "copy_ops_outside_api": 0.2404729169921875,
+        "other_cpu_ops/c10d::allreduce_": 3.911328125e-05,
+        "other_cpu_ops/record_param_comms": 0.0005843427734375,
+        "other_cpu_ops/aten::item": 3.6943359375e-06,
+        "other_cpu_ops/aten::_local_scalar_dense": 1.777734375e-05,
+        "api/D2H": 0.572262064453125,
+        "wait/cudaStreamSynchronize": 0.0091153232421875,
+        "other_cpu_ops/aten::detach": 0.00117353515625,
+        "other_cpu_ops/detach": 0.0009120654296875,
+        "wait/cudaEventSynchronize": 0.0312667900390625,
+        "math/aten::abs": 1.61787330859375,
+        "other_cpu_ops/aten::set_": 0.006712685546875,
+        "math/aten::mul": 1.744514673828125,
+        "math/aten::add_": 1.023732478515625,
+        "math/aten::addcdiv_": 2.389964498046875,
+        "other_cpu_ops/aten::expand_as": 0.006973404296875,
+        "other_cpu_ops/aten::expand": 0.0111524619140625,
+        "api/H2D": 4.821276310546875,
+        "other_cpu_ops/c10d::allgather_into_tensor_coalesced_": 0.000133560546875
+      },
+      "main_thread": [
+        12594,
+        12594
+      ],
+      "other_observed_cpu_tids": [],
+      "suboptimizer_count": 1612,
+      "h2d_calls_inside_suboptimizer": 1612,
+      "transfer_bytes": {
+        "H2D": 15266061312,
+        "D2H": 15266061316
+      },
+      "gpu_observed_overlap": {
+        "H2D": {
+          "union_s": 3.3100333955078125,
+          "overlap_cpu_math_s": 0.000115693359375,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 3.2252657421875,
+          "before_first_cpu_math_s": 0.0
+        },
+        "D2H": {
+          "union_s": 1.7107770234375,
+          "overlap_cpu_math_s": 0.0480746083984375,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 0.5288616962890625,
+          "before_first_cpu_math_s": 0.0002566875
+        },
+        "H2D_D2H_intersection_s": 0.002627353515625
+      },
+      "h2d_by_size": [
+        {
+          "copies": 22,
+          "api_s": 0.00016900099999999998,
+          "gpu_s": 2.4001000000000003e-05,
+          "bytes_each": 512,
+          "suboptimizer_scopes": 22,
+          "scope_total_s": 0.0048422
+        },
+        {
+          "copies": 1,
+          "api_s": 3.2918e-05,
+          "gpu_s": 2.2752e-05,
+          "bytes_each": 4096,
+          "suboptimizer_scopes": 1,
+          "scope_total_s": 0.001881879
+        },
+        {
+          "copies": 21,
+          "api_s": 0.00018407400000000003,
+          "gpu_s": 3.2928e-05,
+          "bytes_each": 8192,
+          "suboptimizer_scopes": 21,
+          "scope_total_s": 0.004879995999999999
+        },
+        {
+          "copies": 11,
+          "api_s": 0.0025243069999999995,
+          "gpu_s": 0.000817652,
+          "bytes_each": 1048576,
+          "suboptimizer_scopes": 11,
+          "scope_total_s": 0.017796964000000002
+        },
+        {
+          "copies": 1,
+          "api_s": 0.000305028,
+          "gpu_s": 0.00024178800000000002,
+          "bytes_each": 3850240,
+          "suboptimizer_scopes": 1,
+          "scope_total_s": 0.002858419
+        },
+        {
+          "copies": 768,
+          "api_s": 2.2567609659999976,
+          "gpu_s": 0.998329442000001,
+          "bytes_each": 6291456,
+          "suboptimizer_scopes": 768,
+          "scope_total_s": 5.520478533000009
+        },
+        {
+          "copies": 768,
+          "api_s": 2.306549562,
+          "gpu_s": 2.113800373999998,
+          "bytes_each": 12582912,
+          "suboptimizer_scopes": 768,
+          "scope_total_s": 8.316423329000003
+        },
+        {
+          "copies": 10,
+          "api_s": 0.08602294800000002,
+          "gpu_s": 0.08315217800000001,
+          "bytes_each": 33554432,
+          "suboptimizer_scopes": 10,
+          "scope_total_s": 0.34134223300000005
+        },
+        {
+          "copies": 10,
+          "api_s": 0.16872752100000002,
+          "gpu_s": 0.113612268,
+          "bytes_each": 41943040,
+          "suboptimizer_scopes": 10,
+          "scope_total_s": 0.5153319820000001
+        }
+      ]
+    }
+  ]
+}

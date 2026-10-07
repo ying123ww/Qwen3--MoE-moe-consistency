@@ -1,0 +1,450 @@
+{
+  "method": "Exclusive main-thread wall accounting: CUDA API priority, otherwise innermost CPU operation. H2D GPU intervals are linked by correlation to APIs inside P1/optimizer_step and intersected with exclusive CPU math intervals. Profiler traces are single isolated steps; speed comparison uses separate synchronized unprofiled timings. CPU op intervals include worker waiting and are not CPU core utilization. Observed interval overlap is not a causal speedup estimate. Synthetic gradients and 16 parameters are not full training; no claim about the historical 15.4 second optimizer.",
+  "source_sha256": {
+    "slime/alignment_a_preparation/gpu_runs/optimizer-backport-hgx05-20260914-01/analyze_traces.py": "f48aa87cd5c1bd25b27687b67680369bd43feaca271d4e31ec783ea1ccb15407",
+    "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_tools/analyze_optimizer_exclusive.py": "ddbc30851eec30130a9b13c9cde52b477317dc79dbf7fe4c3bae70a834759ece",
+    "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_tools/analyze_native_routepack_trace.py": "0f9d15aa1b6574aae3d197249dfd12079e524b1b1de4d8752c44eebc482319a9",
+    "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/optimizer-backport-hgx05-20260914-01/result.json": "9a4c4e572768e49b3792d84d91d8468fa3327f0e995e26cc1262be4f4a8ea4e7"
+  },
+  "environment_note": "Runs 01 and 02 inherited CUDA_LAUNCH_BLOCKING=1, confirmed by the coordinating agent from the remote environment; their zero overlap is not a valid test of asynchronous overlap recovery. Run 03 is explicitly rerun without launch blocking; refer to its result configuration.",
+  "results": [
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/optimizer-backport-hgx05-20260914-01/old.json",
+      "sha256": "1cf373363ced569b7196d6c60659d8c4e95c49ee32c9c65b69247587e0ae4d03",
+      "optimizer_wall_s": 0.0532826982421875,
+      "exclusive_main_thread_s": {
+        "unattributed_host": 0.005461892578125,
+        "api/other": 0.0056043876953125,
+        "copy_ops_outside_api": 0.001023361328125,
+        "api/D2H": 0.00013342578125,
+        "wait/cudaEventSynchronize": 6.190625e-05,
+        "math/aten::abs": 0.0051770693359375,
+        "allocation_ops": 0.0004313408203125,
+        "other_cpu_ops/aten::fill_": 0.0050542802734375,
+        "other_cpu_ops/aten::set_": 3.89267578125e-05,
+        "math/aten::mul": 0.0075658125,
+        "math/aten::add_": 0.0019068740234375,
+        "math/aten::addcdiv_": 0.0076332802734375,
+        "other_cpu_ops/aten::expand_as": 3.77529296875e-05,
+        "other_cpu_ops/aten::expand": 5.75771484375e-05,
+        "other_cpu_ops/aten::as_strided": 3.6673828125e-05,
+        "api/H2D": 0.0130518828125,
+        "wait/cudaDeviceSynchronize": 6.25390625e-06
+      },
+      "main_thread": [
+        120990,
+        120990
+      ],
+      "other_observed_cpu_tids": [],
+      "suboptimizer_count": 16,
+      "h2d_calls_inside_suboptimizer": 16,
+      "transfer_bytes": {
+        "D2H": 150994944,
+        "H2D": 150994944
+      },
+      "gpu_observed_overlap": {
+        "D2H": {
+          "union_s": 0.0070859248046875,
+          "overlap_cpu_math_s": 0.0016917314453125,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 0.000103736328125,
+          "before_first_cpu_math_s": 0.0008826630859375
+        },
+        "H2D": {
+          "union_s": 0.011980611328125,
+          "overlap_cpu_math_s": 0.0,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 0.0113068603515625,
+          "before_first_cpu_math_s": 0.0
+        },
+        "H2D_D2H_intersection_s": 0.0
+      },
+      "h2d_by_size": [
+        {
+          "copies": 8,
+          "api_s": 0.0044558409999999994,
+          "gpu_s": 0.003911469,
+          "bytes_each": 6291456,
+          "suboptimizer_scopes": 8,
+          "scope_total_s": 0.019605766
+        },
+        {
+          "copies": 8,
+          "api_s": 0.008596043999999999,
+          "gpu_s": 0.008069142999999999,
+          "bytes_each": 12582912,
+          "suboptimizer_scopes": 8,
+          "scope_total_s": 0.031448076
+        }
+      ],
+      "variant": "old",
+      "h2d_overlap_exclusive_by_op_s": {
+        "cpu_op/aten::copy_": 0.000236822265625,
+        "cuda_runtime/cudaMemcpyAsync": 0.0113068603515625,
+        "cuda_runtime/cudaLaunchKernel": 0.0004369287109375
+      },
+      "exclusive_by_op_s": {
+        "unattributed_host": 0.005461892578125,
+        "cuda_runtime/cudaStreamIsCapturing": 8.451171875e-05,
+        "cuda_runtime/cudaEventRecordWithFlags": 0.000114080078125,
+        "cuda_runtime/cudaStreamWaitEvent": 6.09111328125e-05,
+        "cpu_op/aten::copy_": 0.0008844404296875,
+        "cuda_runtime/cudaMemcpyAsync": 0.01318530859375,
+        "cuda_runtime/cudaEventSynchronize": 6.190625e-05,
+        "cpu_op/aten::abs": 0.0051770693359375,
+        "cpu_op/aten::empty": 0.0003208662109375,
+        "cpu_op/aten::fill_": 0.0050542802734375,
+        "cpu_op/aten::set_": 3.89267578125e-05,
+        "cpu_op/aten::mul": 0.0075658125,
+        "cpu_op/aten::to": 3.9927734375e-05,
+        "cpu_op/aten::_to_copy": 9.89931640625e-05,
+        "cpu_op/aten::empty_strided": 7.67705078125e-05,
+        "cpu_op/aten::add_": 0.0019068740234375,
+        "cpu_op/aten::addcdiv_": 0.0076332802734375,
+        "cpu_op/aten::empty_like": 3.37041015625e-05,
+        "cuda_runtime/cudaLaunchKernel": 0.005344884765625,
+        "cpu_op/aten::expand_as": 3.77529296875e-05,
+        "cpu_op/aten::expand": 5.75771484375e-05,
+        "cpu_op/aten::as_strided": 3.6673828125e-05,
+        "cuda_runtime/cudaDeviceSynchronize": 6.25390625e-06
+      },
+      "exclusive_cpu_math_s": 0.0222830361328125,
+      "h2d_math_overlap_fraction": 0.0,
+      "unprofiled_rep_medians_s": [
+        0.04807285394053906,
+        0.04936297214590013,
+        0.048921117559075356
+      ],
+      "unprofiled_median_of_rep_medians_s": 0.048921117559075356,
+      "unprofiled_pooled_median_s": 0.048903884598985314
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/optimizer-backport-hgx05-20260914-01/pin_only.json",
+      "sha256": "ed83330f30d46c44db5b5f267a2238687457efc00c046277fe4d1d9c7b0f589a",
+      "optimizer_wall_s": 0.0455493681640625,
+      "exclusive_main_thread_s": {
+        "unattributed_host": 0.0048572548828125,
+        "api/other": 0.0125143935546875,
+        "copy_ops_outside_api": 0.00070130859375,
+        "api/D2H": 6.22041015625e-05,
+        "wait/cudaEventSynchronize": 5.09658203125e-05,
+        "math/aten::abs": 0.00506472265625,
+        "allocation_ops": 0.000378017578125,
+        "other_cpu_ops/aten::fill_": 0.00479016015625,
+        "other_cpu_ops/aten::set_": 3.239453125e-05,
+        "math/aten::mul": 0.007252435546875,
+        "math/aten::add_": 0.001964982421875,
+        "math/aten::addcdiv_": 0.007571697265625,
+        "other_cpu_ops/aten::expand_as": 3.0408203125e-05,
+        "other_cpu_ops/aten::expand": 5.08134765625e-05,
+        "other_cpu_ops/aten::as_strided": 3.0275390625e-05,
+        "api/H2D": 0.00019144921875,
+        "wait/cudaDeviceSynchronize": 5.884765625e-06
+      },
+      "main_thread": [
+        120990,
+        120990
+      ],
+      "other_observed_cpu_tids": [],
+      "suboptimizer_count": 16,
+      "h2d_calls_inside_suboptimizer": 16,
+      "transfer_bytes": {
+        "D2H": 150994944,
+        "H2D": 150994944
+      },
+      "gpu_observed_overlap": {
+        "D2H": {
+          "union_s": 0.0070953369140625,
+          "overlap_cpu_math_s": 0.0008938330078125,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 4.73408203125e-05,
+          "before_first_cpu_math_s": 0.000379404296875
+        },
+        "H2D": {
+          "union_s": 0.006018931640625,
+          "overlap_cpu_math_s": 0.0,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 0.0,
+          "before_first_cpu_math_s": 0.0
+        },
+        "H2D_D2H_intersection_s": 0.0
+      },
+      "h2d_by_size": [
+        {
+          "copies": 8,
+          "api_s": 8.257400000000001e-05,
+          "gpu_s": 0.0020225010000000003,
+          "bytes_each": 6291456,
+          "suboptimizer_scopes": 8,
+          "scope_total_s": 0.017247718999999998
+        },
+        {
+          "copies": 8,
+          "api_s": 0.000108875,
+          "gpu_s": 0.0039964300000000005,
+          "bytes_each": 12582912,
+          "suboptimizer_scopes": 8,
+          "scope_total_s": 0.027077455
+        }
+      ],
+      "variant": "pin_only",
+      "h2d_overlap_exclusive_by_op_s": {
+        "cpu_op/aten::copy_": 9.8630859375e-05,
+        "cuda_runtime/cudaLaunchKernel": 0.00592030078125
+      },
+      "exclusive_by_op_s": {
+        "unattributed_host": 0.0048572548828125,
+        "cuda_runtime/cudaStreamIsCapturing": 6.2728515625e-05,
+        "cuda_runtime/cudaEventRecordWithFlags": 9.112890625e-05,
+        "cuda_runtime/cudaStreamWaitEvent": 5.85009765625e-05,
+        "cpu_op/aten::copy_": 0.000580888671875,
+        "cuda_runtime/cudaMemcpyAsync": 0.0002536533203125,
+        "cuda_runtime/cudaEventSynchronize": 5.09658203125e-05,
+        "cpu_op/aten::abs": 0.00506472265625,
+        "cpu_op/aten::empty": 0.000274173828125,
+        "cpu_op/aten::fill_": 0.00479016015625,
+        "cpu_op/aten::set_": 3.239453125e-05,
+        "cpu_op/aten::mul": 0.007252435546875,
+        "cpu_op/aten::to": 3.25791015625e-05,
+        "cpu_op/aten::_to_copy": 8.78408203125e-05,
+        "cpu_op/aten::empty_strided": 7.128515625e-05,
+        "cpu_op/aten::add_": 0.001964982421875,
+        "cpu_op/aten::addcdiv_": 0.007571697265625,
+        "cpu_op/aten::empty_like": 3.255859375e-05,
+        "cuda_runtime/cudaLaunchKernel": 0.01230203515625,
+        "cpu_op/aten::expand_as": 3.0408203125e-05,
+        "cpu_op/aten::expand": 5.08134765625e-05,
+        "cpu_op/aten::as_strided": 3.0275390625e-05,
+        "cuda_runtime/cudaDeviceSynchronize": 5.884765625e-06
+      },
+      "exclusive_cpu_math_s": 0.021853837890625002,
+      "h2d_math_overlap_fraction": 0.0,
+      "unprofiled_rep_medians_s": [
+        0.03920429898425937,
+        0.03910470544360578,
+        0.03995783207938075
+      ],
+      "unprofiled_median_of_rep_medians_s": 0.03920429898425937,
+      "unprofiled_pooled_median_s": 0.03921787312719971
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/optimizer-backport-hgx05-20260914-01/event_only.json",
+      "sha256": "fa2505bfb291aa215c23fe56ea51368f1dc5e7e36a81a01637292fc2cca57d70",
+      "optimizer_wall_s": 0.05086127734375,
+      "exclusive_main_thread_s": {
+        "unattributed_host": 0.0044816611328125,
+        "api/other": 0.00703299609375,
+        "copy_ops_outside_api": 0.00085865234375,
+        "api/D2H": 6.61171875e-05,
+        "wait/cudaEventSynchronize": 5.31455078125e-05,
+        "math/aten::abs": 0.005182537109375,
+        "allocation_ops": 0.000402220703125,
+        "other_cpu_ops/aten::fill_": 0.0037220107421875,
+        "other_cpu_ops/aten::set_": 3.742578125e-05,
+        "math/aten::mul": 0.0060359892578125,
+        "math/aten::add_": 0.0020914443359375,
+        "math/aten::addcdiv_": 0.0077329326171875,
+        "other_cpu_ops/aten::expand_as": 3.30478515625e-05,
+        "other_cpu_ops/aten::expand": 5.1705078125e-05,
+        "other_cpu_ops/aten::as_strided": 3.1775390625e-05,
+        "api/H2D": 0.01304183203125,
+        "wait/cudaDeviceSynchronize": 5.7841796875e-06
+      },
+      "main_thread": [
+        120990,
+        120990
+      ],
+      "other_observed_cpu_tids": [],
+      "suboptimizer_count": 16,
+      "h2d_calls_inside_suboptimizer": 16,
+      "transfer_bytes": {
+        "D2H": 150994944,
+        "H2D": 150994944
+      },
+      "gpu_observed_overlap": {
+        "D2H": {
+          "union_s": 0.0070950458984375,
+          "overlap_cpu_math_s": 0.00093900390625,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 5.26064453125e-05,
+          "before_first_cpu_math_s": 0.0003824443359375
+        },
+        "H2D": {
+          "union_s": 0.011963845703125,
+          "overlap_cpu_math_s": 0.0,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 0.011287408203125,
+          "before_first_cpu_math_s": 0.0
+        },
+        "H2D_D2H_intersection_s": 0.0
+      },
+      "h2d_by_size": [
+        {
+          "copies": 8,
+          "api_s": 0.0043622999999999995,
+          "gpu_s": 0.003853199,
+          "bytes_each": 6291456,
+          "suboptimizer_scopes": 8,
+          "scope_total_s": 0.020386623
+        },
+        {
+          "copies": 8,
+          "api_s": 0.008679533,
+          "gpu_s": 0.008110647,
+          "bytes_each": 12582912,
+          "suboptimizer_scopes": 8,
+          "scope_total_s": 0.029195184000000002
+        }
+      ],
+      "variant": "event_only",
+      "h2d_overlap_exclusive_by_op_s": {
+        "cpu_op/aten::copy_": 0.0002324345703125,
+        "cuda_runtime/cudaMemcpyAsync": 0.011287408203125,
+        "cuda_runtime/cudaLaunchKernel": 0.0004440029296875
+      },
+      "exclusive_by_op_s": {
+        "unattributed_host": 0.0044816611328125,
+        "cuda_runtime/cudaStreamIsCapturing": 6.6638671875e-05,
+        "cuda_runtime/cudaEventRecordWithFlags": 8.39716796875e-05,
+        "cuda_runtime/cudaStreamWaitEvent": 5.47138671875e-05,
+        "cpu_op/aten::copy_": 0.000734287109375,
+        "cuda_runtime/cudaMemcpyAsync": 0.01310794921875,
+        "cuda_runtime/cudaEventSynchronize": 5.31455078125e-05,
+        "cpu_op/aten::abs": 0.005182537109375,
+        "cpu_op/aten::empty": 0.0002973544921875,
+        "cpu_op/aten::fill_": 0.0037220107421875,
+        "cpu_op/aten::set_": 3.742578125e-05,
+        "cpu_op/aten::mul": 0.0060359892578125,
+        "cpu_op/aten::to": 3.496484375e-05,
+        "cpu_op/aten::_to_copy": 8.9400390625e-05,
+        "cpu_op/aten::empty_strided": 7.440234375e-05,
+        "cpu_op/aten::add_": 0.0020914443359375,
+        "cpu_op/aten::addcdiv_": 0.0077329326171875,
+        "cpu_op/aten::empty_like": 3.04638671875e-05,
+        "cuda_runtime/cudaLaunchKernel": 0.006827671875,
+        "cpu_op/aten::expand_as": 3.30478515625e-05,
+        "cpu_op/aten::expand": 5.1705078125e-05,
+        "cpu_op/aten::as_strided": 3.1775390625e-05,
+        "cuda_runtime/cudaDeviceSynchronize": 5.7841796875e-06
+      },
+      "exclusive_cpu_math_s": 0.0210429033203125,
+      "h2d_math_overlap_fraction": 0.0,
+      "unprofiled_rep_medians_s": [
+        0.050565253011882305,
+        0.048844312550500035,
+        0.04921006737276912
+      ],
+      "unprofiled_median_of_rep_medians_s": 0.04921006737276912,
+      "unprofiled_pooled_median_s": 0.04946672497317195
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/optimizer-backport-hgx05-20260914-01/both.json",
+      "sha256": "04912ab32999afbe3412e39a3543fc65a47c0693604a38de429b30f1475b63c8",
+      "optimizer_wall_s": 0.04181718359375,
+      "exclusive_main_thread_s": {
+        "unattributed_host": 0.0044488173828125,
+        "api/other": 0.012564,
+        "copy_ops_outside_api": 0.0007138154296875,
+        "api/D2H": 0.00041379296875,
+        "wait/cudaEventSynchronize": 5.15283203125e-05,
+        "math/aten::abs": 0.0050474658203125,
+        "allocation_ops": 0.0003955673828125,
+        "other_cpu_ops/aten::fill_": 0.0036857294921875,
+        "other_cpu_ops/aten::set_": 3.5380859375e-05,
+        "math/aten::mul": 0.0047496533203125,
+        "math/aten::add_": 0.002027708984375,
+        "math/aten::addcdiv_": 0.0073634296875,
+        "other_cpu_ops/aten::expand_as": 3.20263671875e-05,
+        "other_cpu_ops/aten::expand": 5.1322265625e-05,
+        "other_cpu_ops/aten::as_strided": 3.00703125e-05,
+        "api/H2D": 0.0002014130859375,
+        "wait/cudaDeviceSynchronize": 5.4619140625e-06
+      },
+      "main_thread": [
+        120990,
+        120990
+      ],
+      "other_observed_cpu_tids": [],
+      "suboptimizer_count": 16,
+      "h2d_calls_inside_suboptimizer": 16,
+      "transfer_bytes": {
+        "D2H": 150994944,
+        "H2D": 150994944
+      },
+      "gpu_observed_overlap": {
+        "D2H": {
+          "union_s": 0.0070879013671875,
+          "overlap_cpu_math_s": 0.00089220703125,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 5.2626953125e-05,
+          "before_first_cpu_math_s": 0.0004198369140625
+        },
+        "H2D": {
+          "union_s": 0.006031501953125,
+          "overlap_cpu_math_s": 0.0,
+          "tail_after_optimizer_s": 0.0,
+          "overlap_same_direction_api_s": 0.0,
+          "before_first_cpu_math_s": 0.0
+        },
+        "H2D_D2H_intersection_s": 0.0
+      },
+      "h2d_by_size": [
+        {
+          "copies": 8,
+          "api_s": 8.238e-05,
+          "gpu_s": 0.0020302439999999996,
+          "bytes_each": 6291456,
+          "suboptimizer_scopes": 8,
+          "scope_total_s": 0.017468196
+        },
+        {
+          "copies": 8,
+          "api_s": 0.00011903200000000001,
+          "gpu_s": 0.004001258000000001,
+          "bytes_each": 12582912,
+          "suboptimizer_scopes": 8,
+          "scope_total_s": 0.022584568
+        }
+      ],
+      "variant": "both",
+      "h2d_overlap_exclusive_by_op_s": {
+        "cpu_op/aten::copy_": 0.00010358984375,
+        "cuda_runtime/cudaLaunchKernel": 0.005927912109375
+      },
+      "exclusive_by_op_s": {
+        "unattributed_host": 0.0044488173828125,
+        "cuda_runtime/cudaStreamIsCapturing": 6.3794921875e-05,
+        "cuda_runtime/cudaEventRecordWithFlags": 9.098828125e-05,
+        "cuda_runtime/cudaStreamWaitEvent": 5.98896484375e-05,
+        "cpu_op/aten::copy_": 0.0005931298828125,
+        "cuda_runtime/cudaMemcpyAsync": 0.0006152060546875,
+        "cuda_runtime/cudaEventSynchronize": 5.15283203125e-05,
+        "cpu_op/aten::abs": 0.0050474658203125,
+        "cpu_op/aten::empty": 0.0002899072265625,
+        "cpu_op/aten::fill_": 0.0036857294921875,
+        "cpu_op/aten::set_": 3.5380859375e-05,
+        "cpu_op/aten::mul": 0.0047496533203125,
+        "cpu_op/aten::to": 3.41953125e-05,
+        "cpu_op/aten::_to_copy": 8.6490234375e-05,
+        "cpu_op/aten::empty_strided": 7.34423828125e-05,
+        "cpu_op/aten::add_": 0.002027708984375,
+        "cpu_op/aten::addcdiv_": 0.0073634296875,
+        "cpu_op/aten::empty_like": 3.22177734375e-05,
+        "cuda_runtime/cudaLaunchKernel": 0.0123493271484375,
+        "cpu_op/aten::expand_as": 3.20263671875e-05,
+        "cpu_op/aten::expand": 5.1322265625e-05,
+        "cpu_op/aten::as_strided": 3.00703125e-05,
+        "cuda_runtime/cudaDeviceSynchronize": 5.4619140625e-06
+      },
+      "exclusive_cpu_math_s": 0.0191882578125,
+      "h2d_math_overlap_fraction": 0.0,
+      "unprofiled_rep_medians_s": [
+        0.04110533057246357,
+        0.040351370931603014,
+        0.04014886147342622
+      ],
+      "unprofiled_median_of_rep_medians_s": 0.040351370931603014,
+      "unprofiled_pooled_median_s": 0.040392164955846965
+    }
+  ]
+}

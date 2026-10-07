@@ -1,0 +1,12 @@
+{
+  "gpu_compute_apps": [],
+  "task_temp_paths_absent": {
+    "/public/home/yingxy2024/moe-consistency/.a-tmp/matmul-tiles-20260912": true,
+    "/public/home/yingxy2024/moe-consistency/.a-tmp/routepack-capture-20260912-01": true,
+    "/dev/shm/routepack-capture-20260912-01": true,
+    "/public/home/yingxy2024/moe-consistency/.a-tmp/a-matmul-attribution-20260912-01": true,
+    "/public/home/yingxy2024/moe-consistency/.a-tmp/routepack-capture-20260912-02": true,
+    "/dev/shm/a-matmul-attribution-20260912-01": true,
+    "/dev/shm/routepack-capture-20260912-02": true
+  }
+}

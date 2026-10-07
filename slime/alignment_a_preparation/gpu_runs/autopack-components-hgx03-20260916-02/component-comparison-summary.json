@@ -1,0 +1,163 @@
+{
+  "rows": [
+    {
+      "method": "native",
+      "phase": "forward",
+      "cpu_window_median_ms": 2041.8704500000001,
+      "gpu_duration_sum_median_ms": 1926.6108610000167,
+      "gpu_interval_union_median_ms": 1925.3196708984374,
+      "unattributed_component_fraction_median": 0.49538636376631584,
+      "component_gpu_inclusive_median_ms": {
+        "aligned_triton_moe": 278.8806254999996,
+        "combine": 155.53826500000005,
+        "combine_postprocess": 0.0,
+        "combine_preprocess": 18.580433499999998,
+        "dispatch": 399.67474400000003,
+        "dispatch_postprocess": 72.27799700000008,
+        "dispatch_preprocess": 0.7100175000000002,
+        "expert_wrapper": 295.45341749999994,
+        "get_permuted_hidden_states_by_experts": 72.27799700000008,
+        "get_restored_hidden_states_by_experts": 18.580433499999998,
+        "moe": 980.5467650000228,
+        "token_dispatch": 399.67474400000003
+      },
+      "kernel_bucket_duration_sum_median_ms": {
+        "DeepEP": 547.4841924999998,
+        "GEMM": 123.53928549999998,
+        "NCCL": 0.0,
+        "memcpy": 2.2469524999999986,
+        "memset": 2.736625,
+        "unknown": 1261.0147470000225
+      }
+    },
+    {
+      "method": "native",
+      "phase": "backward",
+      "cpu_window_median_ms": 15360.796624,
+      "gpu_duration_sum_median_ms": 11381.47403600196,
+      "gpu_interval_union_median_ms": 11073.450982910157,
+      "unattributed_component_fraction_median": 0.7580117642879076,
+      "component_gpu_inclusive_median_ms": {
+        "aligned_triton_moe": 278.5788924999997,
+        "combine": 211.097639,
+        "combine_postprocess": 0.0,
+        "combine_preprocess": 18.603548499999995,
+        "dispatch": 1848.4529169999976,
+        "dispatch_postprocess": 72.22007299999973,
+        "dispatch_preprocess": 0.7136820000000004,
+        "expert_wrapper": 598.7907105000004,
+        "get_permuted_hidden_states_by_experts": 72.22007299999973,
+        "get_restored_hidden_states_by_experts": 18.603548499999995,
+        "moe": 2824.9542329999304,
+        "native_TE_linear_fc1": 152.66398999999996,
+        "native_TE_linear_fc2": 87.99006849999994,
+        "token_dispatch": 1848.4529169999976
+      },
+      "kernel_bucket_duration_sum_median_ms": {
+        "DeepEP": 3769.3213425000013,
+        "GEMM": 1087.1143870000014,
+        "NCCL": 0.0,
+        "memcpy": 32.04868550000136,
+        "memset": 4.973453500000016,
+        "unknown": 6639.105377498593
+      }
+    },
+    {
+      "method": "native",
+      "phase": "optimizer",
+      "cpu_window_median_ms": 11290.733438,
+      "gpu_duration_sum_median_ms": 4108.936332000008,
+      "gpu_interval_union_median_ms": 3461.7561313476563,
+      "unattributed_component_fraction_median": 1.0,
+      "component_gpu_inclusive_median_ms": {},
+      "kernel_bucket_duration_sum_median_ms": {
+        "DeepEP": 0.0,
+        "GEMM": 0.0,
+        "NCCL": 561.218075,
+        "memcpy": 3469.263856499997,
+        "memset": 0.0,
+        "unknown": 34.92674699999989
+      }
+    },
+    {
+      "method": "routepack",
+      "phase": "forward",
+      "cpu_window_median_ms": 2016.298484,
+      "gpu_duration_sum_median_ms": 1905.474556500014,
+      "gpu_interval_union_median_ms": 1904.1530571289063,
+      "unattributed_component_fraction_median": 0.501126770236926,
+      "component_gpu_inclusive_median_ms": {
+        "aligned_triton_moe": 274.5167719999998,
+        "combine": 154.32764849999995,
+        "combine_postprocess": 0.0,
+        "combine_preprocess": 18.562305,
+        "dispatch": 399.8995230000006,
+        "dispatch_postprocess": 72.26711550000061,
+        "dispatch_preprocess": 0.7117090000000001,
+        "expert_wrapper": 291.10272699999985,
+        "get_permuted_hidden_states_by_experts": 72.26711550000061,
+        "get_restored_hidden_states_by_experts": 18.562305,
+        "moe": 952.6260155000266,
+        "token_dispatch": 399.8995230000006
+      },
+      "kernel_bucket_duration_sum_median_ms": {
+        "DeepEP": 533.0586849999999,
+        "GEMM": 123.31982399999997,
+        "NCCL": 0.0,
+        "memcpy": 2.2346599999999954,
+        "memset": 2.732135000000003,
+        "unknown": 1245.5169780000053
+      }
+    },
+    {
+      "method": "routepack",
+      "phase": "backward",
+      "cpu_window_median_ms": 14015.75647,
+      "gpu_duration_sum_median_ms": 10226.730922000399,
+      "gpu_interval_union_median_ms": 9908.917721191407,
+      "unattributed_component_fraction_median": 0.8301334224390171,
+      "component_gpu_inclusive_median_ms": {
+        "aligned_triton_moe": 276.1277759999999,
+        "combine": 211.40120850000005,
+        "combine_postprocess": 0.0,
+        "combine_preprocess": 18.584119,
+        "dispatch": 777.480841000003,
+        "dispatch_postprocess": 72.26061100000025,
+        "dispatch_preprocess": 0.7090725,
+        "expert_wrapper": 596.6704510000006,
+        "get_permuted_hidden_states_by_experts": 72.26061100000025,
+        "get_restored_hidden_states_by_experts": 18.584119,
+        "moe": 1770.5571205000065,
+        "native_TE_linear_fc1": 152.6347639999998,
+        "native_TE_linear_fc2": 88.30038950000005,
+        "token_dispatch": 777.480841000003
+      },
+      "kernel_bucket_duration_sum_median_ms": {
+        "DeepEP": 2528.091856500002,
+        "GEMM": 1084.3601719999963,
+        "NCCL": 0.0,
+        "memcpy": 31.96505399999851,
+        "memset": 4.993288499999997,
+        "unknown": 6633.82017099867
+      }
+    },
+    {
+      "method": "routepack",
+      "phase": "optimizer",
+      "cpu_window_median_ms": 11760.937851499999,
+      "gpu_duration_sum_median_ms": 3914.38875100001,
+      "gpu_interval_union_median_ms": 3310.1758857421873,
+      "unattributed_component_fraction_median": 1.0,
+      "component_gpu_inclusive_median_ms": {},
+      "kernel_bucket_duration_sum_median_ms": {
+        "DeepEP": 0.0,
+        "GEMM": 0.0,
+        "NCCL": 431.0774755,
+        "memcpy": 3461.959677999998,
+        "memset": 0.0,
+        "unknown": 34.92779399999988
+      }
+    }
+  ],
+  "scope": "Medians across 8 ranks of one separately synchronized selected microbatch and optimizer window per method. Not independent repetitions, not full-step throughput. Components nested inclusive; unknown kernel names not reclassified. All GPU events matched CUDA launch correlation."
+}

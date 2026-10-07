@@ -1,0 +1,297 @@
+{
+  "scope": "Offline measured loads/CPU timings; not GPU scheduler speedup",
+  "capture": "/tmp/ap-real-capture-20260914-02/capture",
+  "sampling": {
+    "temperature": 1.0,
+    "max_new_tokens": 8192,
+    "ignore_eos": false,
+    "top_p": 1.0,
+    "top_k": -1,
+    "no_stop_trim": true
+  },
+  "lengths": {
+    "prompt": {
+      "count": 256,
+      "min": 90.0,
+      "p10": 103.0,
+      "p50": 152.5,
+      "p90": 197.0,
+      "p95": 243.0,
+      "max": 261.0,
+      "mean": 155.84375
+    },
+    "response": {
+      "count": 256,
+      "min": 1243.0,
+      "p10": 3197.0,
+      "p50": 6652.0,
+      "p90": 8192.0,
+      "p95": 8192.0,
+      "max": 8192.0,
+      "mean": 6247.703125
+    },
+    "total": {
+      "count": 256,
+      "min": 1343.0,
+      "p10": 3355.5,
+      "p50": 6791.5,
+      "p90": 8386.0,
+      "p95": 8391.0,
+      "max": 8435.0,
+      "mean": 6403.546875
+    }
+  },
+  "finish": {
+    "reason_counts": {
+      "length": 111,
+      "stop": 145
+    },
+    "confirmed_length_truncated_count": 111,
+    "stop_count": 145,
+    "unknown_count": 0,
+    "note": "stop is engine stop, not necessarily EOS; missing reasons remain unknown. Length equal to cap does not establish finish reason.",
+    "eos_token_ids": [
+      151645
+    ],
+    "confirmed_eos_count": 145,
+    "eos_identity_available": true
+  },
+  "b2": {
+    "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-real-hgx05-b1-20260914-02/b2-verified",
+    "samples": 256,
+    "bins": 96,
+    "collectives": 24,
+    "training_tokens": 1639308,
+    "layout_padding_tokens": 22644,
+    "layout_padding_fraction": 0.01362494223659889,
+    "H_including_terminal_and_layout_padding": {
+      "peak_mean_ratio_per_collective_layer": {
+        "count": 1152,
+        "min": 1.005419921875,
+        "p10": 1.0682731447444216,
+        "p50": 1.1904112856040001,
+        "p90": 1.4758128017632308,
+        "p95": 1.5787567960736766,
+        "max": 1.9196999289772727,
+        "mean": 1.2326719230881151
+      },
+      "zero_load_collective_layers": 0,
+      "E": 36957810.0
+    },
+    "H_excluding_layout_padding_including_terminal": {
+      "peak_mean_ratio_per_collective_layer": {
+        "count": 1152,
+        "min": 1.0167936473870587,
+        "p10": 1.06655127909046,
+        "p50": 1.1917665765182557,
+        "p90": 1.4817814731956298,
+        "p95": 1.5800987229676744,
+        "max": 1.8947486635820494,
+        "mean": 1.2378001865035193
+      },
+      "zero_load_collective_layers": 0,
+      "E": 37245999.0
+    },
+    "H_raw_excluding_layout_padding_and_synthetic_terminal": {
+      "peak_mean_ratio_per_collective_layer": {
+        "count": 1152,
+        "min": 1.0169709816337755,
+        "p10": 1.0661140695733435,
+        "p50": 1.1917071638214147,
+        "p90": 1.4819935388765173,
+        "p95": 1.5803523195033784,
+        "max": 1.8944964432796705,
+        "mean": 1.2378890241013016
+      },
+      "zero_load_collective_layers": 0,
+      "E": 37254095.0
+    }
+  },
+  "benchmarks": [
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-real-hgx05-20260914/exchange-seed0.json",
+      "seed": 0,
+      "budgets": {
+        "max_candidates": 500,
+        "max_iterations": 20,
+        "max_swaps": 20
+      },
+      "repeats": 3,
+      "excess": {
+        "native": 36957810.0,
+        "routepack": 35802633.0,
+        "random": 36684722.0
+      },
+      "same_swap_count": true,
+      "routepack_swaps": 18,
+      "random_swaps": 18,
+      "cpu_wall_ms": {
+        "prepare": {
+          "p50": 39415.52291624248,
+          "p95": 39529.59824800491
+        },
+        "search": {
+          "p50": 2912.8103479743004,
+          "p95": 3039.1053076833487
+        },
+        "validation_and_report": {
+          "p50": 39275.89555084705,
+          "p95": 39870.92783264816
+        },
+        "total": {
+          "p50": 81600.23808665574,
+          "p95": 82187.38829158247
+        }
+      },
+      "determinism_passed": true
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-real-hgx05-20260914/exchange-seed1.json",
+      "seed": 1,
+      "budgets": {
+        "max_candidates": 500,
+        "max_iterations": 20,
+        "max_swaps": 20
+      },
+      "repeats": 1,
+      "excess": {
+        "native": 36957810.0,
+        "routepack": 35661221.0,
+        "random": 36538206.0
+      },
+      "same_swap_count": true,
+      "routepack_swaps": 20,
+      "random_swaps": 20,
+      "cpu_wall_ms": {
+        "prepare": {
+          "p50": 41501.235373318195,
+          "p95": 41501.235373318195
+        },
+        "search": {
+          "p50": 2968.6266016215086,
+          "p95": 2968.6266016215086
+        },
+        "validation_and_report": {
+          "p50": 41602.25307755172,
+          "p95": 41602.25307755172
+        },
+        "total": {
+          "p50": 86072.11578451097,
+          "p95": 86072.11578451097
+        }
+      },
+      "determinism_passed": true
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-real-hgx05-20260914/exchange-seed2.json",
+      "seed": 2,
+      "budgets": {
+        "max_candidates": 500,
+        "max_iterations": 20,
+        "max_swaps": 20
+      },
+      "repeats": 1,
+      "excess": {
+        "native": 36957810.0,
+        "routepack": 35458023.0,
+        "random": 35971096.0
+      },
+      "same_swap_count": true,
+      "routepack_swaps": 19,
+      "random_swaps": 19,
+      "cpu_wall_ms": {
+        "prepare": {
+          "p50": 40562.938794493675,
+          "p95": 40562.938794493675
+        },
+        "search": {
+          "p50": 2961.190141737461,
+          "p95": 2961.190141737461
+        },
+        "validation_and_report": {
+          "p50": 40316.09995290637,
+          "p95": 40316.09995290637
+        },
+        "total": {
+          "p50": 83840.22959321737,
+          "p95": 83840.22959321737
+        }
+      },
+      "determinism_passed": true
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-real-hgx05-20260914/exchange-seed3.json",
+      "seed": 3,
+      "budgets": {
+        "max_candidates": 500,
+        "max_iterations": 20,
+        "max_swaps": 20
+      },
+      "repeats": 1,
+      "excess": {
+        "native": 36957810.0,
+        "routepack": 35720421.0,
+        "random": 36354276.0
+      },
+      "same_swap_count": true,
+      "routepack_swaps": 20,
+      "random_swaps": 20,
+      "cpu_wall_ms": {
+        "prepare": {
+          "p50": 42479.513339698315,
+          "p95": 42479.513339698315
+        },
+        "search": {
+          "p50": 3164.8870818316936,
+          "p95": 3164.8870818316936
+        },
+        "validation_and_report": {
+          "p50": 42126.867808401585,
+          "p95": 42126.867808401585
+        },
+        "total": {
+          "p50": 87771.2692078203,
+          "p95": 87771.2692078203
+        }
+      },
+      "determinism_passed": true
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-real-hgx05-20260914/exchange-seed4.json",
+      "seed": 4,
+      "budgets": {
+        "max_candidates": 500,
+        "max_iterations": 20,
+        "max_swaps": 20
+      },
+      "repeats": 1,
+      "excess": {
+        "native": 36957810.0,
+        "routepack": 35867869.0,
+        "random": 36630154.0
+      },
+      "same_swap_count": true,
+      "routepack_swaps": 20,
+      "random_swaps": 20,
+      "cpu_wall_ms": {
+        "prepare": {
+          "p50": 40552.4170473218,
+          "p95": 40552.4170473218
+        },
+        "search": {
+          "p50": 2982.263084501028,
+          "p95": 2982.263084501028
+        },
+        "validation_and_report": {
+          "p50": 40801.88529193401,
+          "p95": 40801.88529193401
+        },
+        "total": {
+          "p50": 84336.5660123527,
+          "p95": 84336.5660123527
+        }
+      },
+      "determinism_passed": true
+    }
+  ]
+}

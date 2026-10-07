@@ -1,0 +1,84 @@
+{
+  "source": "actual_b1_rank_schedules",
+  "cells": [
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 0,
+      "source_rank": 0,
+      "sample_ids": [
+        "routepack-b1-20260912-02:sample4"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 0,
+      "source_rank": 1,
+      "sample_ids": [
+        "routepack-b1-20260912-02:sample5"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 0,
+      "source_rank": 2,
+      "sample_ids": [
+        "routepack-b1-20260912-02:sample0"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 0,
+      "slot": 0,
+      "source_rank": 3,
+      "sample_ids": [
+        "routepack-b1-20260912-02:sample6"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 0,
+      "source_rank": 4,
+      "sample_ids": [
+        "routepack-b1-20260912-02:sample1"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 0,
+      "source_rank": 5,
+      "sample_ids": [
+        "routepack-b1-20260912-02:sample7"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 0,
+      "source_rank": 6,
+      "sample_ids": [
+        "routepack-b1-20260912-02:sample2"
+      ]
+    },
+    {
+      "step": 0,
+      "group_id": 1,
+      "slot": 0,
+      "source_rank": 7,
+      "sample_ids": [
+        "routepack-b1-20260912-02:sample3"
+      ]
+    }
+  ],
+  "num_microbatches": [
+    1
+  ],
+  "global_batch_sizes": [
+    8
+  ],
+  "rollout_execution_id": 0
+}

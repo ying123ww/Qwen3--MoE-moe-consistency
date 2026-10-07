@@ -1,0 +1,7 @@
+{
+  "note": "Hashes recorded after ai_hgx_03 microbenchmark completed; script was not edited between completion and hashing.",
+  "files": {
+    "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_tools/benchmark_optimizer_staging.py": "0e1f01d686bc2ebd427c61863aa2656cc8c2b5b780390fcb4f3d33675f425dbd",
+    "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/p1-optimizer-staging-microbench-20260912.json": "092f155068671c019a113e7ce62e4f6c8f41e7182d728a12f24bba139832bb0e"
+  }
+}

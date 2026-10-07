@@ -1,0 +1,8 @@
+{
+  "mode": "routepack_b2_preflight",
+  "reference_manifest": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/a-matmul-attribution-20260912-01/manifest.json",
+  "output": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/routepack-capture-20260912-02/capture",
+  "response_tokens": 16,
+  "timing_use": "capture only; not a benchmark or B1 training replay gate",
+  "guard": "same allocation memory guard, GPU idle check and isolated caches as matmul mode"
+}

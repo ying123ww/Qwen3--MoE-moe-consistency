@@ -1,0 +1,111 @@
+{
+  "scope": "Offline measured loads/CPU timings; not GPU scheduler speedup",
+  "capture": "/tmp/ap-real-capture-20260914-02/capture",
+  "sampling": {
+    "temperature": 1.0,
+    "max_new_tokens": 8192,
+    "ignore_eos": false,
+    "top_p": 1.0,
+    "top_k": -1,
+    "no_stop_trim": true
+  },
+  "lengths": {
+    "prompt": {
+      "count": 256,
+      "min": 90.0,
+      "p10": 103.0,
+      "p50": 152.5,
+      "p90": 197.0,
+      "p95": 243.0,
+      "max": 261.0,
+      "mean": 155.84375
+    },
+    "response": {
+      "count": 256,
+      "min": 1243.0,
+      "p10": 3197.0,
+      "p50": 6652.0,
+      "p90": 8192.0,
+      "p95": 8192.0,
+      "max": 8192.0,
+      "mean": 6247.703125
+    },
+    "total": {
+      "count": 256,
+      "min": 1343.0,
+      "p10": 3355.5,
+      "p50": 6791.5,
+      "p90": 8386.0,
+      "p95": 8391.0,
+      "max": 8435.0,
+      "mean": 6403.546875
+    }
+  },
+  "finish": {
+    "reason_counts": {
+      "length": 111,
+      "stop": 145
+    },
+    "confirmed_length_truncated_count": 111,
+    "stop_count": 145,
+    "unknown_count": 0,
+    "note": "stop is engine stop, not necessarily EOS; missing reasons remain unknown. Length equal to cap does not establish finish reason.",
+    "eos_token_ids": [
+      151645
+    ],
+    "confirmed_eos_count": 145,
+    "eos_identity_available": true
+  },
+  "b2": {
+    "path": "/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/gpu_runs/autopack-real-hgx05-b1-20260914-02/b2-verified",
+    "samples": 256,
+    "bins": 96,
+    "collectives": 24,
+    "training_tokens": 1639308,
+    "layout_padding_tokens": 22644,
+    "layout_padding_fraction": 0.01362494223659889,
+    "H_including_terminal_and_layout_padding": {
+      "peak_mean_ratio_per_collective_layer": {
+        "count": 1152,
+        "min": 1.005419921875,
+        "p10": 1.0682731447444216,
+        "p50": 1.1904112856040001,
+        "p90": 1.4758128017632308,
+        "p95": 1.5787567960736766,
+        "max": 1.9196999289772727,
+        "mean": 1.2326719230881151
+      },
+      "zero_load_collective_layers": 0,
+      "E": 36957810.0
+    },
+    "H_excluding_layout_padding_including_terminal": {
+      "peak_mean_ratio_per_collective_layer": {
+        "count": 1152,
+        "min": 1.0167936473870587,
+        "p10": 1.06655127909046,
+        "p50": 1.1917665765182557,
+        "p90": 1.4817814731956298,
+        "p95": 1.5800987229676744,
+        "max": 1.8947486635820494,
+        "mean": 1.2378001865035193
+      },
+      "zero_load_collective_layers": 0,
+      "E": 37245999.0
+    },
+    "H_raw_excluding_layout_padding_and_synthetic_terminal": {
+      "peak_mean_ratio_per_collective_layer": {
+        "count": 1152,
+        "min": 1.0169709816337755,
+        "p10": 1.0661140695733435,
+        "p50": 1.1917071638214147,
+        "p90": 1.4819935388765173,
+        "p95": 1.5803523195033784,
+        "max": 1.8944964432796705,
+        "mean": 1.2378890241013016
+      },
+      "zero_load_collective_layers": 0,
+      "E": 37254095.0
+    }
+  },
+  "benchmarks": []
+}

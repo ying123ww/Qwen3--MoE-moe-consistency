@@ -1,0 +1,151 @@
+{
+  "mode": "candidate",
+  "capture_complete": true,
+  "standard_gate_summary": {
+    "rows": 23232,
+    "covered_rank_layers": 384,
+    "compared_elements": 0,
+    "eligible_a_shapes": [
+      [
+        1,
+        2048
+      ],
+      [
+        2,
+        2048
+      ]
+    ]
+  },
+  "per_rank": {
+    "0": {
+      "rows": 2496,
+      "eligible_rows": 2304,
+      "excluded_rows": 192,
+      "mismatches": 0
+    },
+    "1": {
+      "rows": 2496,
+      "eligible_rows": 2304,
+      "excluded_rows": 192,
+      "mismatches": 0
+    },
+    "2": {
+      "rows": 2496,
+      "eligible_rows": 2304,
+      "excluded_rows": 192,
+      "mismatches": 0
+    },
+    "3": {
+      "rows": 2496,
+      "eligible_rows": 2304,
+      "excluded_rows": 192,
+      "mismatches": 0
+    },
+    "4": {
+      "rows": 3312,
+      "eligible_rows": 3072,
+      "excluded_rows": 240,
+      "mismatches": 0
+    },
+    "5": {
+      "rows": 3312,
+      "eligible_rows": 3072,
+      "excluded_rows": 240,
+      "mismatches": 0
+    },
+    "6": {
+      "rows": 3312,
+      "eligible_rows": 3072,
+      "excluded_rows": 240,
+      "mismatches": 0
+    },
+    "7": {
+      "rows": 3312,
+      "eligible_rows": 3072,
+      "excluded_rows": 240,
+      "mismatches": 0
+    }
+  },
+  "shapes": [
+    {
+      "a_shape": [
+        1,
+        2048
+      ],
+      "eligible": true,
+      "calls": 15360
+    },
+    {
+      "a_shape": [
+        2,
+        2048
+      ],
+      "eligible": true,
+      "calls": 6144
+    },
+    {
+      "a_shape": [
+        32,
+        2048
+      ],
+      "eligible": false,
+      "calls": 192
+    },
+    {
+      "a_shape": [
+        70,
+        2048
+      ],
+      "eligible": false,
+      "calls": 192
+    },
+    {
+      "a_shape": [
+        72,
+        2048
+      ],
+      "eligible": false,
+      "calls": 384
+    },
+    {
+      "a_shape": [
+        73,
+        2048
+      ],
+      "eligible": false,
+      "calls": 192
+    },
+    {
+      "a_shape": [
+        141,
+        2048
+      ],
+      "eligible": false,
+      "calls": 384
+    },
+    {
+      "a_shape": [
+        164,
+        2048
+      ],
+      "eligible": false,
+      "calls": 192
+    },
+    {
+      "a_shape": [
+        235,
+        2048
+      ],
+      "eligible": false,
+      "calls": 192
+    }
+  ],
+  "call_sequence_errors": [],
+  "resolved_server_args_differences": {
+    "shadow": {},
+    "candidate": {}
+  },
+  "off_and_shadow_vs_candidate_failures": [],
+  "candidate_batch_failures": [],
+  "scope": "Candidate returns new tile outputs; bitwise oracle comparison is from independently captured model artifacts, not per-call candidate audit. Finite M1/M2 actual inputs only."
+}

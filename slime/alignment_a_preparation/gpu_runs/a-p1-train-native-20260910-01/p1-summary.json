@@ -1,0 +1,338 @@
+[
+  {
+    "file": "slime/alignment_a_preparation/gpu_runs/a-p1-train-native-20260910-01/profiles/train/train-rollout3-rank0.json.gz",
+    "gpu_events": 67432,
+    "gpu_union_s": 10.109189935546874,
+    "gpu_sum_s": 10.200120165000016,
+    "gpu_observed_window_s": 27.582865833007812,
+    "cpu_spans_s": {
+      "P1/train_rpc": 27.611512896,
+      "P1/wake_up": 3.23298182,
+      "P1/_get_rollout_data": 0.001332855,
+      "P1/forward_backward": 2.226020745,
+      "P1/optimizer_step": 15.401887217,
+      "P1/actor_weights_cpu_backup": 1.769693433,
+      "P1/sleep": 2.710839439
+    },
+    "top_gpu_events": [
+      {
+        "name": "gpu_memcpy: Memcpy DtoH (Device -> Pinned)",
+        "seconds": 3.482089579,
+        "count": 5426
+      },
+      {
+        "name": "gpu_memcpy: Memcpy HtoD (Pageable -> Device)",
+        "seconds": 3.082823570000003,
+        "count": 3003
+      },
+      {
+        "name": "gpu_memcpy: Memcpy HtoD (Pinned -> Device)",
+        "seconds": 2.8123328030000114,
+        "count": 6855
+      },
+      {
+        "name": "kernel: ncclDevKernel_AllGather_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+        "seconds": 0.13746994099999998,
+        "count": 4
+      },
+      {
+        "name": "kernel: ncclDevKernel_ReduceScatter_Sum_f32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+        "seconds": 0.110414613,
+        "count": 2
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "seconds": 0.05722691500000043,
+        "count": 3929
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+        "seconds": 0.041794938,
+        "count": 28
+      },
+      {
+        "name": "kernel: ampere_s1688gemm_bf16_256x128_ldg8_stages_32x1_nt",
+        "seconds": 0.029128458,
+        "count": 843
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x5_tn",
+        "seconds": 0.022411789999999994,
+        "count": 1124
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_tn",
+        "seconds": 0.022409337999999997,
+        "count": 1938
+      },
+      {
+        "name": "kernel: void multi_tensor_apply_kernel<TensorListMetadata<1, false>, transformer_engine::multi_tensor_l2norm::L2NormFunctor<float>, float*, float*, bool, int>(long, int volatile*, TensorListMetadata<1, false>, transformer_engine::multi_tensor_l2norm::L2NormFunctor<float>, float*, float*, bool, int)",
+        "seconds": 0.020169310000000006,
+        "count": 364
+      },
+      {
+        "name": "kernel: void multi_tensor_apply_kernel<TensorListMetadata<2, false>, transformer_engine::multi_tensor_scale::ScaleFunctor<float, float>, float>(long, int volatile*, TensorListMetadata<2, false>, transformer_engine::multi_tensor_scale::ScaleFunctor<float, float>, float)",
+        "seconds": 0.020109371999999976,
+        "count": 183
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_nn",
+        "seconds": 0.016009811000000013,
+        "count": 1084
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+        "seconds": 0.015808719999999995,
+        "count": 1778
+      },
+      {
+        "name": "kernel: void deep_ep::intranode::combine<__nv_bfloat16, 4, 768, 4096>(__nv_bfloat16*, float*, __nv_bfloat16 const*, float const*, __nv_bfloat16 const*, __nv_bfloat16 const*, int const*, int const*, int const*, int*, int, int, int, int, void**, int, int, int)",
+        "seconds": 0.015225396000000009,
+        "count": 144
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_128x128_ldg8_f2f_stages_64x3_tn",
+        "seconds": 0.015016228999999996,
+        "count": 372
+      },
+      {
+        "name": "kernel: void deep_ep::intranode::dispatch<4, 768, 8192>(int4*, float*, int*, long*, float*, int*, int*, int4 const*, float const*, long const*, float const*, bool const*, int const*, int, int, int, int, int, int, int, int, void**, int, int, int)",
+        "seconds": 0.013548501999999997,
+        "count": 144
+      },
+      {
+        "name": "kernel: ampere_s16816gemm_bf16_256x128_ldg8_stages_32x3_nt",
+        "seconds": 0.013211190000000003,
+        "count": 294
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1ul> >(int, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1ul>)",
+        "seconds": 0.012908287999999926,
+        "count": 3080
+      },
+      {
+        "name": "kernel: ampere_s16816gemm_bf16_128x64_ldg8_stages_64x3_nt",
+        "seconds": 0.011654321999999996,
+        "count": 571
+      },
+      {
+        "name": "kernel: ampere_s1688gemm_bf16_128x128_ldg8_stages_32x1_nt",
+        "seconds": 0.011113878999999983,
+        "count": 479
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1ul> >(int, at::native::FillFunctor<long>, std::array<char*, 1ul>)",
+        "seconds": 0.009770787999999916,
+        "count": 5928
+      },
+      {
+        "name": "kernel: ampere_s16816gemm_bf16_128x128_ldg8_stages_32x5_nt",
+        "seconds": 0.009547126000000001,
+        "count": 129
+      },
+      {
+        "name": "kernel: void cutlass::Kernel2<cutlass_80_tensorop_s16816gemm_bf16_64x64_64x6_tn_align8>(cutlass_80_tensorop_s16816gemm_bf16_64x64_64x6_tn_align8::Params)",
+        "seconds": 0.008275383000000002,
+        "count": 680
+      },
+      {
+        "name": "kernel: void at_cuda_detail::cub::DeviceRadixSortOnesweepKernel<at_cuda_detail::cub::detail::radix::policy_hub<long, at::cuda::cub::detail::OpaqueType<8>, unsigned long long>::Policy1000, false, long, at::cuda::cub::detail::OpaqueType<8>, unsigned long long, int, int, at_cuda_detail::cub::detail::identity_decomposer_t>(int*, int*, unsigned long long*, unsigned long long const*, long*, long const*, at::cuda::cub::detail::OpaqueType<8>*, at::cuda::cub::detail::OpaqueType<8> const*, int, int, int, at_cuda_detail::cub::detail::identity_decomposer_t)",
+        "seconds": 0.007980480000000012,
+        "count": 858
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_32x3_nn",
+        "seconds": 0.007810587,
+        "count": 147
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_128x256_ldg8_f2f_stages_64x3_tn",
+        "seconds": 0.006854572999999999,
+        "count": 101
+      },
+      {
+        "name": "kernel: void cutlass::Kernel2<cutlass_80_tensorop_s16816gemm_bf16_64x64_64x6_nn_align8>(cutlass_80_tensorop_s16816gemm_bf16_64x64_64x6_nn_align8::Params)",
+        "seconds": 0.006684876999999999,
+        "count": 801
+      },
+      {
+        "name": "kernel: void cublasLt::splitKreduce_kernel<32, 16, int, float, __nv_bfloat16, float, __nv_bfloat16, false, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, true, false, false, false>(cublasLt::cublasSplitKParams<float>, float const*, __nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16*, float const*, float const*, __nv_bfloat16 const*, float const*, __nv_bfloat16*, void*, long, float*, int*, float*, float*, float const*, float const*, float const*, float const*, float const*)",
+        "seconds": 0.006406785000000006,
+        "count": 2151
+      },
+      {
+        "name": "gpu_memset: Memset (Device)",
+        "seconds": 0.00630482099999999,
+        "count": 2572
+      }
+    ]
+  },
+  {
+    "file": "slime/alignment_a_preparation/gpu_runs/a-p1-train-native-20260910-01/profiles/train/train-rollout3-rank4.json.gz",
+    "gpu_events": 68207,
+    "gpu_union_s": 10.411866794921876,
+    "gpu_sum_s": 10.493879737999988,
+    "gpu_observed_window_s": 27.495039890625,
+    "cpu_spans_s": {
+      "P1/train_rpc": 27.51268489,
+      "P1/wake_up": 3.2465504,
+      "P1/_get_rollout_data": 0.00175937,
+      "P1/forward_backward": 2.2259479160000004,
+      "P1/optimizer_step": 15.433331745999999,
+      "P1/actor_weights_cpu_backup": 1.910732484,
+      "P1/sleep": 2.468299372
+    },
+    "top_gpu_events": [
+      {
+        "name": "gpu_memcpy: Memcpy DtoH (Device -> Pinned)",
+        "seconds": 3.6464166870000034,
+        "count": 5501
+      },
+      {
+        "name": "gpu_memcpy: Memcpy HtoD (Pageable -> Device)",
+        "seconds": 3.2043025989999903,
+        "count": 3150
+      },
+      {
+        "name": "gpu_memcpy: Memcpy HtoD (Pinned -> Device)",
+        "seconds": 2.843948032999993,
+        "count": 6855
+      },
+      {
+        "name": "kernel: ncclDevKernel_AllGather_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+        "seconds": 0.11947042199999999,
+        "count": 4
+      },
+      {
+        "name": "kernel: ncclDevKernel_ReduceScatter_Sum_f32_RING_LL(ncclDevKernelArgsStorage<4096ul>)",
+        "seconds": 0.11059674900000001,
+        "count": 2
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<float>, std::array<char*, 1ul> >(int, at::native::FillFunctor<float>, std::array<char*, 1ul>)",
+        "seconds": 0.057256801000000856,
+        "count": 4004
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<4, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul> >(int, at::native::AUnaryFunctor<float, float, float, at::native::binary_internal::MulFunctor<float> >, std::array<char*, 2ul>)",
+        "seconds": 0.04178476800000001,
+        "count": 28
+      },
+      {
+        "name": "kernel: ampere_s1688gemm_bf16_256x128_ldg8_stages_32x1_nt",
+        "seconds": 0.03215540400000001,
+        "count": 935
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_tn",
+        "seconds": 0.023485944000000026,
+        "count": 2138
+      },
+      {
+        "name": "kernel: void multi_tensor_apply_kernel<TensorListMetadata<1, false>, transformer_engine::multi_tensor_l2norm::L2NormFunctor<float>, float*, float*, bool, int>(long, int volatile*, TensorListMetadata<1, false>, transformer_engine::multi_tensor_l2norm::L2NormFunctor<float>, float*, float*, bool, int)",
+        "seconds": 0.020431649,
+        "count": 366
+      },
+      {
+        "name": "kernel: void multi_tensor_apply_kernel<TensorListMetadata<2, false>, transformer_engine::multi_tensor_scale::ScaleFunctor<float, float>, float>(long, int volatile*, TensorListMetadata<2, false>, transformer_engine::multi_tensor_scale::ScaleFunctor<float, float>, float)",
+        "seconds": 0.020363450999999998,
+        "count": 183
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x5_tn",
+        "seconds": 0.01973095999999999,
+        "count": 1062
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<4, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul> >(int, at::native::bfloat16_copy_kernel_cuda(at::TensorIteratorBase&)::{lambda(float)#1}, std::array<char*, 2ul>)",
+        "seconds": 0.01593020200000002,
+        "count": 1853
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_64x64_sliced1x2_ldg8_f2f_stages_64x6_nn",
+        "seconds": 0.015904765999999994,
+        "count": 1145
+      },
+      {
+        "name": "kernel: void deep_ep::intranode::combine<__nv_bfloat16, 4, 768, 4096>(__nv_bfloat16*, float*, __nv_bfloat16 const*, float const*, __nv_bfloat16 const*, __nv_bfloat16 const*, int const*, int const*, int const*, int*, int, int, int, int, void**, int, int, int)",
+        "seconds": 0.015619011000000007,
+        "count": 144
+      },
+      {
+        "name": "kernel: void deep_ep::intranode::dispatch<4, 768, 8192>(int4*, float*, int*, long*, float*, int*, int*, int4 const*, float const*, long const*, float const*, bool const*, int const*, int, int, int, int, int, int, int, int, void**, int, int, int)",
+        "seconds": 0.014142301000000003,
+        "count": 144
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<4, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1ul> >(int, at::native::FillFunctor<c10::BFloat16>, std::array<char*, 1ul>)",
+        "seconds": 0.013610246999999931,
+        "count": 3080
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_128x128_ldg8_f2f_stages_64x3_tn",
+        "seconds": 0.012483755000000001,
+        "count": 306
+      },
+      {
+        "name": "kernel: ampere_s16816gemm_bf16_128x128_ldg8_stages_32x5_nt",
+        "seconds": 0.012207949000000001,
+        "count": 195
+      },
+      {
+        "name": "kernel: ampere_s16816gemm_bf16_256x128_ldg8_stages_32x3_nt",
+        "seconds": 0.011800728000000009,
+        "count": 250
+      },
+      {
+        "name": "kernel: ampere_s16816gemm_bf16_128x64_ldg8_stages_64x3_nt",
+        "seconds": 0.011286431000000001,
+        "count": 598
+      },
+      {
+        "name": "kernel: ampere_s1688gemm_bf16_128x128_ldg8_stages_32x1_nt",
+        "seconds": 0.010479163000000003,
+        "count": 475
+      },
+      {
+        "name": "kernel: void at::native::vectorized_elementwise_kernel<2, at::native::FillFunctor<long>, std::array<char*, 1ul> >(int, at::native::FillFunctor<long>, std::array<char*, 1ul>)",
+        "seconds": 0.009566456999999903,
+        "count": 5928
+      },
+      {
+        "name": "kernel: void cutlass::Kernel2<cutlass_80_tensorop_s16816gemm_bf16_64x64_64x6_tn_align8>(cutlass_80_tensorop_s16816gemm_bf16_64x64_64x6_tn_align8::Params)",
+        "seconds": 0.008054303,
+        "count": 708
+      },
+      {
+        "name": "kernel: void at_cuda_detail::cub::DeviceRadixSortOnesweepKernel<at_cuda_detail::cub::detail::radix::policy_hub<long, at::cuda::cub::detail::OpaqueType<8>, unsigned long long>::Policy1000, false, long, at::cuda::cub::detail::OpaqueType<8>, unsigned long long, int, int, at_cuda_detail::cub::detail::identity_decomposer_t>(int*, int*, unsigned long long*, unsigned long long const*, long*, long const*, at::cuda::cub::detail::OpaqueType<8>*, at::cuda::cub::detail::OpaqueType<8> const*, int, int, int, at_cuda_detail::cub::detail::identity_decomposer_t)",
+        "seconds": 0.007772004999999994,
+        "count": 846
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_128x256_ldg8_f2f_stages_64x3_tn",
+        "seconds": 0.007716663000000001,
+        "count": 117
+      },
+      {
+        "name": "kernel: ampere_bf16_s16816gemm_bf16_256x128_ldg8_f2f_stages_32x3_nn",
+        "seconds": 0.007539347000000002,
+        "count": 146
+      },
+      {
+        "name": "kernel: void cutlass::Kernel2<cutlass_80_tensorop_s16816gemm_bf16_64x64_64x6_nn_align8>(cutlass_80_tensorop_s16816gemm_bf16_64x64_64x6_nn_align8::Params)",
+        "seconds": 0.007018409000000007,
+        "count": 874
+      },
+      {
+        "name": "gpu_memset: Memset (Device)",
+        "seconds": 0.006703505999999963,
+        "count": 2620
+      },
+      {
+        "name": "kernel: void cublasLt::splitKreduce_kernel<32, 16, int, float, __nv_bfloat16, float, __nv_bfloat16, false, __nv_bfloat16, __nv_bfloat16, __nv_bfloat16, true, false, false, false>(cublasLt::cublasSplitKParams<float>, float const*, __nv_bfloat16 const*, __nv_bfloat16*, __nv_bfloat16*, float const*, float const*, __nv_bfloat16 const*, float const*, __nv_bfloat16*, void*, long, float*, int*, float*, float*, float const*, float const*, float const*, float const*, float const*)",
+        "seconds": 0.006651980999999998,
+        "count": 2282
+      }
+    ]
+  }
+]

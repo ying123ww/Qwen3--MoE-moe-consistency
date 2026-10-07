@@ -1,0 +1,6 @@
+{
+  "max_tree_rss_gib": 923.7073364257812,
+  "min_available_gib": 487.53317642211914,
+  "min_tmp_free_gib": 111.84720993041992,
+  "note": "5-second samples; not exact peak; profiling wall time is not training performance"
+}

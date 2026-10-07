@@ -1,0 +1,760 @@
+{
+  "results": [
+    {
+      "gpu_activity_available": true,
+      "gpu_activity_event_count": 21591,
+      "validation_error": null,
+      "path": "/tmp/ap-components-native-20260916-02/components/components-rank3-forward.json",
+      "sha256": "9756e5e07946e3f07a73045ef352c9822fa5eba390fce19e61f7cfbf0547f8ea",
+      "windows": [
+        {
+          "kernel_name_buckets": {
+            "DeepEP": {
+              "events": 384,
+              "duration_sum_ms": 532.068972,
+              "interval_union_ms": 532.068970703125,
+              "streams": [
+                23
+              ]
+            },
+            "GEMM": {
+              "events": 193,
+              "duration_sum_ms": 123.28099300000002,
+              "interval_union_ms": 123.280990234375,
+              "streams": [
+                7
+              ]
+            },
+            "memcpy": {
+              "events": 672,
+              "duration_sum_ms": 2.2437719999999906,
+              "interval_union_ms": 2.2437138671875,
+              "streams": [
+                7
+              ]
+            },
+            "memset": {
+              "events": 1531,
+              "duration_sum_ms": 2.711349000000015,
+              "interval_union_ms": 2.7115234375,
+              "streams": [
+                7
+              ]
+            },
+            "unknown": {
+              "events": 18811,
+              "duration_sum_ms": 1279.442527000005,
+              "interval_union_ms": 1279.4425419921874,
+              "streams": [
+                7,
+                23
+              ]
+            }
+          },
+          "window": "forward",
+          "cpu_window_wall_ms": 2046.1340770000002,
+          "gpu": {
+            "events": 21591,
+            "duration_sum_ms": 1939.7476130000173,
+            "interval_union_ms": 1938.463822265625,
+            "streams": [
+              7,
+              23
+            ]
+          },
+          "categories": {
+            "kernel": {
+              "events": 19388,
+              "duration_sum_ms": 1934.7924920000023,
+              "interval_union_ms": 1933.5085849609375,
+              "streams": [
+                7,
+                23
+              ]
+            },
+            "gpu_memcpy": {
+              "events": 672,
+              "duration_sum_ms": 2.2437719999999906,
+              "interval_union_ms": 2.2437138671875,
+              "streams": [
+                7
+              ]
+            },
+            "gpu_memset": {
+              "events": 1531,
+              "duration_sum_ms": 2.711349000000015,
+              "interval_union_ms": 2.7115234375,
+              "streams": [
+                7
+              ]
+            }
+          },
+          "unattributed_to_component": {
+            "events": 3505,
+            "duration_sum_ms": 962.474100999998,
+            "interval_union_ms": 962.474091796875,
+            "streams": [
+              7
+            ]
+          },
+          "unattributed_gpu_duration_fraction": 0.4961852225256428,
+          "components": [
+            {
+              "component": "aligned_triton_moe",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 63.70623100000002,
+              "gpu_inclusive": {
+                "events": 1440,
+                "duration_sum_ms": 289.36189400000046,
+                "interval_union_ms": 289.3618916015625,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "combine",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 10.766125000000002,
+              "gpu_inclusive": {
+                "events": 144,
+                "duration_sum_ms": 175.32684199999997,
+                "interval_union_ms": 174.1343818359375,
+                "streams": [
+                  7,
+                  23
+                ]
+              }
+            },
+            {
+              "component": "combine_postprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1.274763,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "combine_preprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 15.566728999999999,
+              "gpu_inclusive": {
+                "events": 192,
+                "duration_sum_ms": 19.159436,
+                "interval_union_ms": 19.1594287109375,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "dispatch",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 797.2286149999999,
+              "gpu_inclusive": {
+                "events": 1728,
+                "duration_sum_ms": 365.6700949999999,
+                "interval_union_ms": 365.5786533203125,
+                "streams": [
+                  7,
+                  23
+                ]
+              }
+            },
+            {
+              "component": "dispatch_postprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 391.3365019999999,
+              "gpu_inclusive": {
+                "events": 9062,
+                "duration_sum_ms": 74.24411199999989,
+                "interval_union_ms": 74.244080078125,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "dispatch_preprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 8.467882,
+              "gpu_inclusive": {
+                "events": 144,
+                "duration_sum_ms": 0.7064750000000006,
+                "interval_union_ms": 0.70647265625,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "expert_wrapper",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 69.56088499999998,
+              "gpu_inclusive": {
+                "events": 1536,
+                "duration_sum_ms": 305.9309940000007,
+                "interval_union_ms": 305.93098828125,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "get_permuted_hidden_states_by_experts",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 390.17451,
+              "gpu_inclusive": {
+                "events": 9062,
+                "duration_sum_ms": 74.24411199999989,
+                "interval_union_ms": 74.244080078125,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "get_restored_hidden_states_by_experts",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 14.464993000000003,
+              "gpu_inclusive": {
+                "events": 192,
+                "duration_sum_ms": 19.159436,
+                "interval_union_ms": 19.1594287109375,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "moe",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1389.4753170000004,
+              "gpu_inclusive": {
+                "events": 18086,
+                "duration_sum_ms": 977.273512000021,
+                "interval_union_ms": 975.98973046875,
+                "streams": [
+                  7,
+                  23
+                ]
+              }
+            },
+            {
+              "component": "token_dispatch",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 796.1543970000001,
+              "gpu_inclusive": {
+                "events": 1728,
+                "duration_sum_ms": 365.6700949999999,
+                "interval_union_ms": 365.5786533203125,
+                "streams": [
+                  7,
+                  23
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "linkage": {
+        "gpu_events_linked_to_cuda_api": 21591,
+        "gpu_events_with_matching_cpu_external_id": 21591
+      },
+      "gpu_events_outside_windows": {
+        "events": 0,
+        "duration_sum_ms": 0.0,
+        "interval_union_ms": 0.0,
+        "streams": []
+      },
+      "limitations": [
+        "CPU annotation durations are host inclusive time, never device kernel duration.",
+        "GPU attribution uses CUDA API correlation plus containing same-thread component ranges. External IDs are checked as supplementary linkage evidence.",
+        "Missing range attribution (especially native backward kernels) remains unattributed rather than guessed.",
+        "Components are nested inclusive and not additive. GPU duration sum can exceed interval union with multi-stream concurrency.",
+        "GPU union is observed activity coverage, not full component latency or isolated compute, and is not additive across components.",
+        "Synchronized selected-window boundaries perturb scheduling and exclude other microbatches and loss forward; no throughput or cross-rank arrival-time claim."
+      ]
+    },
+    {
+      "gpu_activity_available": true,
+      "gpu_activity_event_count": 556917,
+      "validation_error": null,
+      "path": "/tmp/ap-components-native-20260916-02/components/components-rank3-backward.json",
+      "sha256": "5a194423487561979984e0b3b825ad74bfe9b3237724cf490b22122c675f587f",
+      "windows": [
+        {
+          "kernel_name_buckets": {
+            "DeepEP": {
+              "events": 576,
+              "duration_sum_ms": 2068.658008999998,
+              "interval_union_ms": 2068.65800390625,
+              "streams": [
+                23
+              ]
+            },
+            "GEMM": {
+              "events": 9574,
+              "duration_sum_ms": 1099.357513000003,
+              "interval_union_ms": 788.3424833984375,
+              "streams": [
+                7,
+                664,
+                665,
+                666,
+                667
+              ]
+            },
+            "memcpy": {
+              "events": 14830,
+              "duration_sum_ms": 32.77423599999692,
+              "interval_union_ms": 32.7725048828125,
+              "streams": [
+                7
+              ]
+            },
+            "memset": {
+              "events": 2824,
+              "duration_sum_ms": 4.98987800000003,
+              "interval_union_ms": 4.9901806640625,
+              "streams": [
+                7,
+                664,
+                665,
+                666,
+                667
+              ]
+            },
+            "unknown": {
+              "events": 529113,
+              "duration_sum_ms": 6786.115211994596,
+              "interval_union_ms": 6782.737424804687,
+              "streams": [
+                7,
+                20,
+                23
+              ]
+            }
+          },
+          "window": "backward",
+          "cpu_window_wall_ms": 14067.461474,
+          "gpu": {
+            "events": 556917,
+            "duration_sum_ms": 9991.894847992698,
+            "interval_union_ms": 9674.045918945312,
+            "streams": [
+              7,
+              20,
+              23,
+              664,
+              665,
+              666,
+              667
+            ]
+          },
+          "categories": {
+            "kernel": {
+              "events": 539263,
+              "duration_sum_ms": 9954.130733991922,
+              "interval_union_ms": 9636.568328125,
+              "streams": [
+                7,
+                20,
+                23,
+                664,
+                665,
+                666,
+                667
+              ]
+            },
+            "gpu_memcpy": {
+              "events": 14830,
+              "duration_sum_ms": 32.77423599999692,
+              "interval_union_ms": 32.7725048828125,
+              "streams": [
+                7
+              ]
+            },
+            "gpu_memset": {
+              "events": 2824,
+              "duration_sum_ms": 4.98987800000003,
+              "interval_union_ms": 4.9901806640625,
+              "streams": [
+                7,
+                664,
+                665,
+                666,
+                667
+              ]
+            }
+          },
+          "unattributed_to_component": {
+            "events": 535454,
+            "duration_sum_ms": 8565.503271995512,
+            "interval_union_ms": 8320.469432617187,
+            "streams": [
+              7,
+              20,
+              23,
+              664,
+              665,
+              666,
+              667
+            ]
+          },
+          "unattributed_gpu_duration_fraction": 0.8572451374141774,
+          "components": [
+            {
+              "component": "aligned_triton_moe",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 66.185147,
+              "gpu_inclusive": {
+                "events": 1440,
+                "duration_sum_ms": 290.58558900000037,
+                "interval_union_ms": 290.585587890625,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "combine",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 10.499557,
+              "gpu_inclusive": {
+                "events": 144,
+                "duration_sum_ms": 202.94412200000002,
+                "interval_union_ms": 201.758251953125,
+                "streams": [
+                  7,
+                  23
+                ]
+              }
+            },
+            {
+              "component": "combine_postprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1.4148240000000003,
+              "gpu_inclusive": {
+                "events": 0,
+                "duration_sum_ms": 0.0,
+                "interval_union_ms": 0.0,
+                "streams": []
+              }
+            },
+            {
+              "component": "combine_preprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 19.648395999999995,
+              "gpu_inclusive": {
+                "events": 192,
+                "duration_sum_ms": 19.26078099999999,
+                "interval_union_ms": 19.2607724609375,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "dispatch",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1004.9688809999998,
+              "gpu_inclusive": {
+                "events": 1728,
+                "duration_sum_ms": 473.2530410000008,
+                "interval_union_ms": 473.172359375,
+                "streams": [
+                  7,
+                  23
+                ]
+              }
+            },
+            {
+              "component": "dispatch_postprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 396.56197,
+              "gpu_inclusive": {
+                "events": 9062,
+                "duration_sum_ms": 74.40559700000045,
+                "interval_union_ms": 74.405646484375,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "dispatch_preprocess",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 9.511735,
+              "gpu_inclusive": {
+                "events": 144,
+                "duration_sum_ms": 0.7158990000000002,
+                "interval_union_ms": 0.715896484375,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "expert_wrapper",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 218.315272,
+              "gpu_inclusive": {
+                "events": 4913,
+                "duration_sum_ms": 619.4958589999986,
+                "interval_union_ms": 547.9472109375,
+                "streams": [
+                  7,
+                  664,
+                  665,
+                  666,
+                  667
+                ]
+              }
+            },
+            {
+              "component": "get_permuted_hidden_states_by_experts",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 395.34906399999994,
+              "gpu_inclusive": {
+                "events": 9062,
+                "duration_sum_ms": 74.40559700000045,
+                "interval_union_ms": 74.405646484375,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "get_restored_hidden_states_by_experts",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 18.442665999999996,
+              "gpu_inclusive": {
+                "events": 192,
+                "duration_sum_ms": 19.26078099999999,
+                "interval_union_ms": 19.2607724609375,
+                "streams": [
+                  7
+                ]
+              }
+            },
+            {
+              "component": "moe",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1764.571629,
+              "gpu_inclusive": {
+                "events": 21463,
+                "duration_sum_ms": 1426.3915760000082,
+                "interval_union_ms": 1353.576486328125,
+                "streams": [
+                  7,
+                  23,
+                  664,
+                  665,
+                  666,
+                  667
+                ]
+              }
+            },
+            {
+              "component": "native_TE_linear_fc1",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 65.321368,
+              "gpu_inclusive": {
+                "events": 1581,
+                "duration_sum_ms": 156.50607800000003,
+                "interval_union_ms": 108.1886640625,
+                "streams": [
+                  7,
+                  664,
+                  665,
+                  666,
+                  667
+                ]
+              }
+            },
+            {
+              "component": "native_TE_linear_fc2",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 63.00886000000001,
+              "gpu_inclusive": {
+                "events": 1556,
+                "duration_sum_ms": 90.16392599999995,
+                "interval_union_ms": 66.93269921875,
+                "streams": [
+                  7,
+                  664,
+                  665,
+                  666,
+                  667
+                ]
+              }
+            },
+            {
+              "component": "token_dispatch",
+              "cpu_range_count": 48,
+              "cpu_inclusive_sum_ms": 1003.928972,
+              "gpu_inclusive": {
+                "events": 1728,
+                "duration_sum_ms": 473.2530410000008,
+                "interval_union_ms": 473.172359375,
+                "streams": [
+                  7,
+                  23
+                ]
+              }
+            }
+          ]
+        }
+      ],
+      "linkage": {
+        "gpu_events_linked_to_cuda_api": 556917,
+        "gpu_events_with_matching_cpu_external_id": 556914
+      },
+      "gpu_events_outside_windows": {
+        "events": 0,
+        "duration_sum_ms": 0.0,
+        "interval_union_ms": 0.0,
+        "streams": []
+      },
+      "limitations": [
+        "CPU annotation durations are host inclusive time, never device kernel duration.",
+        "GPU attribution uses CUDA API correlation plus containing same-thread component ranges. External IDs are checked as supplementary linkage evidence.",
+        "Missing range attribution (especially native backward kernels) remains unattributed rather than guessed.",
+        "Components are nested inclusive and not additive. GPU duration sum can exceed interval union with multi-stream concurrency.",
+        "GPU union is observed activity coverage, not full component latency or isolated compute, and is not additive across components.",
+        "Synchronized selected-window boundaries perturb scheduling and exclude other microbatches and loss forward; no throughput or cross-rank arrival-time claim."
+      ]
+    },
+    {
+      "gpu_activity_available": true,
+      "gpu_activity_event_count": 6624,
+      "validation_error": null,
+      "path": "/tmp/ap-components-native-20260916-02/components/components-rank3-optimizer.json",
+      "sha256": "1f7ab14cb7e36786a704bfd62c7179d60a72b7febc24c9160fb71a3656fcb4e1",
+      "windows": [
+        {
+          "kernel_name_buckets": {
+            "NCCL": {
+              "events": 5,
+              "duration_sum_ms": 521.006235,
+              "interval_union_ms": 521.0062353515625,
+              "streams": [
+                7,
+                84,
+                88
+              ]
+            },
+            "memcpy": {
+              "events": 3215,
+              "duration_sum_ms": 3448.5194840000067,
+              "interval_union_ms": 2835.0758193359375,
+              "streams": [
+                7,
+                40,
+                44,
+                56,
+                60
+              ]
+            },
+            "unknown": {
+              "events": 3404,
+              "duration_sum_ms": 35.26084100000014,
+              "interval_union_ms": 35.2608076171875,
+              "streams": [
+                7,
+                44,
+                60
+              ]
+            }
+          },
+          "window": "optimizer",
+          "cpu_window_wall_ms": 11342.623549,
+          "gpu": {
+            "events": 6624,
+            "duration_sum_ms": 4004.786560000032,
+            "interval_union_ms": 3389.84608203125,
+            "streams": [
+              7,
+              40,
+              44,
+              56,
+              60,
+              84,
+              88
+            ]
+          },
+          "categories": {
+            "kernel": {
+              "events": 3409,
+              "duration_sum_ms": 556.2670760000011,
+              "interval_union_ms": 556.26704296875,
+              "streams": [
+                7,
+                44,
+                60,
+                84,
+                88
+              ]
+            },
+            "gpu_memcpy": {
+              "events": 3215,
+              "duration_sum_ms": 3448.5194840000067,
+              "interval_union_ms": 2835.0758193359375,
+              "streams": [
+                7,
+                40,
+                44,
+                56,
+                60
+              ]
+            },
+            "gpu_memset": {
+              "events": 0,
+              "duration_sum_ms": 0.0,
+              "interval_union_ms": 0.0,
+              "streams": []
+            }
+          },
+          "unattributed_to_component": {
+            "events": 6624,
+            "duration_sum_ms": 4004.786560000032,
+            "interval_union_ms": 3389.84608203125,
+            "streams": [
+              7,
+              40,
+              44,
+              56,
+              60,
+              84,
+              88
+            ]
+          },
+          "unattributed_gpu_duration_fraction": 1.0,
+          "components": []
+        }
+      ],
+      "linkage": {
+        "gpu_events_linked_to_cuda_api": 6624,
+        "gpu_events_with_matching_cpu_external_id": 6440
+      },
+      "gpu_events_outside_windows": {
+        "events": 0,
+        "duration_sum_ms": 0.0,
+        "interval_union_ms": 0.0,
+        "streams": []
+      },
+      "limitations": [
+        "CPU annotation durations are host inclusive time, never device kernel duration.",
+        "GPU attribution uses CUDA API correlation plus containing same-thread component ranges. External IDs are checked as supplementary linkage evidence.",
+        "Missing range attribution (especially native backward kernels) remains unattributed rather than guessed.",
+        "Components are nested inclusive and not additive. GPU duration sum can exceed interval union with multi-stream concurrency.",
+        "GPU union is observed activity coverage, not full component latency or isolated compute, and is not additive across components.",
+        "Synchronized selected-window boundaries perturb scheduling and exclude other microbatches and loss forward; no throughput or cross-rank arrival-time claim."
+      ]
+    }
+  ]
+}

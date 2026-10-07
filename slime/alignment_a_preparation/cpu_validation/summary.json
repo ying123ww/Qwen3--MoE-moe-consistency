@@ -1,0 +1,268 @@
+{
+  "mode": "CPU-only historical artifact validation; no model forward, GPU query or training",
+  "cuda_visible_devices": "",
+  "torch_version": "2.11.0+cu129",
+  "steps": [
+    {
+      "step": 1,
+      "sample_count": 8,
+      "input_tokens": 2242,
+      "response_tokens": 1024,
+      "total_lengths": [
+        272,
+        272,
+        265,
+        265,
+        317,
+        317,
+        267,
+        267
+      ],
+      "rollout_keys": [
+        "apply_chat_template_kwargs",
+        "custom_rm_path",
+        "generate_function_path",
+        "group_index",
+        "index",
+        "label",
+        "loss_mask",
+        "metadata",
+        "multimodal_inputs",
+        "multimodal_train_input_id",
+        "multimodal_train_inputs",
+        "non_generation_time",
+        "prefix_cache_info",
+        "prompt",
+        "remove_sample",
+        "response",
+        "response_length",
+        "reward",
+        "rollout_id",
+        "rollout_log_probs",
+        "rollout_routed_experts",
+        "rollout_top_p_token_ids",
+        "rollout_top_p_token_offsets",
+        "session_id",
+        "spec_info",
+        "status",
+        "teacher_log_probs",
+        "tokens",
+        "trace",
+        "train_metadata",
+        "weight_versions"
+      ],
+      "train_keys": [
+        "advantages",
+        "data_parallel_rank",
+        "kl",
+        "local_raw_reward",
+        "log_probs",
+        "loss_masks",
+        "response_lengths",
+        "returns",
+        "rewards",
+        "rollout_ids",
+        "rollout_log_probs",
+        "rollout_mask_sums",
+        "rollout_position",
+        "sample_index",
+        "source_names",
+        "tokens",
+        "total_lengths",
+        "truncated"
+      ],
+      "sample_metadata": [
+        {
+          "position": 0,
+          "total_tokens": 272,
+          "response_tokens": 128,
+          "reward": 1,
+          "has_route_trace": false
+        },
+        {
+          "position": 1,
+          "total_tokens": 272,
+          "response_tokens": 128,
+          "reward": 1,
+          "has_route_trace": false
+        },
+        {
+          "position": 2,
+          "total_tokens": 265,
+          "response_tokens": 128,
+          "reward": 0,
+          "has_route_trace": false
+        },
+        {
+          "position": 3,
+          "total_tokens": 265,
+          "response_tokens": 128,
+          "reward": 1,
+          "has_route_trace": false
+        },
+        {
+          "position": 4,
+          "total_tokens": 317,
+          "response_tokens": 128,
+          "reward": 1,
+          "has_route_trace": false
+        },
+        {
+          "position": 5,
+          "total_tokens": 317,
+          "response_tokens": 128,
+          "reward": 0,
+          "has_route_trace": false
+        },
+        {
+          "position": 6,
+          "total_tokens": 267,
+          "response_tokens": 128,
+          "reward": 0,
+          "has_route_trace": false
+        },
+        {
+          "position": 7,
+          "total_tokens": 267,
+          "response_tokens": 128,
+          "reward": 0,
+          "has_route_trace": false
+        }
+      ],
+      "exact": true,
+      "max_abs": 0.0,
+      "mismatched_tokens": 0
+    },
+    {
+      "step": 2,
+      "sample_count": 8,
+      "input_tokens": 2166,
+      "response_tokens": 1024,
+      "total_lengths": [
+        257,
+        257,
+        268,
+        268,
+        286,
+        286,
+        272,
+        272
+      ],
+      "rollout_keys": [
+        "apply_chat_template_kwargs",
+        "custom_rm_path",
+        "generate_function_path",
+        "group_index",
+        "index",
+        "label",
+        "loss_mask",
+        "metadata",
+        "multimodal_inputs",
+        "multimodal_train_input_id",
+        "multimodal_train_inputs",
+        "non_generation_time",
+        "prefix_cache_info",
+        "prompt",
+        "remove_sample",
+        "response",
+        "response_length",
+        "reward",
+        "rollout_id",
+        "rollout_log_probs",
+        "rollout_routed_experts",
+        "rollout_top_p_token_ids",
+        "rollout_top_p_token_offsets",
+        "session_id",
+        "spec_info",
+        "status",
+        "teacher_log_probs",
+        "tokens",
+        "trace",
+        "train_metadata",
+        "weight_versions"
+      ],
+      "train_keys": [
+        "advantages",
+        "data_parallel_rank",
+        "kl",
+        "local_raw_reward",
+        "log_probs",
+        "loss_masks",
+        "response_lengths",
+        "returns",
+        "rewards",
+        "rollout_ids",
+        "rollout_log_probs",
+        "rollout_mask_sums",
+        "rollout_position",
+        "sample_index",
+        "source_names",
+        "tokens",
+        "total_lengths",
+        "truncated"
+      ],
+      "sample_metadata": [
+        {
+          "position": 0,
+          "total_tokens": 257,
+          "response_tokens": 128,
+          "reward": 1,
+          "has_route_trace": false
+        },
+        {
+          "position": 1,
+          "total_tokens": 257,
+          "response_tokens": 128,
+          "reward": 1,
+          "has_route_trace": false
+        },
+        {
+          "position": 2,
+          "total_tokens": 268,
+          "response_tokens": 128,
+          "reward": 0,
+          "has_route_trace": false
+        },
+        {
+          "position": 3,
+          "total_tokens": 268,
+          "response_tokens": 128,
+          "reward": 0,
+          "has_route_trace": false
+        },
+        {
+          "position": 4,
+          "total_tokens": 286,
+          "response_tokens": 128,
+          "reward": 0,
+          "has_route_trace": false
+        },
+        {
+          "position": 5,
+          "total_tokens": 286,
+          "response_tokens": 128,
+          "reward": 0,
+          "has_route_trace": false
+        },
+        {
+          "position": 6,
+          "total_tokens": 272,
+          "response_tokens": 128,
+          "reward": 1,
+          "has_route_trace": false
+        },
+        {
+          "position": 7,
+          "total_tokens": 272,
+          "response_tokens": 128,
+          "reward": 0,
+          "has_route_trace": false
+        }
+      ],
+      "exact": true,
+      "max_abs": 0.0,
+      "mismatched_tokens": 0
+    }
+  ],
+  "cuda_initialized_after": false
+}

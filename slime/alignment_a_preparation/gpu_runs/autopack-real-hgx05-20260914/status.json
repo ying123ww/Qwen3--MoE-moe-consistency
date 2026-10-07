@@ -1,0 +1,65 @@
+{
+  "status": "completed",
+  "host": "ai_hgx_05",
+  "capture_directory": "/tmp/ap-real-capture-20260914-02",
+  "capture_session": 14968,
+  "source_recipe": "scripts/run-qwen3-30B-A3B.sh",
+  "scope": "native schedule GPU B1/B2 and offline exchange comparison; exchanged schedule GPU correctness and timing not run",
+  "workload": {
+    "prompts": 32,
+    "samples_per_prompt": 8,
+    "global_batch_size": 256,
+    "max_tokens_per_gpu": 20480,
+    "response_limit": 8192,
+    "temperature": 1,
+    "ignore_eos": false,
+    "balance_data": true,
+    "rollout_seed": 42
+  },
+  "training_topology": {
+    "tp": 1,
+    "ep": 4,
+    "world": 8
+  },
+  "recipe_topology": {
+    "tp": 4,
+    "ep": 8
+  },
+  "capture_batch_size": 128,
+  "previous_keepalive": {
+    "script": "Wan21/scripts/training/run_stage1_ar_camera.sh",
+    "pgid": 125284,
+    "stopped_for_formal_test": true
+  },
+  "next": "capture completion -> B1/B2 -> CPU comparison -> restore keepalive",
+  "invalid_capture": {
+    "path": "/tmp/ap-real-capture-20260914-01",
+    "reason": "deterministic inference default seed42 repeated across same-prompt samples; intended Slime seeds42..49",
+    "used_for_results": false
+  },
+  "sampling_seed_rule": "rollout_seed42 + response_index_in_group[0..7]",
+  "b1_run": "autopack-real-hgx05-b1-20260914-02",
+  "b1_passed": true,
+  "b2_passed": true,
+  "training_slots_per_rank": 12,
+  "keepalive": {
+    "pid": 34347,
+    "worker_pids": [
+      34452,
+      34453,
+      34454,
+      34455,
+      34456,
+      34457,
+      34458,
+      34459
+    ],
+    "log": "slime/alignment_a_preparation/gpu_runs/autopack-real-hgx05-20260914/keepalive02.log",
+    "verified": "GPU workers present; Trainer.train_one_step first BP done"
+  },
+  "allocator": "expandable_segments:True",
+  "capture_archive": "slime/alignment_a_preparation/gpu_runs/autopack-real-hgx05-20260914/capture02-evidence.tar.gz",
+  "cpu_primary_seed": 0,
+  "cpu_primary_repeats": 3,
+  "cpu_other_seeds_parallel": true
+}

@@ -1,0 +1,134 @@
+{
+  "status": "declarative recipe; not executable or GPU-validated",
+  "comparison": "native-controlled vs aligned-controlled",
+  "common": {
+    "source_cli": "v89_cli_static.json",
+    "source_env": "source_snapshots/v89_runtime_env.yaml.txt",
+    "set_args": {
+      "--load-debug-rollout-data": "/public/home/yingxy2024/.codex/qwen3-v89-regression/baseline/rollout/1.pt",
+      "--lr": "0",
+      "--num-rollout": "2"
+    },
+    "start_rollout_id_required": 1,
+    "remove_server_args": "all --sglang-* in debug-train-only mode; retain SGLang Python dependency and fixed config env",
+    "keep": [
+      "deterministic-mode",
+      "same model/checkpoint",
+      "EP4 TP1 PP1 CP1 expertTP1",
+      "v89 batch and padding",
+      "v89 StatelessAdam/reset/offload/recompute"
+    ],
+    "routing_replay": false,
+    "fresh_process_per_variant": true,
+    "env_guard": {
+      "ENABLE_ROUTING_REPLAY": "0",
+      "OPEN_TRAINING_INT4_FAKE_QAT_FLAG": "0"
+    },
+    "other_inherited_hooks_or_legacy_deepgemm_selections": "must be absent",
+    "note": "lr=0 isolates fixed-weight replay; not an update/convergence experiment"
+  },
+  "variants": {
+    "aligned-controlled": {
+      "keep_qwen_hooks": true,
+      "qwen3_alignment_layers": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        9,
+        10,
+        11,
+        12,
+        13,
+        14,
+        15,
+        16,
+        17,
+        18,
+        19,
+        20,
+        21,
+        22,
+        23,
+        24,
+        25,
+        26,
+        27,
+        28,
+        29,
+        30,
+        31,
+        32,
+        33,
+        34,
+        35,
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46,
+        47
+      ],
+      "set_env": {
+        "MEGATRON_USE_SGLANG_QWEN3_INPUT_NORM_QKV": "1",
+        "MEGATRON_USE_SGLANG_QWEN3_QK_NORM": "1",
+        "MEGATRON_USE_SGLANG_QWEN3_PRE_MLP_NORM": "1",
+        "MEGATRON_USE_SGLANG_QWEN3_CORE_ATTENTION": "1",
+        "MEGATRON_USE_SGLANG_QWEN3_OUTPUT_PROJECTION": "1",
+        "MEGATRON_USE_SGLANG_FUSED_RESIDUAL_RMS": "1"
+      },
+      "MEGATRON_QWEN3_SGLANG_ATTENTION_TP_SIZE": "2",
+      "SLIME_QWEN3_FIXED_DEEPEP_CONFIG": "preserve source value; actual consumed configs still need validation"
+    },
+    "native-controlled": {
+      "remove_args": [
+        "--custom-megatron-before-log-prob-hook-path",
+        "--custom-megatron-before-train-step-hook-path",
+        "--qwen3-alignment-layers"
+      ],
+      "qwen3_alignment_layers_expected": null,
+      "set_env": {
+        "MEGATRON_USE_SGLANG_QWEN3_INPUT_NORM_QKV": "0",
+        "MEGATRON_USE_SGLANG_QWEN3_QK_NORM": "0",
+        "MEGATRON_USE_SGLANG_QWEN3_PRE_MLP_NORM": "0",
+        "MEGATRON_USE_SGLANG_QWEN3_CORE_ATTENTION": "0",
+        "MEGATRON_USE_SGLANG_QWEN3_OUTPUT_PROJECTION": "0",
+        "MEGATRON_USE_SGLANG_FUSED_RESIDUAL_RMS": "0"
+      },
+      "note": "native in frozen patched stack, not pristine upstream or fastest nondeterministic mode"
+    }
+  },
+  "passes": {
+    "correctness": {
+      "train_dump": "unique path",
+      "aligned_max_abs": 0,
+      "native": "report finite actual deviation; nonzero alone is not failure"
+    },
+    "timing": {
+      "remove_args": [
+        "--save-debug-train-data",
+        "--save-debug-rollout-data"
+      ],
+      "layer_dumps": "off",
+      "step_timing_and_peak_memory": "instrumentation not implemented yet"
+    }
+  },
+  "before_gpu": [
+    "unique run ID and output; never directly execute historical launcher",
+    "isolated CUDA build paths; old temporary directory missing",
+    "verify effective args, imports, no native alignment wrappers",
+    "verify actual DeepEP config rather than trusting env declaration",
+    "single-pass smoke only; build warmup/repetition harness before throughput measurement"
+  ]
+}

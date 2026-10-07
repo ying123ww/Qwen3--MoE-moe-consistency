@@ -1,0 +1,94 @@
+{
+  "date": "2026-09-09",
+  "status": "CPU preparation; not a GPU runtime manifest",
+  "repositories": [
+    {
+      "name": "slime",
+      "path": "/public/home/yingxy2024/moe-consistency/slime",
+      "commit": "fd5f0573405d7153168c430c51e94a249c700d78",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tracked_diff_bytes": 0,
+      "diff_returncode": 0
+    },
+    {
+      "name": "megatron",
+      "path": "/public/home/yingxy2024/slime-deps/Megatron-LM",
+      "commit": "1dcf0dafa884ad52ffb243625717a3471643e087",
+      "tracked_diff_sha256": "c30f39e6b7e01104b484ac21b3e09023d0b35ae3f98eba85ed75448e275818c1",
+      "tracked_diff_bytes": 47484,
+      "diff_returncode": 0
+    },
+    {
+      "name": "sglang",
+      "path": "/public/home/yingxy2024/moe-consistency/experiments/sglang-main-sm80",
+      "commit_from_worktree_ref": "2ab7bfe91f9e02f975a19adfbe0d6379fdae1bc0",
+      "ref": "refs/heads/a100-deepep-bf16",
+      "tracked_diff_returncode": 0,
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "tracked_diff_bytes": 0,
+      "note": "Old system Git: explicit shared gitdir, worktree, index and commit. Read-only diff."
+    }
+  ],
+  "audited_sources": [
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/backends/megatron_utils/alignment/qwen3.py",
+      "sha256": "039a80b783fbd8172ef4da3667655052a26b8de8d5e2e90fb6a6c38c675d09ba"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/backends/megatron_utils/alignment/deepgemm_moe_forward.py",
+      "sha256": "0f3a79e4e8b8e994308e5c524020b1c41309b28e1563bbefb34338007da1ba1c"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/backends/megatron_utils/alignment/deepgemm_forward.py",
+      "sha256": "1ba675ac30db1e8a44e282819dc5febcba750143e56885ea00d2d1774b4f7492"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/backends/megatron_utils/loss.py",
+      "sha256": "94b429934baab287713ded14e7735bfdabfbca948498d1977d8b0109ba54e1ba"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/backends/megatron_utils/model.py",
+      "sha256": "36c8a851923b4d6cdba52d601a5dadb8b4cf2db736516f28217cd942c2b48330"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/backends/megatron_utils/stateless_adam.py",
+      "sha256": "795a7f9be09744364b06a5d3170db46ab4528857a68a3afa425c03895da7ae1b"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/utils/ppo_utils.py",
+      "sha256": "34bb3f5a162cda0b73a46850d51b07fab04186308927af0904fd0ad14a3afd0f"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/utils/arguments.py",
+      "sha256": "15c231895ab36a9e5141e7914235a2bf13d8daf467248a6998af84aca22b1af6"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/utils/timer.py",
+      "sha256": "bc97d346b44809954c9652db1251ce4593012274717acf1d50b2d4959d298505"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/utils/train_metric_utils.py",
+      "sha256": "46c40a68614dd408506f8eb4fef18ddc58f187f697210e69ed726c7f2d62cc3c"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/slime/slime/utils/compare_qwen3_logprobs.py",
+      "sha256": "32e33a1acc6afd5b73e78da02632b186622429150f1c18ee7eb87d785d37a8c9"
+    },
+    {
+      "path": "/public/home/yingxy2024/moe-consistency/experiments/sglang-main-sm80/python/sglang/srt/layers/attention/triton_backend.py",
+      "sha256": "b7c363e860c53169f9ad1fa4ce6042f86da3f5298425d31dcdfbf0a9230dddfa"
+    },
+    {
+      "path": "/public/home/yingxy2024/.conda/envs/slime/lib/python3.12/site-packages/deep_ep/buffer.py",
+      "sha256": "abd2017ff5fc39a9d1f0a64e5536863033d9a33581be5b59aa28f80b0423e5c2"
+    }
+  ],
+  "unverified": [
+    "GPU model/availability/interconnect",
+    "remote worker imports and runtime groups",
+    "full HF/DCP weight integrity and identity",
+    "native GPU viability",
+    "GPU timing and memory",
+    "historical updated checkpoint/optimizer state not present in preserved baseline directory"
+  ]
+}

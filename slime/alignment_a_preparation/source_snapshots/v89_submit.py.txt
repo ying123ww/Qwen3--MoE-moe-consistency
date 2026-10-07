@@ -1,0 +1,16 @@
+import os
+
+import yaml
+from ray.job_submission import JobSubmissionClient
+
+
+with open(os.environ["RUNTIME_ENV"], encoding="utf-8") as runtime_env_file:
+    runtime_env = yaml.safe_load(runtime_env_file)
+
+client = JobSubmissionClient("http://127.0.0.1:8265")
+submission_id = client.submit_job(
+    entrypoint=os.environ["ENTRYPOINT"],
+    submission_id="qwen3-v89-regression",
+    runtime_env=runtime_env,
+)
+print(f"submitted {submission_id}", flush=True)

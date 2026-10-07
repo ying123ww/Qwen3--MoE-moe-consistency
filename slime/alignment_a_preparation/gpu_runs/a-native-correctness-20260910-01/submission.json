@@ -1,0 +1,6 @@
+{
+  "job_id": "a-native-correctness-20260910-01",
+  "address": "http://127.0.0.1:8267",
+  "mode": "native",
+  "timing": false
+}

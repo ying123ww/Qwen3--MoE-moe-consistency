@@ -1,0 +1,16 @@
+{
+  "b1_forward_gate": "passed_and_route_files_rechecked",
+  "sample_count": 256,
+  "collective_count": 24,
+  "actual_route_files_checked": 18432,
+  "actual_route_rows_checked": 316896384,
+  "data_pad_size_multiplier": 512,
+  "actual_dispatch_H_U_per_expert_match": true,
+  "optimizer_steps": 0,
+  "actual_logprob_values_checked": 4798236,
+  "actual_logprob_bitwise_match": true,
+  "timing_gate": "not_run",
+  "schedule_intervention_gate": "not_run",
+  "go_decision": "not_evaluated",
+  "scope": "one original schedule; raw routes + terminal + bin padding; counts are not communication bytes or time"
+}

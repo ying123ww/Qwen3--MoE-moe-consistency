@@ -1,0 +1,182 @@
+[
+  {
+    "path": "/tmp/ray-alignment-a-20260909",
+    "action": "removed",
+    "allocated_bytes": 25624576
+  },
+  {
+    "path": "/tmp/ray-v41",
+    "action": "removed",
+    "allocated_bytes": 4096
+  },
+  {
+    "path": "/tmp/sglang_temp_file_1788930548.7786758_8068206.sh",
+    "action": "removed",
+    "allocated_bytes": 4096
+  },
+  {
+    "path": "/tmp/sglang_temp_file_1788930548.8164592_8517157.sh",
+    "action": "removed",
+    "allocated_bytes": 4096
+  },
+  {
+    "path": "/tmp/sglang_temp_file_1788939731.4748201_5275529.sh",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/sglang_temp_file_1788930548.7578928_326307.sh",
+    "action": "removed",
+    "allocated_bytes": 4096
+  },
+  {
+    "path": "/tmp/sglang_temp_file_1788929889.6254709_746204.sh",
+    "action": "removed",
+    "allocated_bytes": 4096
+  },
+  {
+    "path": "/tmp/sglang_temp_file_1788930548.7992318_121199.sh",
+    "action": "removed",
+    "allocated_bytes": 4096
+  },
+  {
+    "path": "/tmp/sglang_temp_file_1788929889.6083324_7395449.sh",
+    "action": "removed",
+    "allocated_bytes": 4096
+  },
+  {
+    "path": "/tmp/sglang_temp_file_1788929889.6574953_9831146.sh",
+    "action": "removed",
+    "allocated_bytes": 4096
+  },
+  {
+    "path": "/tmp/sglang_temp_file_1788929889.6391973_4024324.sh",
+    "action": "removed",
+    "allocated_bytes": 4096
+  },
+  {
+    "path": "/tmp/wandb_gpu_stats-120803-120833-1788957618719.sock",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/wandb_gpu_stats-34979-34998-1788925573277.sock",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/wandb_gpu_stats-71755-71784-1789014563035.sock",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/wandb_gpu_stats-9303-9331-1789048029635.sock",
+    "action": "keep",
+    "reason": "producer PID exists"
+  },
+  {
+    "path": "/tmp/wandb_gpu_stats-103829-103859-1789032748443.sock",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/wandb_gpu_stats-109769-109800-1789009966339.sock",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/wandb_gpu_stats-14834-14861-1789044588404.sock",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/wandb_gpu_stats-9338-9367-1789031435539.sock",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/wandb_gpu_stats-23581-23612-1789028209946.sock",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmp0nt_c6v7wandb-artifacts",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpt5p62oljwandb-media",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpic6s0lm3wandb-media",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmp3hlne2qewandb-media",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmp4wtt4c4twandb-media",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpmdzq8dhywandb-media",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpp42xbk7zwandb-artifacts",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpw41b7gbfwandb-artifacts",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpe3mr8oc0wandb-artifacts",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmp5lr_90e5wandb-media",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpbvd161z0wandb-artifacts",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpn5z12n9vwandb-media",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpd__xicjcwandb-artifacts",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmp41mjkwvrwandb-media",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmp3w0up50zwandb-artifacts",
+    "action": "removed",
+    "allocated_bytes": 0
+  },
+  {
+    "path": "/tmp/tmpjaksz978wandb-artifacts",
+    "action": "removed",
+    "allocated_bytes": 0
+  }
+]

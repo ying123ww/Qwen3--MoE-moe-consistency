@@ -1,0 +1,153 @@
+{
+  "kernel_count": 2610,
+  "unlinked_kernels": 0,
+  "rows": [
+    {
+      "phase": "decode",
+      "family": "attention_output",
+      "m": 4,
+      "k": 2048,
+      "n": 2048,
+      "input_types": "['c10::BFloat16', 'c10::BFloat16']",
+      "calls": 768,
+      "gpu_ms": 39.76571700000002,
+      "cpu_mm_ms": 74.16353000000002,
+      "cpu_launch_ms": 5.175868000000002
+    },
+    {
+      "phase": "decode",
+      "family": "attention_qkv",
+      "m": 4,
+      "k": 2048,
+      "n": 2560,
+      "input_types": "['c10::BFloat16', 'c10::BFloat16']",
+      "calls": 768,
+      "gpu_ms": 42.97326500000002,
+      "cpu_mm_ms": 81.30102800000004,
+      "cpu_launch_ms": 6.366342999999999
+    },
+    {
+      "phase": "decode",
+      "family": "lm_head",
+      "m": 4,
+      "k": 2048,
+      "n": 75968,
+      "input_types": "['c10::BFloat16', 'c10::BFloat16']",
+      "calls": 16,
+      "gpu_ms": 11.677466,
+      "cpu_mm_ms": 1.6021820000000002,
+      "cpu_launch_ms": 0.12677199999999997
+    },
+    {
+      "phase": "decode",
+      "family": "router",
+      "m": 2,
+      "k": 2048,
+      "n": 128,
+      "input_types": "['float', 'float']",
+      "calls": 768,
+      "gpu_ms": 68.23300499999996,
+      "cpu_mm_ms": 74.46754100000008,
+      "cpu_launch_ms": 4.979153000000002
+    },
+    {
+      "phase": "prefill",
+      "family": "attention_output",
+      "m": 140,
+      "k": 2048,
+      "n": 2048,
+      "input_types": "['c10::BFloat16', 'c10::BFloat16']",
+      "calls": 48,
+      "gpu_ms": 2.497495,
+      "cpu_mm_ms": 4.58467,
+      "cpu_launch_ms": 0.32202400000000003
+    },
+    {
+      "phase": "prefill",
+      "family": "attention_output",
+      "m": 470,
+      "k": 2048,
+      "n": 2048,
+      "input_types": "['c10::BFloat16', 'c10::BFloat16']",
+      "calls": 48,
+      "gpu_ms": 2.349192000000001,
+      "cpu_mm_ms": 4.6558769999999985,
+      "cpu_launch_ms": 0.322135
+    },
+    {
+      "phase": "prefill",
+      "family": "attention_qkv",
+      "m": 140,
+      "k": 2048,
+      "n": 2560,
+      "input_types": "['c10::BFloat16', 'c10::BFloat16']",
+      "calls": 48,
+      "gpu_ms": 2.753842,
+      "cpu_mm_ms": 5.087056,
+      "cpu_launch_ms": 0.394976
+    },
+    {
+      "phase": "prefill",
+      "family": "attention_qkv",
+      "m": 470,
+      "k": 2048,
+      "n": 2560,
+      "input_types": "['c10::BFloat16', 'c10::BFloat16']",
+      "calls": 48,
+      "gpu_ms": 2.3812189999999998,
+      "cpu_mm_ms": 5.156276000000001,
+      "cpu_launch_ms": 0.40321799999999997
+    },
+    {
+      "phase": "prefill",
+      "family": "lm_head",
+      "m": 1,
+      "k": 2048,
+      "n": 75968,
+      "input_types": "['c10::BFloat16', 'c10::BFloat16']",
+      "calls": 1,
+      "gpu_ms": 0.641694,
+      "cpu_mm_ms": 0.105244,
+      "cpu_launch_ms": 0.00777
+    },
+    {
+      "phase": "prefill",
+      "family": "lm_head",
+      "m": 3,
+      "k": 2048,
+      "n": 75968,
+      "input_types": "['c10::BFloat16', 'c10::BFloat16']",
+      "calls": 1,
+      "gpu_ms": 0.6737569999999999,
+      "cpu_mm_ms": 0.103443,
+      "cpu_launch_ms": 0.006609
+    },
+    {
+      "phase": "prefill",
+      "family": "router",
+      "m": 70,
+      "k": 2048,
+      "n": 128,
+      "input_types": "['float', 'float']",
+      "calls": 48,
+      "gpu_ms": 4.301344000000001,
+      "cpu_mm_ms": 4.6776110000000015,
+      "cpu_launch_ms": 0.3148409999999999
+    },
+    {
+      "phase": "prefill",
+      "family": "router",
+      "m": 235,
+      "k": 2048,
+      "n": 128,
+      "input_types": "['float', 'float']",
+      "calls": 48,
+      "gpu_ms": 4.350231000000001,
+      "cpu_mm_ms": 4.742506000000001,
+      "cpu_launch_ms": 0.317247
+    }
+  ],
+  "scope": "GPU event duration sums, CPU mm wall intervals and CPU launch intervals overlap; do not add them or treat them as end-to-end cost. Shape family mapping is specific to Qwen3-30B-A3B with attention TP=2.",
+  "trace": "slime/alignment_a_preparation/gpu_runs/a-matmul-attribution-20260912-01/profiles/rollout/1789191668.421055-TP-4-DP-1-EP-0.trace.json.gz",
+  "trace_sha256": "319d3e05a01b06e82a54c8ca44b296f531366f7be960f2c8efbe7ec49c2cda9a"
+}

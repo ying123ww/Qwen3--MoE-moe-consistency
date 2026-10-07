@@ -1,0 +1,89 @@
+{
+  "rollout_data": "slime/alignment_a_preparation/gpu_runs/a-restore-20260909-06/rollout/1.pt",
+  "train_data": "slime/alignment_a_preparation/gpu_runs/a-restore-20260909-06/train/1.pt",
+  "log_probs": {
+    "samples": 8,
+    "tokens": 1024,
+    "max_abs": 0.0,
+    "mean_abs": 0.0,
+    "mismatched_tokens": 0,
+    "rollout_nonfinite": 0,
+    "train_nonfinite": 0,
+    "exact": true,
+    "importance_ratio": {
+      "definition": "exp(train_log_prob - rollout_log_prob)",
+      "max_abs_from_one": 0.0,
+      "mean_abs_from_one": 0.0,
+      "exact_one": true
+    },
+    "ppo_kl": {
+      "definition": "rollout_log_prob - train_log_prob",
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_zero": true
+    },
+    "low_var_kl": {
+      "max_abs": 0.0,
+      "mean_abs": 0.0,
+      "exact_zero": true
+    },
+    "per_sample": [
+      {
+        "rollout_position": 0,
+        "tokens": 128,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "mismatched_tokens": 0
+      },
+      {
+        "rollout_position": 1,
+        "tokens": 128,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "mismatched_tokens": 0
+      },
+      {
+        "rollout_position": 2,
+        "tokens": 128,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "mismatched_tokens": 0
+      },
+      {
+        "rollout_position": 3,
+        "tokens": 128,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "mismatched_tokens": 0
+      },
+      {
+        "rollout_position": 4,
+        "tokens": 128,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "mismatched_tokens": 0
+      },
+      {
+        "rollout_position": 5,
+        "tokens": 128,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "mismatched_tokens": 0
+      },
+      {
+        "rollout_position": 6,
+        "tokens": 128,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "mismatched_tokens": 0
+      },
+      {
+        "rollout_position": 7,
+        "tokens": 128,
+        "max_abs": 0.0,
+        "mean_abs": 0.0,
+        "mismatched_tokens": 0
+      }
+    ]
+  }
+}
