@@ -8,8 +8,14 @@ import torch
 _MODE = os.environ.get("SLIME_QWEN3_ROUTER_TILE_MODE", "off")
 if _MODE not in ("off", "shadow", "candidate"):
     raise ValueError(f"Invalid SLIME_QWEN3_ROUTER_TILE_MODE: {_MODE!r}")
+_AUDIT = os.environ.get("SLIME_QWEN3_ROUTER_TILE_AUDIT", "1")
+if _AUDIT not in ("0", "1"):
+    raise ValueError(f"Invalid SLIME_QWEN3_ROUTER_TILE_AUDIT: {_AUDIT!r}")
+_AUDIT_ENABLED = _AUDIT == "1"
+if _MODE == "shadow" and not _AUDIT_ENABLED:
+    raise ValueError("Router tile shadow mode requires auditing")
 _AUDIT_DIR = os.environ.get("SLIME_QWEN3_ROUTER_TILE_AUDIT_DIR")
-if _MODE != "off" and not _AUDIT_DIR:
+if _MODE != "off" and _AUDIT_ENABLED and not _AUDIT_DIR:
     raise ValueError("Router tile experiments require SLIME_QWEN3_ROUTER_TILE_AUDIT_DIR")
 _CALLS = {}
 
@@ -17,7 +23,7 @@ _CALLS = {}
 def eligible_shape(a_shape, b_shape):
     # Deliberately limited to the Qwen3-30B-A3B router measured in the pilot.
     return (len(a_shape) == len(b_shape) == 2 and
-            0 < a_shape[0] <= 16 and a_shape[1] == b_shape[0] == 2048 and
+            0 < a_shape[0] <= 2 and a_shape[1] == b_shape[0] == 2048 and
             b_shape[1] == 128)
 
 
@@ -46,6 +52,17 @@ def router_matmul(a, b, *, layer_id):
         raise RuntimeError("Router tile experiment requires FP32 CUDA operands on one device")
     if torch.cuda.is_current_stream_capturing():
         raise RuntimeError("Router tile audit requires disable_cuda_graph=True")
+    # Timing path: no rank lookup, counters, JSON, filesystem I/O or GPU sync.
+    # Keep graphs disabled until the candidate is separately validated in capture.
+    if _MODE == "candidate" and not _AUDIT_ENABLED:
+        if not eligible_shape(a.shape, b.shape):
+            return torch.mm(a, b)
+        try:
+            return _candidate(a, b)
+        except Exception as exc:
+            raise RuntimeError(
+                f"Router tile candidate failed: layer={layer_id} shape={list(a.shape)}"
+            ) from exc
     rank = torch.distributed.get_rank() if torch.distributed.is_initialized() else 0
     key = (rank, layer_id)
     _CALLS[key] = _CALLS.get(key, 0) + 1

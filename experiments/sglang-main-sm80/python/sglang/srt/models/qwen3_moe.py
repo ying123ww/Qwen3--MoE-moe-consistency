@@ -832,6 +832,10 @@ class Qwen3MoeDecoderLayer(nn.Module):
         self.post_attention_layernorm = RMSNorm(
             config.hidden_size, eps=config.rms_norm_eps
         )
+        self.input_layernorm._slime_qwen3_rms_layer = self.layer_id
+        self.input_layernorm._slime_qwen3_rms_kind = "input"
+        self.post_attention_layernorm._slime_qwen3_rms_layer = self.layer_id
+        self.post_attention_layernorm._slime_qwen3_rms_kind = "pre_mlp"
 
         self.layer_communicator = LayerCommunicator(
             layer_scatter_modes=self.layer_scatter_modes,

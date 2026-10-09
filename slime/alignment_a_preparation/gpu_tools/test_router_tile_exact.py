@@ -30,7 +30,7 @@ def test_default_is_exact_torch_mm(monkeypatch, tmp_path):
 
 
 @pytest.mark.parametrize('a,b,expected', [((1, 2048), (2048, 128), True),
-    ((16, 2048), (2048, 128), True), ((17, 2048), (2048, 128), False),
+    ((2, 2048), (2048, 128), True), ((3, 2048), (2048, 128), False), ((16, 2048), (2048, 128), False), ((17, 2048), (2048, 128), False),
     ((0, 2048), (2048, 128), False), ((2, 2048), (2048, 2560), False),
     ((2, 1024), (1024, 128), False)])
 def test_narrow_shape_scope(monkeypatch, tmp_path, a, b, expected):
@@ -109,3 +109,41 @@ def test_workloads_include_identical_rows_and_variable_lengths():
     assert [len(x[2]) for x in workloads] == [8, 3, 1, 3]
     assert workloads[1][2][0] == workloads[2][2][0] == workloads[0][2][0]
     assert list(map(len, workloads[3][2])) == [17, 63, 129]
+
+def test_shadow_cannot_disable_audit(monkeypatch, tmp_path):
+    monkeypatch.setenv('SLIME_QWEN3_ROUTER_TILE_AUDIT', '0')
+    with pytest.raises(ValueError, match='shadow mode requires auditing'):
+        helper(monkeypatch, tmp_path, 'shadow')
+
+
+def test_timing_path_skips_audit_and_preserves_scope(monkeypatch, tmp_path):
+    monkeypatch.setenv('SLIME_QWEN3_ROUTER_TILE_AUDIT', '0')
+    module = helper(monkeypatch, tmp_path, 'candidate')
+    monkeypatch.setattr(torch.cuda, 'is_current_stream_capturing', lambda: False)
+    def forbidden(*args, **kwargs):
+        raise AssertionError('Timing path must not do distributed lookup or audit I/O')
+    monkeypatch.setattr(torch.distributed, 'is_initialized', forbidden)
+    monkeypatch.setattr(module, 'Path', forbidden)
+    candidate, reference = object(), object()
+    monkeypatch.setattr(module, '_candidate', lambda a, b: candidate)
+    monkeypatch.setattr(torch, 'mm', lambda a, b: reference)
+    b = SimpleNamespace(dtype=torch.float32, device='cuda:0', shape=(2048, 128))
+    for m, expected in ((1, candidate), (2, candidate), (3, reference), (16, reference)):
+        a = SimpleNamespace(dtype=torch.float32, is_cuda=True, device='cuda:0', shape=(m, 2048))
+        assert module.router_matmul(a, b, layer_id=7) is expected
+    assert not module._CALLS
+    assert not list(tmp_path.iterdir())
+
+
+def test_timing_candidate_error_is_fatal(monkeypatch, tmp_path):
+    monkeypatch.setenv('SLIME_QWEN3_ROUTER_TILE_AUDIT', '0')
+    module = helper(monkeypatch, tmp_path, 'candidate')
+    monkeypatch.setattr(torch.cuda, 'is_current_stream_capturing', lambda: False)
+    a = SimpleNamespace(dtype=torch.float32, is_cuda=True, device='cuda:0', shape=(2, 2048))
+    b = SimpleNamespace(dtype=torch.float32, device='cuda:0', shape=(2048, 128))
+    def fail(a, b):
+        raise ValueError('kernel failed')
+    monkeypatch.setattr(module, '_candidate', fail)
+    with pytest.raises(RuntimeError, match='layer=3') as exc:
+        module.router_matmul(a, b, layer_id=3)
+    assert isinstance(exc.value.__cause__, ValueError)

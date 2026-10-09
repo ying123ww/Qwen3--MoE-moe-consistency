@@ -27,8 +27,14 @@ def cases(prompts):
 
 def capture(args):
     # Set before importing SGLang so spawned ranks get the same mode.
-    os.environ['SLIME_QWEN3_ROUTER_TILE_MODE'] = args.mode
-    os.environ['SLIME_QWEN3_ROUTER_TILE_AUDIT_DIR'] = str((args.output / 'audit').resolve())
+    if args.disable_audit and args.mode != 'candidate':
+        raise ValueError('Only candidate capture may disable audit')
+    os.environ['SLIME_QWEN3_ROUTER_TILE_MODE'] = 'off'
+    os.environ['SLIME_QWEN3_RESIDUAL_RMS_MODE'] = 'off'
+    prefix = 'SLIME_QWEN3_ROUTER_TILE' if args.component == 'router' else 'SLIME_QWEN3_RESIDUAL_RMS'
+    os.environ[prefix + '_AUDIT'] = '0' if args.disable_audit else '1'
+    os.environ[prefix + '_MODE'] = args.mode
+    os.environ[prefix + '_AUDIT_DIR'] = str((args.output / 'audit').resolve())
     reference = json.loads(args.reference_manifest.read_text())
     config = dict(reference['requested_server_args'])
     if not config.get('enable_deterministic_inference'):
@@ -48,8 +54,9 @@ def capture(args):
     srt = ROOT.parent / 'experiments/sglang-main-sm80/python/sglang/srt'
     paths = [Path(__file__), ROOT / 'tools/routepack/capture_routes.py', model_config_path,
              srt / 'models/qwen3_moe.py', srt / 'models/qwen3_router_tile.py',
-             srt / 'batch_invariant_ops/batch_invariant_ops.py', srt / 'layers/sampler.py']
-    manifest = dict(mode=args.mode, requested_server_args=config, sampling=sampling,
+             srt / 'batch_invariant_ops/batch_invariant_ops.py', srt / 'layers/sampler.py',
+             srt / 'batch_invariant_ops/fused_rmsnorm_candidate.py', srt / 'layers/layernorm.py']
+    manifest = dict(component=args.component, mode=args.mode, audit_enabled=not args.disable_audit, requested_server_args=config, sampling=sampling,
                     effective_logprob_temperature=1.0,
                     logprob_rule='sampler greedy branch: log_softmax(unscaled logits)',
                     source_rollout=str(args.frozen_rollout.resolve()),
@@ -114,7 +121,7 @@ def compare_samples(left, right, label):
     return failures
 
 
-def audit_summary(directory, mode, expected_ranks=8, expected_layers=48):
+def audit_summary(directory, mode, expected_ranks=8, expected_layers=48, component='router'):
     coverage = set()
     rows = 0
     compared = 0
@@ -128,10 +135,13 @@ def audit_summary(directory, mode, expected_ranks=8, expected_layers=48):
             if row['eligible']:
                 if mode == 'shadow' and row['compared_elements'] <= 0:
                     raise ValueError('Shadow row has no actual bit comparisons')
-                coverage.add((row['rank'], row['layer']))
+                coverage.add((row['rank'], row['layer'], row['kind']) if component == 'residual-rms' else (row['rank'], row['layer']))
                 compared += row['compared_elements']
                 shapes.add(tuple(row['a_shape']))
-    expected = {(r, l) for r in range(expected_ranks) for l in range(expected_layers)}
+    expected = ({(r,l,k) for r in range(expected_ranks) for l in range(expected_layers)
+                 for k in ('input','pre_mlp') if k != 'input' or l > 0}
+                if component == 'residual-rms' else
+                {(r,l) for r in range(expected_ranks) for l in range(expected_layers)})
     if coverage != expected:
         raise ValueError(f'{mode} rank/layer coverage mismatch: missing={sorted(expected - coverage)}, extra={sorted(coverage - expected)}')
     return dict(rows=rows, covered_rank_layers=len(coverage), compared_elements=compared,
@@ -146,6 +156,9 @@ def compare(args):
         manifests[mode] = json.loads((directory / 'manifest.json').read_text())
         if complete != dict(mode=mode, cases=4) or manifests[mode]['mode'] != mode:
             raise ValueError(f'Incomplete or wrong-mode capture: {directory}')
+    component = manifests['off'].get('component', 'router')
+    if any(m.get('component', 'router') != component for m in manifests.values()):
+        raise ValueError('Mixed exact gate components')
     # Paths for audit/mode are environment-only; actual Engine args must match.
     for mode in ('shadow', 'candidate'):
         for key in ('requested_server_args', 'sampling', 'source_rollout_sha256', 'source_sha256', 'cases'):
@@ -163,8 +176,10 @@ def compare(args):
         batching_failures.extend(compare_samples(original[:1], load_case(directory, 'batch1'), f'{mode}:batch8-vs-batch1'))
     result = dict(model_exact=not failures, batch_exact=not batching_failures,
                   failures=failures, batching_failures=batching_failures,
-                  shadow_audit=audit_summary(args.shadow, 'shadow'),
-                  candidate_audit=audit_summary(args.candidate, 'candidate'),
+                  shadow_audit=audit_summary(args.shadow, 'shadow', component=component),
+                  candidate_audit=(audit_summary(args.candidate, 'candidate', component=component)
+                      if manifests['candidate'].get('audit_enabled', True)
+                      else dict(disabled=True, validation='Compared full tokens/routes/logprob bits with off and audited shadow')),
                   limitation='Finite greedy workload, graph-disabled Engine; not cross-framework or performance validation.')
     args.output.write_text(json.dumps(result, indent=2) + '\n')
     print(json.dumps(result), flush=True)
@@ -176,6 +191,8 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     sub = parser.add_subparsers(dest='action', required=True)
     cap = sub.add_parser('capture')
+    cap.add_argument('--component', choices=['router', 'residual-rms'], default='router')
+    cap.add_argument('--disable-audit', action='store_true', help='Verify the candidate timing path using complete model artifacts')
     cap.add_argument('--mode', choices=['off', 'shadow', 'candidate'], required=True)
     cap.add_argument('--reference-manifest', type=Path, required=True)
     cap.add_argument('--frozen-rollout', type=Path, required=True)

@@ -95,3 +95,13 @@ python slime/alignment_a_preparation/gpu_tools/router_tile_exact.py compare \
 ## 结论边界
 
 这是有限输入、greedy、关闭 CUDA graphs 的模型 gate；此次通过的结果仍不能替代跨框架训练 exact、图模式验证或不带审计的完整推理计时。此次脚本和审计含同步与序列化开销，不可用来宣称模型提速。checkpoint 路径/config 冻结，但未计算所有权重 shard 内容哈希。
+
+## 2026-10-07：关闭审计的计时路径
+
+Router 候选现在收窄到真实模型历史 gate 已覆盖的 M=1/2（K=2048、N=128、FP32）。其他形状使用原 mm，默认模式仍为 off。
+
+新增 SLIME_QWEN3_ROUTER_TILE_AUDIT=0|1，默认 1。shadow 必须保留审计；candidate 可显式设为 0，以跳过逐调用 rank 查询、计数、JSON 和文件写入。候选仍拒绝 CUDA graph capture，仍保持 BLOCK_K=32、3 stages 和原 persistent kernel 的数值实现。候选执行异常直接失败，不静默回退。
+
+router_tile_exact.py capture --mode candidate --disable-audit 验证实际计时路径；比较器用独立 off、audited shadow 和 audit-free candidate 的完整 tokens/routes/logprob bits 验收。性能脚本 inference_benchmark.py --variant aligned --router-tile-mode candidate 自动关闭审计。新启动器 router_tile_performance.py 在模型加载前检查八卡 P2P，运行单卡 microcheck、三模式模型 gate，再按三轮轮换顺序执行 baseline/aligned/candidate 计时。
+
+本轮进展及最终性能结果见 [P1_ROUTER_TILE_PERFORMANCE_20261007.md](P1_ROUTER_TILE_PERFORMANCE_20261007.md)。历史 2026-09-12 的审计文件和结论不受此追加说明改写。

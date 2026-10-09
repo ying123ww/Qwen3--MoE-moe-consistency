@@ -21,6 +21,10 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
+from sglang.srt.batch_invariant_ops.fused_rmsnorm_candidate import (
+    ENABLED as _residual_rms_enabled,
+    forward as _residual_rms_forward,
+)
 from sglang.srt.batch_invariant_ops import (
     is_batch_invariant_mode_enabled,
     rms_norm_batch_invariant,
@@ -427,6 +431,8 @@ class RMSNorm(MultiPlatformOp):
                 or self.cast_x_before_out_mul
                 or get_exec().deterministic.rl_on_policy_target == "fsdp"
             ):
+                if _residual_rms_enabled and hasattr(self, "_slime_qwen3_rms_kind"):
+                    return _residual_rms_forward(self, x, residual, post_residual_addition)
                 return self.forward_native(x, residual, post_residual_addition)
             out = rms_norm_batch_invariant(
                 x,
