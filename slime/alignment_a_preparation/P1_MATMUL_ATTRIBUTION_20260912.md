@@ -10,7 +10,7 @@
 - 分 prefill/decode 使用 CPU `step[...]` annotation。GPU kernel 的完成时间可以晚于发起 CPU 区间，关联不依赖二者时间窗口重合。CPU/GPU 同名 annotation 不混算。
 - 根盘仍满；主要临时目录迁移至项目 `.a-tmp`，编译缓存迁移至 `/dev/shm`。本轮专用临时目录成功后清理，900 GiB guard 未触发。
 
-运行证据：[实验目录](gpu_runs/a-matmul-attribution-20260912-01/)，含 manifest、实际 server args、源文件 hashes、资源检查、退出状态、原始 trace、分 rank 汇总与 [小型对照 JSON](gpu_runs/a-matmul-attribution-20260912-01/matmul-comparison.json)。
+运行证据：实验目录（本地产物：`gpu_runs/a-matmul-attribution-20260912-01/`），含 manifest、实际 server args、源文件 hashes、资源检查、退出状态、原始 trace、分 rank 汇总与 小型对照 JSON（本地产物：`gpu_runs/a-matmul-attribution-20260912-01/matmul-comparison.json`）。
 
 ## 矩阵乘构成
 
@@ -53,9 +53,9 @@ rank 0 的 CPU `aten::mm` 区间累计：QKV 92.725 ms、输出投影 84.098 ms�
 
 表中为每次调用的中位 wall time，包含输出分配、Python/Triton 发射和 GPU 完成；CUDA event 区间也包含发射间隙，不能称为纯 kernel duration。每配置 5 次测量、每次 20 次调用，配置顺序固定，未做独立交错重复；只用于筛选下一项实验。只缩小 M、保持 N=128 的候选在 QKV 上反而变慢（106.38 µs），因此不能统一假定“小 tile 总是更快”。
 
-[微基准结果](gpu_runs/p1-matmul-tiles-20260912.json)保存所有候选、精确比较和源码 SHA256；[脚本](gpu_tools/benchmark_matmul_tiles.py)可重跑。**微基准完成时建议：把 router 的 16×64 tile 做成默认关闭的候选，使用真实权重/激活与变长 batch 过 exact gate，再测完整推理。模型 gate 的后续结果见下节。** 本轮没有部署该候选，也不把上表写成整模型提速。
+微基准结果（本地产物：`gpu_runs/p1-matmul-tiles-20260912.json`）保存所有候选、精确比较和源码 SHA256；[脚本](gpu_tools/benchmark_matmul_tiles.py)可重跑。**微基准完成时建议：把 router 的 16×64 tile 做成默认关闭的候选，使用真实权重/激活与变长 batch 过 exact gate，再测完整推理。模型 gate 的后续结果见下节。** 本轮没有部署该候选，也不把上表写成整模型提速。
 
 
 ## 后续模型级 gate（2026-09-12）
 
-router 16×64/K32/4-warps 候选现已完成独立 off/shadow/candidate Engine 的 4-case exact gate：tokens、routes、response logprob bits 与跨 batch8/3/1 同行结果全部一致；shadow 覆盖 8 ranks × 48 层，比较 3,538,944 个 FP32 输出元素，零 bit 差异。**真实候选输入仅覆盖 M=1/2，CUDA graphs 关闭；未验证 M=3..16、跨框架或完整推理性能，默认仍 off。** 详见[模型级 gate 报告](P1_ROUTER_TILE_EXACT_20260912.md)及[三模式比较](gpu_runs/router-exact-candidate-20260912-01/comparison.json)。
+router 16×64/K32/4-warps 候选现已完成独立 off/shadow/candidate Engine 的 4-case exact gate：tokens、routes、response logprob bits 与跨 batch8/3/1 同行结果全部一致；shadow 覆盖 8 ranks × 48 层，比较 3,538,944 个 FP32 输出元素，零 bit 差异。**真实候选输入仅覆盖 M=1/2，CUDA graphs 关闭；未验证 M=3..16、跨框架或完整推理性能，默认仍 off。** 详见[模型级 gate 报告](P1_ROUTER_TILE_EXACT_20260912.md)及三模式比较（本地产物：`gpu_runs/router-exact-candidate-20260912-01/comparison.json`）。

@@ -6,7 +6,7 @@
 
 RoutePack 和匹配 18 次交换的 Random-Swap 都已实际应用交换后的 schedule，8 ranks 的前向 gate 全部通过。每种 schedule 的 1,599,412 个 response token，在 capture、aligned fallthrough、R3 replay 三方 logprob bitwise 一致；route mismatch 为零。每 rank 12 slots。此结论只覆盖前向和路由，不覆盖梯度或更新一致性。
 
-证据：[RoutePack gate](gpu_runs/autopack-gpu-compare-20260914/runs/gate_routepack-01/gate-summary.json)、[Random gate](gpu_runs/autopack-gpu-compare-20260914/runs/gate_random-01/gate-summary.json)。
+证据：RoutePack gate（本地产物：`gpu_runs/autopack-gpu-compare-20260914/runs/gate_routepack-01/gate-summary.json`）、Random gate（本地产物：`gpu_runs/autopack-gpu-compare-20260914/runs/gate_random-01/gate-summary.json`）。
 
 ## 完整 step 测评状态
 

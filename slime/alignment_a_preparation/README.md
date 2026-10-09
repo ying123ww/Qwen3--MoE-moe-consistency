@@ -30,7 +30,7 @@
 
 这是对历史 tensor dump 的独立复算，不是当前代码再次完成 GPU forward 的证明，也不能重新证明历史参数更新或同步过程。
 
-证据：[CPU 汇总](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/cpu_validation/summary.json)、[step 1](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/cpu_validation/step1.json)、[step 2](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/cpu_validation/step2.json)。
+证据：CPU 汇总（本地产物：`/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/cpu_validation/summary.json`）、step 1（本地产物：`/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/cpu_validation/step1.json`）、step 2（本地产物：`/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/cpu_validation/step2.json`）。
 
 这两份 rollout 的 `rollout_routed_experts` 均为空。因此本次固定数据 replay 不等于 Routing Replay；A 不开启 R3，也无需为 RoutePack 新采 trace。
 

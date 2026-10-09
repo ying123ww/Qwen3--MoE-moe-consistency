@@ -12,13 +12,13 @@
 | `router-exact-shadow-20260912-02` | **完整通过，exit 0** | 4 个 case 完成；真实逐层 shadow 比较零差异，模型产物与 off 一致。 |
 | `router-exact-candidate-20260912-01` | **完整通过，exit 0** | 4 个 case 完成；官方三模式比较 `model_exact=true`、`batch_exact=true`，独立原始产物复核亦通过。 |
 
-早期失败记录与基线证据：[off01 日志](gpu_runs/router-exact-off-20260912-01/job.log)、[off02 manifest](gpu_runs/router-exact-off-20260912-02/capture/manifest.json)、[off02 完成标记](gpu_runs/router-exact-off-20260912-02/capture/complete.json)、[基线跨 batch 比较](gpu_runs/router-exact-off-20260912-02/capture/baseline-batch-comparison.json)、[shadow01 日志](gpu_runs/router-exact-shadow-20260912-01/job.log)。显存日志直接证明失败阶段；外部服务身份由主任务当时的进程检查确认。
+早期失败记录与基线证据：off01 日志（本地产物：`gpu_runs/router-exact-off-20260912-01/job.log`）、off02 manifest（本地产物：`gpu_runs/router-exact-off-20260912-02/capture/manifest.json`）、off02 完成标记（本地产物：`gpu_runs/router-exact-off-20260912-02/capture/complete.json`）、基线跨 batch 比较（本地产物：`gpu_runs/router-exact-off-20260912-02/capture/baseline-batch-comparison.json`）、shadow01 日志（本地产物：`gpu_runs/router-exact-shadow-20260912-01/job.log`）。显存日志直接证明失败阶段；外部服务身份由主任务当时的进程检查确认。
 
 ### 完成的候选 gate 与独立审计
 
-用户确认 GPU 空闲后，在连续可用窗口重跑 shadow02 并运行 candidate01。两轮均完成 4 个 case 并正常退出，冻结源码哈希与 off02 保持一致。官方 [comparison.json](gpu_runs/router-exact-candidate-20260912-01/comparison.json) 显示 `model_exact=true`、`batch_exact=true`，两类 failure 列表均为空。
+用户确认 GPU 空闲后，在连续可用窗口重跑 shadow02 并运行 candidate01。两轮均完成 4 个 case 并正常退出，冻结源码哈希与 off02 保持一致。官方 comparison.json（本地产物：`gpu_runs/router-exact-candidate-20260912-01/comparison.json`） 显示 `model_exact=true`、`batch_exact=true`，两类 failure 列表均为空。
 
-独立审阅原始 JSONL 与 `.npy` 后，补充保存 [shadow 审计汇总](gpu_runs/router-exact-shadow-20260912-02/capture/audit-summary.json) 和 [candidate 审计汇总](gpu_runs/router-exact-candidate-20260912-01/capture/audit-summary.json)：
+独立审阅原始 JSONL 与 `.npy` 后，补充保存 shadow 审计汇总（本地产物：`gpu_runs/router-exact-shadow-20260912-02/capture/audit-summary.json`） 和 candidate 审计汇总（本地产物：`gpu_runs/router-exact-candidate-20260912-01/capture/audit-summary.json`）：
 
 | 检查 | 实际结果 |
 |---|---|
@@ -47,7 +47,7 @@ candidate audit 记录实际候选执行覆盖，不额外运行逐调用原 mm�
 
 以上 15 请求包含重复输入，不应写成 15 条独立原始样本。batch8 的 8 条原始 prompt 共 1,218 tokens，生成 128 tokens；最终生成 token 尚未再次前向，因此每请求 routes 比完整 tokens 少 1。基线比较文件 `{"3": [], "1": []}` 仅记录 off 自身两个跨 batch 比较；完整候选比较见上方官方 comparison.json。
 
-首批 8 条已转换为 [B1 冻结 rollout](routepack_b_20260912/router-off02-b1-rollout.pt)，包含供训练 replay 使用的 tokens、routes 和真实推理 logprobs。有效 logprob 温度仍为 1.0。
+首批 8 条已转换为 B1 冻结 rollout（本地产物：`routepack_b_20260912/router-off02-b1-rollout.pt`），包含供训练 replay 使用的 tokens、routes 和真实推理 logprobs。有效 logprob 温度仍为 1.0。
 
 shadow02、candidate01 与三模式比较已完成。下一步执行复用 off02 rollout 的 **B1 训练端 topology / dispatch / replay gate**（另行报告），之后才能结合跨框架结果决定是否扩大候选验证。性能收益仍需关闭审计、按原重复计时协议独立测量；本轮含逐 bit 同步、路由捕获与日志，不能作为整模型性能对照。保留显存平衡检查；若源码或输入变更，必须重新建立可配对基线。
 

@@ -12,7 +12,7 @@
 
 单卡初版在688,128个BF16输出/残差元素上零差异，wall约130→24µs。真实模型仍在 rank0/layer39/input、shape[2,2048] 的第三次调用出现1bit差异。因此初版不能使用，未启动完整性能计时。
 
-证据分别在[首次模型门禁](gpu_runs/rms-perf-hgx05-20261008-01/)与[带失败张量的重现](gpu_runs/rms-repro-hgx05-20261008-01/)。重现 rank4/6 的失败张量保留在 exact-shadow/audit/*.pt。具体输出坐标[1,446]：reference=-0.0927734375，candidate=-0.09228515625；residual输出仍相同。
+证据分别在首次模型门禁（本地产物：`gpu_runs/rms-perf-hgx05-20261008-01/`）与带失败张量的重现（本地产物：`gpu_runs/rms-repro-hgx05-20261008-01/`）。重现 rank4/6 的失败张量保留在 exact-shadow/audit/*.pt。具体输出坐标[1,446]：reference=-0.0927734375，candidate=-0.09228515625；residual输出仍相同。
 
 分析编译后的 Triton IR：原 FP32 mean load 使用每线程4个连续元素；融合BF16 load默认选择8个，使归约树改变。方差出现FP32 1ULP差异，经过倒数、乘weight与BF16舍入后落在不同值。
 
@@ -22,11 +22,11 @@
 
 ai_hgx_05原分配结束后，按用户授权的命令重新申请，排除ai_hgx_04。新Slurm作业1028519分配到ai_hgx_03，8×A100-SXM4-80GB、64 CPU、1TiB内存；P2P检查通过，无无关GPU任务。
 
-修复后单卡目录：[residual-rms-hgx03-20261008-02](gpu_runs/residual-rms-hgx03-20261008-02/)。完整门禁和计时目录：[rms-perf-hgx03-20261008-02](gpu_runs/rms-perf-hgx03-20261008-02/)。数值门禁和完整性能对照均已完成；state.json记录complete，所有正式worker和driver109631均已退出，GPU空闲。Slurm作业1028519仍在ai_hgx_03，用户本轮取消保号。
+修复后单卡目录：residual-rms-hgx03-20261008-02（本地产物：`gpu_runs/residual-rms-hgx03-20261008-02/`）。完整门禁和计时目录：rms-perf-hgx03-20261008-02（本地产物：`gpu_runs/rms-perf-hgx03-20261008-02/`）。数值门禁和完整性能对照均已完成；state.json记录complete，所有正式worker和driver109631均已退出，GPU空闲。Slurm作业1028519仍在ai_hgx_03，用户本轮取消保号。
 
 计时协议与router对照相同：8冻结prompts、1218输入tokens，每请求128输出；每Engine预热3批、正式20批，三轮交错 baseline/aligned/candidate，共9个独立Engine。所有模式router候选均off，candidate仅启用本项RMSNorm融合。测量完整blocking generate；模型加载、预热、cache-flush重试均在计时区间外。
 
-运行环境为Python3.12.13、PyTorch2.11.0+cu129、Triton3.6.0；SGLang使用本项目源码快照（安装包版本标记0.0.0）。版本记录见[runtime-versions.json](gpu_runs/rms-perf-hgx03-20261008-02/runtime-versions.json)。
+运行环境为Python3.12.13、PyTorch2.11.0+cu129、Triton3.6.0；SGLang使用本项目源码快照（安装包版本标记0.0.0）。版本记录见runtime-versions.json（本地产物：`gpu_runs/rms-perf-hgx03-20261008-02/runtime-versions.json`）。
 
 CPU分派、审计失败快照、数值覆盖和测量控制测试36项通过。失败快照测试使用真实CPU张量并检查signed-zero bit差异被报告并保存。
 
@@ -42,9 +42,9 @@ CPU分派、审计失败快照、数值覆盖和测量控制测试36项通过。
 
 10轮交错顺序，每轮每种方式100次调用；wall包含分配、Python/Triton发射与GPU完成。上述数据是单算子有限合成试验。
 
-[真实模型比较](gpu_runs/rms-perf-hgx03-20261008-02/exact-comparison.json)：model_exact=true、batch_exact=true，failures为空。shadow完成45,980次调用，覆盖760个rank/层/norm类型组合，比较224,133,120个归一化输出及residual的BF16元素，零bit差异、零非有限值；实际eligible形状为M1/2。无审计candidate的完整tokens/routes/logprob bits与off和shadow相同，三个模式自身batch8/3/1同行结果也一致。范围为四组有限greedy输入、每请求16输出tokens、关闭CUDA graph；未据此宣称任意输入或跨框架一致。
+真实模型比较（本地产物：`gpu_runs/rms-perf-hgx03-20261008-02/exact-comparison.json`）：model_exact=true、batch_exact=true，failures为空。shadow完成45,980次调用，覆盖760个rank/层/norm类型组合，比较224,133,120个归一化输出及residual的BF16元素，零bit差异、零非有限值；实际eligible形状为M1/2。无审计candidate的完整tokens/routes/logprob bits与off和shadow相同，三个模式自身batch8/3/1同行结果也一致。范围为四组有限greedy输入、每请求16输出tokens、关闭CUDA graph；未据此宣称任意输入或跨框架一致。
 
-[诊断证据](gpu_runs/rms-repro-hgx05-20261008-01/analysis/)保留初版1bit失败与4元素布局修复的方差/倒数对照。
+诊断证据（本地产物：`gpu_runs/rms-repro-hgx05-20261008-01/analysis/`）保留初版1bit失败与4元素布局修复的方差/倒数对照。
 
 ## 完整性能结果
 
@@ -56,9 +56,9 @@ CPU分派、审计失败快照、数值覆盖和测量控制测试36项通过。
 
 三轮配对延迟下降中位数为10.926%。各模式三轮中位数为baseline 12.694秒、aligned 15.768秒、candidate 14.042秒；该汇总不替代上表各轮配对计算。相对baseline的差距由24.038%–24.761%缩到10.614%–10.962%。
 
-[完整结果](gpu_runs/rms-perf-hgx03-20261008-02/comparison.json)与[最终样本核查](gpu_runs/rms-perf-hgx03-20261008-02/measurement-validation.json)。9组均完整预热3批、正式20批，全部输出固定1024tokens，计时无profiler和逐调用审计。baseline第二/三轮各1次cache flush短暂重试，全部成功且在计时区间外；没有失败样本或续跑拼接。
+完整结果（本地产物：`gpu_runs/rms-perf-hgx03-20261008-02/comparison.json`）与最终样本核查（本地产物：`gpu_runs/rms-perf-hgx03-20261008-02/measurement-validation.json`）。9组均完整预热3批、正式20批，全部输出固定1024tokens，计时无profiler和逐调用审计。baseline第二/三轮各1次cache flush短暂重试，全部成功且在计时区间外；没有失败样本或续跑拼接。
 
-全部数值/控制源码SHA256保持不变，已保存在[source-snapshots](gpu_runs/rms-perf-hgx03-20261008-02/source-snapshots/)供核查。三轮aligned/candidate各23批输出哈希全部一致，共69/69批；这是采样输出哈希检查，不替代greedy gate的routes/logprob逐bit比较。
+全部数值/控制源码SHA256保持不变，已保存在source-snapshots（本地产物：`gpu_runs/rms-perf-hgx03-20261008-02/source-snapshots/`）供核查。三轮aligned/candidate各23批输出哈希全部一致，共69/69批；这是采样输出哈希检查，不替代greedy gate的routes/logprob逐bit比较。
 
 图状态以resolved-server-args.json中的`cuda_graph_config`为准：9组prefill和decode backend均disabled，日志明确记录DeepEP normal禁用CUDA graph。旧兼容字段`disable_cuda_graph=False`不能单独代表实际图后端。
 

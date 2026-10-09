@@ -1,0 +1,43 @@
+{
+  "management": "vendored current source; dependency Git metadata is local only",
+  "licenses": "Preserve the license files shipped with each dependency.",
+  "dependencies": [
+    {
+      "directory": "DeepEP",
+      "role": "expert-parallel communication dependency",
+      "upstream_url": "https://github.com/zhuzilin/DeepEP.git",
+      "recorded_base_revision": "4f2c1632da2d6f0aa88034f5704312f01c0c4366"
+    },
+    {
+      "directory": "Megatron-LM",
+      "role": "training dependency with project modifications",
+      "upstream_url": "https://github.com/NVIDIA/Megatron-LM.git",
+      "recorded_base_revision": "1dcf0dafa884ad52ffb243625717a3471643e087"
+    },
+    {
+      "directory": "sglang",
+      "role": "inference dependency with project modifications",
+      "upstream_url": "https://github.com/sgl-project/sglang.git",
+      "recorded_base_revision": "0b3bb0cbe31873994c9f989fddfe2f87ca839fdd"
+    },
+    {
+      "directory": "slime",
+      "role": "training, rollout and numerical-alignment integration",
+      "upstream_url": "https://github.com/THUDM/slime.git",
+      "recorded_base_revision": "022e9b0b08b8e0ff6ec26d437674553e919e8707"
+    },
+    {
+      "directory": "experiments/sglang-main-sm80",
+      "role": "experimental inference runtime containing Qwen3 fusion candidates",
+      "upstream_url": "https://github.com/sgl-project/sglang.git",
+      "recorded_base_revision": null,
+      "note": "Original worktree metadata is unavailable; the full current source is vendored."
+    },
+    {
+      "directory": "experiments/torch_memory_saver",
+      "role": "GPU memory-management dependency",
+      "upstream_url": "https://github.com/zhuzilin/torch_memory_saver.git",
+      "recorded_base_revision": "8d30c59ca12a68d9deccbc9c6599076a1218cbc5"
+    }
+  ]
+}

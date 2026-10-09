@@ -1,2 +1,0 @@
-{"batch": 0, "profiled": false, "warmup": true, "elapsed_s": 30.862501155002974, "output_tokens": 128, "output_tokens_per_s": 4.147427953331984, "cached_tokens": [0, 0, 0, 0, 0, 0, 0, 0], "output_sha256": "2822d047b150d5f461d172a54f2aed77b0b27d16957fa4a783b64886a94d8597"}
-{"batch": 1, "profiled": true, "warmup": false, "elapsed_s": 3.2360900480416603, "output_tokens": 128, "output_tokens_per_s": 39.55390551553409, "cached_tokens": [0, 0, 0, 0, 0, 0, 0, 0], "output_sha256": "2822d047b150d5f461d172a54f2aed77b0b27d16957fa4a783b64886a94d8597"}

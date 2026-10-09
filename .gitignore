@@ -1,8 +1,19 @@
-# Local repositories keep their own Git metadata.
+# Local tooling and machine configuration (kept on disk).
 .git/
+.agents/
+.claude/
+.codex/
+.serena/
+.humanize/
+.tmp-codex/
 .a-tmp/
-.pytest_cache/
 .history/
+/AGENTS.md
+/docs/source-snapshot.json
+/experiments/conda-slime-before.yml
+
+# Python, editor and build caches.
+.pytest_cache/
 .cache/
 __pycache__/
 *.py[cod]
@@ -17,13 +28,33 @@ venv/
 node_modules/
 build/
 dist/
+target/
 *.egg-info/
+
+# Experiment outputs: exclude whole run directories, regardless of file type.
+/slime/alignment_a_preparation/gpu_runs/
+/slime/alignment_a_preparation/cpu_runs/
+/slime/alignment_a_preparation/cpu_validation/
+/slime/alignment_a_preparation/source_snapshots/
+/slime/alignment_a_preparation/routepack_b_20260912/
+/slime/alignment_a_preparation/artifact_inventory.json
+/slime/alignment_a_preparation/source_manifest.json
+/slime/alignment_a_preparation/v89_cli_static.json
+/slime/alignment_a_preparation/P1_REMAINING_INFERENCE_PROFILE_20261009.md
+/slime/qwen3_grpo_metrics_0_156.png
 wandb/
+profiles/
 rollout_data/
 buffer_stats/
-profiles/
 
-# Model weights, checkpoints, tensor dumps, and compiled artifacts.
+# Downloaded datasets and models. Version only the small two-layer configuration.
+/slime/data/
+/experiments/Qwen3-30B-A3B-2layer/*
+!/experiments/Qwen3-30B-A3B-2layer/README.md
+!/experiments/Qwen3-30B-A3B-2layer/LICENSE
+!/experiments/Qwen3-30B-A3B-2layer/config.json
+!/experiments/Qwen3-30B-A3B-2layer/generation_config.json
+/experiments/Qwen3-30B-A3B-2layer_torch_dist/
 *.safetensors
 *.pt
 *.pth
@@ -34,14 +65,13 @@ profiles/
 *.pickle
 *.npy
 *.npz
+
+# Compiled packages, logs and profiling data.
 *.so
 *.o
 *.a
 *.whl
 *.egg
-/experiments/Qwen3-30B-A3B-2layer_torch_dist/
-
-# Runtime logs, archives, and raw profiling output.
 *.log
 *.out
 *.pid
@@ -51,9 +81,8 @@ profiles/
 *.nsys-rep
 *.ncu-rep
 *tfevents*
-/slime/alignment_a_preparation/gpu_runs/**/timing.json
 
-# Local credentials.
+# Local credentials; examples remain eligible for version control.
 .env
 .env.*
 !.env.example

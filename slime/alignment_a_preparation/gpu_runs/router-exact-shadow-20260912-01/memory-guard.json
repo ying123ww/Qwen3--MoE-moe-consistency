@@ -1,1 +1,0 @@
-{"pid": 123183, "time": 1789193670.176817, "job": "job_1000742", "usage_bytes": 13131055104, "threshold_bytes": 966367641600, "limit_bytes": 1099511627776, "triggered": false, "signal_sent_to": [], "error": null}

@@ -1,26 +1,48 @@
 # Qwen3 MoE Consistency
 
-Qwen3 MoE 训练与推理数值一致性实验项目，包含 Megatron、SGLang、slime 和 DeepEP 的当前源码及本地修改。
+Qwen3 MoE 训练与推理数值一致性实验项目，包含训练端对齐、推理端算子融合、逐 bit 门禁及性能测量工具。
 
-建议从 [Qwen3 第 0 层数值对齐与默认开关审计](docs/qwen3-layer0-alignment-audit.md) 开始阅读。该文档说明对齐实现、启用条件、默认开关以及历史实验结果的适用范围。
+## 阅读入口
 
-## 目录
+- [第 0 层数值对齐审计](docs/qwen3-layer0-alignment-audit.md)：实现范围与默认开关。
+- [Residual + RMSNorm 融合](slime/alignment_a_preparation/P1_RESIDUAL_RMS_PERFORMANCE_20261008.md)：融合实现、归约布局修复、有限输入数值门禁及性能对照。
+- [Router 小 M tile 对照](slime/alignment_a_preparation/P1_ROUTER_TILE_PERFORMANCE_20261007.md)：数值门禁与完整推理计时。
+- [仓库组织与 Git 约定](docs/GIT_WORKFLOW.md)：版本控制范围、提交与检查流程。
+- [依赖来源](docs/dependencies.json)：保留的依赖源码与用途。
 
-- `slime/`：训练与 rollout 集成、Qwen3 对齐适配、RoutePack 工具及实验记录。
-- `Megatron-LM/`：训练端源码和本地修改。
-- `sglang/`：推理端源码和本地修改。
-- `DeepEP/`：专家并行通信依赖源码。
-- `experiments/`：两层 Qwen3 配置、启动脚本、实验版 SGLang 和 torch_memory_saver。
-- `docs/`：项目审计和 [源码快照来源记录](docs/source-snapshot.json)。
+融合候选默认关闭。启用条件、CUDA graph 状态和已验证范围以对应报告为准；单算子收益与完整推理收益分别记录。
 
-## 使用说明
+## 仓库结构
 
-本仓库将依赖目录保存为普通源码文件，克隆即可获得本地修改，无需初始化 Git 子模块。各依赖的环境配置和安装方式参见相应目录的 README。
+| 路径 | 用途 |
+|---|---|
+| `slime/slime/` | 训练、rollout、跨框架数值对齐集成 |
+| `slime/tools/routepack/` | 路由捕获、排列、校验及 profiling 工具 |
+| `slime/alignment_a_preparation/gpu_tools/` | 可复跑的门禁、算子基准、性能与测量控制测试 |
+| `experiments/sglang-main-sm80/` | 实验版 SGLang；当前 Qwen3 router 与 RMSNorm 融合运行时 |
+| `sglang/` | 另一版本的推理依赖源码及项目修改 |
+| `Megatron-LM/` | 训练依赖源码及项目修改 |
+| `DeepEP/`、`experiments/torch_memory_saver/` | 通信与显存管理依赖源码 |
+| `experiments/Qwen3-30B-A3B-2layer/` | 两层模型配置和来源说明 |
+| `docs/` | 项目审计、依赖说明及 Git 约定 |
+| `scripts/check_repo_hygiene.py` | 检查暂存区的文件范围、对象大小及意外 gitlink |
 
-该快照保留源码、配置、文档、tokenizer 文件及小型实验结果；模型权重、分布式检查点、tensor dump、构建产物、缓存、运行日志和原始性能 trace 在本地保留，不随源码上传。运行实验前，需要准备模型权重，并按实际环境调整脚本中的模型、数据和依赖路径。
+依赖以普通源码文件保存，保留许可证和必要的上游文件；安装方式见各依赖 README。两个 SGLang 目录服务于不同代码版本，运行融合实验时请使用 `experiments/sglang-main-sm80/python` 中的实现，并按启动脚本配置环境。
 
-普通运行 Qwen3 不会自动启用完整的数值对齐路径；具体开关和验证范围见上述审计文档。
+## 数据与实验产物
 
-## 依赖来源与许可证
+模型权重、tokenizer、数据集、原始运行输出、trace、逐调用审计、临时源码快照、PID/排队状态和本机工具配置在本地维护，不随项目源码提交。克隆后需要按依赖 README 和实验脚本准备模型与数据路径。
 
-各依赖目录保留其原有许可证。源码快照来源、基础提交和本地修改清单见 [source-snapshot.json](docs/source-snapshot.json)。本次上传保存当前文件状态，不包含这些依赖各自的 Git 历史。
+技术报告中的原始证据路径指向本地实验产物；完成的报告、实验设计、可复跑脚本和测试纳入版本控制。自动更新的排队报告不纳入 Git。
+
+## 提交前检查
+
+先按功能选择文件暂存，再运行：
+
+```bash
+python3 scripts/check_repo_hygiene.py
+git diff --cached --stat
+git -c core.whitespace=-blank-at-eof diff --cached --check
+```
+
+GitHub 的 `Repository hygiene` 工作流会检查已提交文件。详细提交规则与本次融合的 CPU 测试命令见 [Git 约定](docs/GIT_WORKFLOW.md)。

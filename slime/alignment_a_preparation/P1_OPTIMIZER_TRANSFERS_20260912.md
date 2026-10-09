@@ -4,11 +4,11 @@
 
 ## 证据与调用链
 
-原采样 `runtime_env.json` 指向 `/public/home/yingxy2024/slime-deps/Megatron-LM`，并非项目内 `Megatron-LM`。本次检查读取实际路径，另存 [源码哈希](gpu_runs/p1-optimizer-inspected-source-hashes-20260912.json)。这是本次读取快照，不能追溯宣称为 9 月 10 日原始源码哈希。
+原采样 `runtime_env.json` 指向 `/public/home/yingxy2024/slime-deps/Megatron-LM`，并非项目内 `Megatron-LM`。本次检查读取实际路径，另存 源码哈希（本地产物：`gpu_runs/p1-optimizer-inspected-source-hashes-20260912.json`）。这是本次读取快照，不能追溯宣称为 9 月 10 日原始源码哈希。
 
 1. `slime/slime/backends/megatron_utils/model.py:250,309` 使用 `_patch_megatron_adam(StatelessAdam)` 同时替换 Megatron 的 Adam/CPUAdam。
 2. 实际 Megatron `optimizer/__init__.py:306` 在 `optimizer_cpu_offload` 下创建 `HybridDeviceOptimizer(param_update_in_fp32=True)`；运行参数含 `--overlap-cpu-optimizer-d2h-h2d`、`--use-precision-aware-optimizer`、`--use-stateless-adam`。命令行 offload fraction 默认 1.0。
-3. 实际 `cpu_offloading/hybrid_optimizer.py:274` 先 `param.detach().clone().cpu().pin_memory()`，随后第 277 行为 FP32 master 再 `param.detach().clone().float()`。**pinning 没有保留到最终 FP32 master。** 主任务在 ai_hgx_03 / torch 2.11.0+cu129 小内存实测：原 pinned BF16 `is_pinned=True`，`detach().clone()` 为 False，继续 `.float()` 仍为 False；原始记录见 [pinning smoke](gpu_runs/p1-optimizer-pinning-smoke-20260912.json)。这不是仅凭代码猜测。
+3. 实际 `cpu_offloading/hybrid_optimizer.py:274` 先 `param.detach().clone().cpu().pin_memory()`，随后第 277 行为 FP32 master 再 `param.detach().clone().float()`。**pinning 没有保留到最终 FP32 master。** 主任务在 ai_hgx_03 / torch 2.11.0+cu129 小内存实测：原 pinned BF16 `is_pinned=True`，`detach().clone()` 为 False，继续 `.float()` 仍为 False；原始记录见 pinning smoke（本地产物：`gpu_runs/p1-optimizer-pinning-smoke-20260912.json`）。这不是仅凭代码猜测。
 4. 第 110–116 行分配 pinned FP32 gradient buffer，并从 GPU 异步 DtoH；第 171–175 行逐子 optimizer 等待其 D2H event 后执行 CPU StatelessAdam。
 5. CPU Adam 的 post hook 第 121–128 行，在 `_h2d_stream` 上执行 `gpu_param.data.copy_(param.data, non_blocking=True)`。这里的源就是 pageable FP32 master。`non_blocking=True` 本身不会把源变成 pinned。
 
@@ -16,7 +16,7 @@
 
 ## 四份 trace 的字节和耗时
 
-[机器可读归因结果](gpu_runs/p1-optimizer-transfer-attribution-20260912.json) 包含四份原 trace SHA256、分析脚本哈希、correlation 示例、算子关联、拷贝大小直方图。与此前仅按时间窗口求交相比，这次以 **CPU optimizer 区间内的发起 API** 归属拷贝，即使 GPU 完成晚于 CPU 区间也能归属。四份 trace 没有窗口内无法匹配 optimizer API 的 memcpy。
+机器可读归因结果（本地产物：`gpu_runs/p1-optimizer-transfer-attribution-20260912.json`） 包含四份原 trace SHA256、分析脚本哈希、correlation 示例、算子关联、拷贝大小直方图。与此前仅按时间窗口求交相比，这次以 **CPU optimizer 区间内的发起 API** 归属拷贝，即使 GPU 完成晚于 CPU 区间也能归属。四份 trace 没有窗口内无法匹配 optimizer API 的 memcpy。
 
 | 采样 | optimizer CPU 秒 | pageable HtoD 次数 | HtoD GPU 累计秒 | HtoD CUDA API CPU 累计秒 | DtoH GPU 累计秒 | event synchronize CPU 秒 |
 |---|---:|---:|---:|---:|---:|---:|
@@ -41,7 +41,7 @@ CPU 数学也有显著成本：optimizer 范围内 `aten::addcdiv_` native/align
 /public/home/yingxy2024/.conda/envs/slime/bin/python slime/alignment_a_preparation/gpu_tools/benchmark_optimizer_staging.py --output slime/alignment_a_preparation/gpu_runs/p1-optimizer-staging-microbench-20260912.json
 ```
 
-**已在 ai_hgx_03 的 A100-SXM4-80GB、torch 2.11.0+cu129 完成上述 microbenchmark。** 两次预热后交替顺序测量各 5 次，6/12/64 MiB 共 82 MiB 的 FP32 源，2 × 32 MiB pinned staging。直接 copy 中位 **7.120 ms**，staging 中位 **4.175 ms**，本微基准减少约 **41.4%**；所有轮次 BF16 输出逐 bit 相同。计时包含 CPU staging copy、GPU transfer/cast 与完成等待。见 [原始五次计时及验证结果](gpu_runs/p1-optimizer-staging-microbench-20260912.json) 和 [脚本/结果哈希](gpu_runs/p1-optimizer-staging-microbench-hashes-20260912.json)。
+**已在 ai_hgx_03 的 A100-SXM4-80GB、torch 2.11.0+cu129 完成上述 microbenchmark。** 两次预热后交替顺序测量各 5 次，6/12/64 MiB 共 82 MiB 的 FP32 源，2 × 32 MiB pinned staging。直接 copy 中位 **7.120 ms**，staging 中位 **4.175 ms**，本微基准减少约 **41.4%**；所有轮次 BF16 输出逐 bit 相同。计时包含 CPU staging copy、GPU transfer/cast 与完成等待。见 原始五次计时及验证结果（本地产物：`gpu_runs/p1-optimizer-staging-microbench-20260912.json`） 和 脚本/结果哈希（本地产物：`gpu_runs/p1-optimizer-staging-microbench-hashes-20260912.json`）。
 
 这是单 GPU 搬运可行性证据，**不是训练提速 41.4%**：不含 CPU Adam 更新重叠、1537/1612 个参数的完整序列、最大的约 735 MiB 参数、八 rank 资源竞争和分布式通信，也未验证线上流依赖修复。下一步可增加默认关闭的训练侧 staging 开关；仍须经非零学习率、小模型参数/梯度与 exact gate 验证后，用关闭 profiler 的原 training-phase 口径比较。当前 lr=0 旧采样不能替代真实更新验证；microbenchmark 的随机值和特殊值只验证搬运/cast，不证明 Adam 数学或整模型 correctness。
 

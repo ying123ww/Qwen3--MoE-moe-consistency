@@ -4,7 +4,7 @@
 
 ai_hgx_05, 8 A100 80GB; CUDA_LAUNCH_BLOCKING=0. Reused capture-01: 32 distinct DAPO prompts, 128 response tokens each. B1-03 exited 0; all eight rank gates passed; each rank has three slots, yielding two EP groups × three slots (six collectives). No optimizer updates. GPU workers shut down after completion.
 
-4096 response tokens have exact FP32 logprob bits across SGLang Engine capture, aligned Megatron fallthrough, and Megatron R3 replay_forward. Router and dispatch mismatched rows are zero. B2 independently reread 4608 route arrays (2018016 rows) and 12288 logprob values; H/U/per-expert reconstruction matched actual dispatch. Evidence: [gate-summary](gpu_runs/autopack-hgx05-b1-20260914-03/gate-summary.json), [B2](gpu_runs/autopack-hgx05-b1-20260914-03/b2-verified/).
+4096 response tokens have exact FP32 logprob bits across SGLang Engine capture, aligned Megatron fallthrough, and Megatron R3 replay_forward. Router and dispatch mismatched rows are zero. B2 independently reread 4608 route arrays (2018016 rows) and 12288 logprob values; H/U/per-expert reconstruction matched actual dispatch. Evidence: gate-summary（本地产物：`gpu_runs/autopack-hgx05-b1-20260914-03/gate-summary.json`）, B2（本地产物：`gpu_runs/autopack-hgx05-b1-20260914-03/b2-verified/`）.
 
 ## Offline intervention comparison
 

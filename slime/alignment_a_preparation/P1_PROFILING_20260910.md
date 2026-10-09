@@ -9,9 +9,9 @@
 - SGLang：8 rank，各自 prefill（EXTEND）与前 8 个 decode step，CPU+GPU，不记录 stack/shapes/memory。
 - Megatron：rank 0、4 的第三轮 train RPC，CPU+CUDA；新增 wake_up、数据获取、forward_backward、optimizer_step、CPU actor backup、sleep 标记。
 - 权重同步也接入了 profiler 和实际 colocate Tensor updater 的打包/IPC 标记，但此次同步失败，**没有有效同步 trace**。
-- 运行目录：[aligned-02](gpu_runs/a-p1-aligned-20260910-02/)。已解析 16 份推理和 2 份训练 gzip Chrome trace，全部包含 GPU 事件。
-- 机器可读结果：[p1-summary.json](gpu_runs/a-p1-aligned-20260910-02/p1-summary.json)。原始文件在该目录 `profiles/`，日志 `job.log`，训练 operator 汇总和元数据位于 `profiles/train/`。
-- 采样时源码哈希：[p1-source-hashes-20260910-02.json](gpu_runs/p1-source-hashes-20260910-02.json)。其后 launcher 增加了根盘空间检查，尚未 GPU 重跑该版本。
+- 运行目录：aligned-02（本地产物：`gpu_runs/a-p1-aligned-20260910-02/`）。已解析 16 份推理和 2 份训练 gzip Chrome trace，全部包含 GPU 事件。
+- 机器可读结果：p1-summary.json（本地产物：`gpu_runs/a-p1-aligned-20260910-02/p1-summary.json`）。原始文件在该目录 `profiles/`，日志 `job.log`，训练 operator 汇总和元数据位于 `profiles/train/`。
+- 采样时源码哈希：p1-source-hashes-20260910-02.json（本地产物：`gpu_runs/p1-source-hashes-20260910-02.json`）。其后 launcher 增加了根盘空间检查，尚未 GPU 重跑该版本。
 
 ## 已观察到的候选瓶颈
 
@@ -70,10 +70,10 @@ rank 0 train RPC 的 28.508 秒与上述子区间之和不相等，仍有未标�
 
 baseline/aligned 各独立启动一次；每组 3 次预热 + 1 次完整 `Engine.generate` CPU/GPU 采样。128-token response，8 prompts，共 1024 输出 token；三批预热及采样批全部通过 token 数和有限 logprob 检查，cached tokens 全为 0。连续采样，不在 prefill/decode 边界切换 profiler。两组是同 prompt/长度，生成内容可不同；不是冻结相同 route 的 kernel 微基准。
 
-- [baseline 原始目录](gpu_runs/a-p1-inference-baseline-20260910-01/)、[baseline 汇总](gpu_runs/a-p1-inference-baseline-20260910-01/p1-summary.json)
-- [aligned 原始目录](gpu_runs/a-p1-inference-aligned-20260910-01/)、[aligned 汇总](gpu_runs/a-p1-inference-aligned-20260910-01/p1-summary.json)
+- baseline 原始目录（本地产物：`gpu_runs/a-p1-inference-baseline-20260910-01/`）、baseline 汇总（本地产物：`gpu_runs/a-p1-inference-baseline-20260910-01/p1-summary.json`）
+- aligned 原始目录（本地产物：`gpu_runs/a-p1-inference-aligned-20260910-01/`）、aligned 汇总（本地产物：`gpu_runs/a-p1-inference-aligned-20260910-01/p1-summary.json`）
 - 每组 8 份 gzip trace，所有文件都包含 GPU 事件；两组采样结果不与前次在线分阶段采样直接计算差值。
-- [运行源码哈希](gpu_runs/p1-inference-source-hashes-20260910.json)、[完成状态](gpu_runs/p1-inference-20260910-state.json)。
+- 运行源码哈希（本地产物：`gpu_runs/p1-inference-source-hashes-20260910.json`）、完成状态（本地产物：`gpu_runs/p1-inference-20260910-state.json`）。
 
 ### 当前可以支持的归因候选
 

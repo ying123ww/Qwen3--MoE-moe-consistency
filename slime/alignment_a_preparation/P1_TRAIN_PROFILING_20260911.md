@@ -72,7 +72,7 @@ trace 同时含 `cat=overhead`、名为 `Command Buffer Full` 的事件，累计
 
 ## 证据入口
 
-- [机器可读对照](gpu_runs/p1-train-comparison-20260911.json)，含冻结数据 SHA256、4 份 trace 汇总和 copy window 结果。
-- [native](gpu_runs/a-p1-train-native-20260910-01/) / [aligned](gpu_runs/a-p1-train-aligned-20260910-01/)：`job-status.json`、`argv.json`、`runtime_env.json`、`audit-rank*.json`、`measurements-rank*.jsonl`、`profiles/train/`、`p1-copy-windows.json`、`scratch-cleaned.json`。
-- [采样源码哈希](gpu_runs/p1-train-source-hashes-20260910.json)。其中汇总器随后修正 CPU/GPU annotation 混算；报告使用修正版，另存分析源码哈希。
+- 机器可读对照（本地产物：`gpu_runs/p1-train-comparison-20260911.json`），含冻结数据 SHA256、4 份 trace 汇总和 copy window 结果。
+- native（本地产物：`gpu_runs/a-p1-train-native-20260910-01/`） / aligned（本地产物：`gpu_runs/a-p1-train-aligned-20260910-01/`）：`job-status.json`、`argv.json`、`runtime_env.json`、`audit-rank*.json`、`measurements-rank*.jsonl`、`profiles/train/`、`p1-copy-windows.json`、`scratch-cleaned.json`。
+- 采样源码哈希（本地产物：`gpu_runs/p1-train-source-hashes-20260910.json`）。其中汇总器随后修正 CPU/GPU annotation 混算；报告使用修正版，另存分析源码哈希。
 - 相关 CPU 测试 3 项通过，语法检查和 git diff 空白检查通过。

@@ -88,11 +88,11 @@ Seed 0 三次正式重复最终 schedule hash 一致：`9ccbfc65d6ebe4259d664dbc
 
 根目录：`alignment_a_preparation/gpu_runs/autopack-real-hgx05-20260914/`。
 
-- [长度与终止原因](gpu_runs/autopack-real-hgx05-20260914/capture-summary.json)
-- [原生 H/padding/collective 统计](gpu_runs/autopack-real-hgx05-20260914/native-summary.json)
-- [Seed 0 三次串行重复与交换轨迹](gpu_runs/autopack-real-hgx05-20260914/exchange-seed0.json)
-- [Seed 1](gpu_runs/autopack-real-hgx05-20260914/exchange-seed1.json)、[Seed 2](gpu_runs/autopack-real-hgx05-20260914/exchange-seed2.json)、[Seed 3](gpu_runs/autopack-real-hgx05-20260914/exchange-seed3.json)、[Seed 4](gpu_runs/autopack-real-hgx05-20260914/exchange-seed4.json)：同 batch 离线质量对照
+- 长度与终止原因（本地产物：`gpu_runs/autopack-real-hgx05-20260914/capture-summary.json`）
+- 原生 H/padding/collective 统计（本地产物：`gpu_runs/autopack-real-hgx05-20260914/native-summary.json`）
+- Seed 0 三次串行重复与交换轨迹（本地产物：`gpu_runs/autopack-real-hgx05-20260914/exchange-seed0.json`）
+- Seed 1（本地产物：`gpu_runs/autopack-real-hgx05-20260914/exchange-seed1.json`）、Seed 2（本地产物：`gpu_runs/autopack-real-hgx05-20260914/exchange-seed2.json`）、Seed 3（本地产物：`gpu_runs/autopack-real-hgx05-20260914/exchange-seed3.json`）、Seed 4（本地产物：`gpu_runs/autopack-real-hgx05-20260914/exchange-seed4.json`）：同 batch 离线质量对照
 - [原生调度 B1/B2 验证](AUTOPACK_REAL_B1_20260914.md)
-- [输入与来源配置](gpu_runs/autopack-real-hgx05-20260914-input/prompts.json)
+- 输入与来源配置（本地产物：`gpu_runs/autopack-real-hgx05-20260914-input/prompts.json`）
 
 重型原始数组保存在 ai_hgx_05 节点临时目录，路径见 B1 记录；清理这些数组前需要单独安排归档。GPU 正式实验已由 root 完成并恢复授权保号任务，当前 PID/日志以 root 的最新交接为准；本离线报告未切换 GPU 任务。

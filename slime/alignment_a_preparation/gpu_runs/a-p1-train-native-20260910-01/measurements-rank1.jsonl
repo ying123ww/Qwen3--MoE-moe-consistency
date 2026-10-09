@@ -1,2 +1,0 @@
-{"rank": 1, "variant": "native", "rollout_id": 2, "step_id": 0, "num_microbatches": 1, "global_batch_size": 8, "elapsed_s": 17.931050902989227, "start_allocated_bytes": 53749019136, "peak_allocated_bytes": 54575419392, "peak_reserved_bytes": 56107204608, "grad_norm": 2.3976596229407687}
-{"rank": 1, "variant": "native", "rollout_id": 3, "step_id": 0, "num_microbatches": 1, "global_batch_size": 8, "elapsed_s": 18.13925375501276, "start_allocated_bytes": 53740334080, "peak_allocated_bytes": 54575939584, "peak_reserved_bytes": 56109301760, "grad_norm": 2.3976596229407687}
