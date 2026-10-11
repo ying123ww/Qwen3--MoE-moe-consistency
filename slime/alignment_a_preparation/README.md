@@ -1,6 +1,15 @@
-# A 阶段：不用 GPU 的准备结果与实验说明
+# alignment_a_preparation：实验入口与历史准备说明
 
-日期：2026-09-09。以下正文保留 CPU 准备阶段的实验设计。此后已获授权并进行了两次 GPU 启动尝试，尚未产生新的数值或性能结果；当前状态以 `gpu_runs/PROGRESS.md` 和 `gpu_runs/NODE_STARTUP_DIAGNOSIS.md` 为准。启动修复说明见 `gpu_runs/LAUNCH_FIXES.md`。
+最新整理：2026-10-12。整个目录的工作、结果、实现状态、失败原因和复跑入口见
+[详尽总览 WORK_SUMMARY_20261012.md](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/WORK_SUMMARY_20261012.md)。
+最新baseline完整decode Graph测量为1.890481秒，较同轮最佳Breakable的3.093301秒
+降低38.885%；prefill仍eager。配置和验证边界见
+[P9_BASELINE_FULL_DECODE_20261012.md](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/P9_BASELINE_FULL_DECODE_20261012.md)。
+
+以下正文保留2026-09-09 CPU准备阶段的原始实验设计，其中“未完成”“下一步”等
+均为当时状态，不代表后续GPU实验仍未完成。早期启动记录保留于 `gpu_runs/PROGRESS.md`、
+`gpu_runs/NODE_STARTUP_DIAGNOSIS.md` 和 `gpu_runs/LAUNCH_FIXES.md`，当前结论以总览
+及对应已完成阶段报告为准。
 
 ## 先看这部分：我们接下来究竟比较什么
 

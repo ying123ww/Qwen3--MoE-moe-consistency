@@ -3,7 +3,7 @@ import json
 from pathlib import Path
 
 
-def allow_full_configuration(output):
+def allow_full_configuration(output, *, deterministic=True):
     from sglang.srt.server_args import ServerArgs
     from sglang.srt.model_executor.cuda_graph_config import Backend
     original=ServerArgs._handle_a2a_moe
@@ -12,12 +12,13 @@ def allow_full_configuration(output):
         requested=self.cuda_graph_config.decode.backend
         original(self)
         if requested==Backend.FULL:
-            if self.moe_a2a_backend!='deepep' or self.deepep_mode!='normal' or not self.enable_deterministic_inference:
-                raise RuntimeError('Fixed-capacity full probe requires deterministic DeepEP normal')
+            if (self.moe_a2a_backend!='deepep' or self.deepep_mode!='normal'
+                    or bool(self.enable_deterministic_inference)!=deterministic):
+                raise RuntimeError('Fixed-capacity full probe requires the requested DeepEP normal variant')
             self.cuda_graph_config.decode.backend=Backend.FULL
             output.mkdir(parents=True,exist_ok=True)
             (output/'full-config-bypass.json').write_text(json.dumps(dict(decode='full',prefill='disabled',
-                deepep_mode='normal',experimental=True),indent=2)+'\n')
+                deepep_mode='normal',deterministic=deterministic,experimental=True),indent=2)+'\n')
             print('FIXED_CAPACITY_FULL_BACKEND_RESTORED',flush=True)
     ServerArgs._handle_a2a_moe=handle
 
