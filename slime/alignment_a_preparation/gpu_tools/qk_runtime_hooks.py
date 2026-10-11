@@ -15,7 +15,7 @@ def bits_equal(a, b):
     return a.shape == b.shape and a.dtype == b.dtype and torch.equal(a.contiguous().view(torch.int16), b.contiguous().view(torch.int16))
 
 
-def eligible(q, k, q_norm, k_norm, head_dim):
+def eligible(q, k, q_norm, k_norm, head_dim, allow_cuda_graph=False):
     from sglang.srt.batch_invariant_ops import is_batch_invariant_mode_enabled
     from sglang.srt.runtime_context import get_exec
     return (is_batch_invariant_mode_enabled()
@@ -30,7 +30,7 @@ def eligible(q, k, q_norm, k_norm, head_dim):
             and q_norm.weight.dtype == k_norm.weight.dtype
             and q_norm.weight.dtype in (torch.bfloat16,torch.float32)
             and q_norm.weight.is_contiguous() and k_norm.weight.is_contiguous()
-            and not torch.cuda.is_current_stream_capturing())
+            and (allow_cuda_graph or not torch.cuda.is_current_stream_capturing()))
 
 
 def install(config):
@@ -39,6 +39,9 @@ def install(config):
     if mode not in ('off','shadow','joint','strided'):
         raise ValueError('Unknown Q/K runtime experiment mode')
     audit_dir = Path(config['audit_dir']) if config.get('audit_dir') else None
+    allow_cuda_graph = config.get('allow_cuda_graph', False)
+    if allow_cuda_graph and (mode not in ('joint', 'strided') or audit_dir is not None):
+        raise ValueError('Q/K CUDA Graph requires unaudited joint/strided mode')
     if mode == 'shadow' and audit_dir is None:
         raise ValueError('Shadow gate requires a distinct audit directory')
     if _INSTALLED is not None:
@@ -61,12 +64,14 @@ def install(config):
         global _FIRST
         if mode == 'off':
             return original(q,k,q_norm,k_norm,head_dim,*args,**kwargs)
-        supported = eligible(q,k,q_norm,k_norm,head_dim)
+        supported = eligible(q,k,q_norm,k_norm,head_dim,allow_cuda_graph)
         if not supported:
             if audit_dir:
                 _COUNTS['fallback'] += 1
             return original(q,k,q_norm,k_norm,head_dim,*args,**kwargs)
         selected = 'joint' if mode == 'shadow' else mode
+        if allow_cuda_graph and torch.cuda.is_current_stream_capturing():
+            _COUNTS['captured'] += 1
         result = prototype.forward(q,k,q_norm.weight,k_norm.weight,head_dim,
                                    q_norm.variance_epsilon,k_norm.variance_epsilon,selected)
         if not _FIRST:

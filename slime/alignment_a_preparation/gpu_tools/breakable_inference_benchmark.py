@@ -18,7 +18,17 @@ if __name__ == '__main__':
     def engine(**kwargs):
         config = configure(kwargs, mode, run/'graph-evidence')
         (run/'experimental-server-args.json').write_text(json.dumps(config, indent=2)+'\n')
-        return original(**config)
+        result = original(**config)
+        if os.environ.get('SLIME_GRAPH_FUSION_PREWARM') == '1':
+            import torch
+            from inference_benchmark import FROZEN, flush_cache_until_idle
+            samples = torch.load(FROZEN, map_location='cpu', weights_only=False)['samples']
+            prompts = [list(map(int, s['tokens'][:-int(s['response_length'])])) for s in samples]
+            flush_cache_until_idle(result)
+            result.generate(input_ids=prompts[:3], sampling_params=dict(temperature=0, max_new_tokens=2, ignore_eos=True))
+            (run/'shape2-prewarm.json').write_text(json.dumps(dict(prompts=3, response_tokens=2,
+                timed=False, purpose='Pay first replay evidence writes before measurement'))+'\n')
+        return result
     sglang.Engine = engine
     import inference_benchmark
     from profile_export_guard import install

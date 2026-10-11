@@ -16,6 +16,13 @@ if _MODE != "off" and _AUDIT_ENABLED and not _AUDIT_DIR:
     raise ValueError("Residual RMSNorm experiments require an audit directory")
 ENABLED = _MODE != "off"
 _CALLS = {}
+_GRAPH_SETTING = os.environ.get("SLIME_QWEN3_RESIDUAL_RMS_CUDA_GRAPH", "0")
+if _GRAPH_SETTING not in ("0", "1"):
+    raise ValueError("Invalid residual RMSNorm CUDA Graph setting")
+_GRAPH_ENABLED = _GRAPH_SETTING == "1"
+if _GRAPH_ENABLED and (_MODE != "candidate" or _AUDIT_ENABLED):
+    raise ValueError("Residual RMSNorm CUDA Graph requires unaudited candidate mode")
+_GRAPH_CAPTURE_CALLS = 0
 
 """Opt-in Qwen3 residual RMSNorm fusion; default runtime is unchanged."""
 import torch
@@ -50,7 +57,8 @@ def _fused_residual_rms_kernel(X, R, W, Y, RES, EPS: tl.constexpr,
         tl.store(RES + index, value.to(RES.dtype.element_ty))
 
 
-def _candidate(x, residual, weight, eps=1e-6):
+def _candidate(x, residual, weight, eps=1e-6, *, allow_cuda_graph=False):
+    global _GRAPH_CAPTURE_CALLS
     if not (x.is_cuda and x.device == residual.device == weight.device
             and x.dtype == residual.dtype == torch.bfloat16
             and weight.dtype in (torch.bfloat16, torch.float32)
@@ -59,7 +67,9 @@ def _candidate(x, residual, weight, eps=1e-6):
             and x.is_contiguous() and residual.is_contiguous() and weight.is_contiguous()):
         raise ValueError('Prototype requires contiguous BF16 M=1..4/H2048 input/residual and BF16/FP32 weights')
     if torch.cuda.is_current_stream_capturing():
-        raise RuntimeError('Prototype has no CUDA graph gate')
+        if not allow_cuda_graph:
+            raise RuntimeError('Residual RMSNorm CUDA Graph requires explicit opt-in')
+        _GRAPH_CAPTURE_CALLS += 1
     output = torch.empty_like(x)
     residual_output = torch.empty_like(residual)
     _fused_residual_rms_kernel[(x.shape[0],)](
@@ -90,6 +100,9 @@ def forward(module, x, residual, post_residual_addition=None):
         if not accepted:
             return module.forward_native(x, residual, post_residual_addition)
         try:
+            if _GRAPH_ENABLED:
+                return _candidate(x, residual, module.weight, module.variance_epsilon,
+                                  allow_cuda_graph=True)
             return _candidate(x, residual, module.weight, module.variance_epsilon)
         except Exception as exc:
             raise RuntimeError(f"Residual RMSNorm candidate failed: layer={module._slime_qwen3_rms_layer} kind={module._slime_qwen3_rms_kind}") from exc

@@ -88,6 +88,13 @@ def capture_cuda_graphs(
         model_runner
     )
 
+    # Operator replacements must be installed before warmup/capture. Ordinary
+    # diagnostic hooks retain the default post-capture registration below.
+    hook_specs = model_runner.server_args.forward_hooks or []
+    capture_hooks = [spec for spec in hook_specs if spec.get("before_cuda_graph_capture", False)]
+    if capture_hooks:
+        register_forward_hooks(model_runner.model, capture_hooks)
+
     # The eager (no-cuda-graph) phase runner, built AFTER the attention
     # backend so its __init__ can warm up kernels (run-once) and allocate the
     # fixed-max static buffer — both before the cuda-graph runners, so that
@@ -119,10 +126,9 @@ def capture_cuda_graphs(
     # not traced into any captured graph — capture stays hook-free and hooks
     # fire only on the eager forward path (capture replay never runs Python
     # hooks anyway).
-    if model_runner.server_args.forward_hooks:
-        register_forward_hooks(
-            model_runner.model, model_runner.server_args.forward_hooks
-        )
+    runtime_hooks = [spec for spec in hook_specs if not spec.get("before_cuda_graph_capture", False)]
+    if runtime_hooks:
+        register_forward_hooks(model_runner.model, runtime_hooks)
 
     prealloc_symmetric_memory_pool(
         is_draft_worker=model_runner.is_draft_worker,
