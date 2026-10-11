@@ -20,8 +20,9 @@ from capture_routes import save_engine_routes
 
 def capture(args):
     os.environ.update(SLIME_QWEN3_ROUTER_TILE_MODE='off',SLIME_QWEN3_ROUTER_TILE_AUDIT='0',
-        SLIME_QWEN3_RESIDUAL_RMS_MODE='candidate' if args.mode=='plan1' else 'off',
+        SLIME_QWEN3_RESIDUAL_RMS_MODE='candidate' if args.mode in ('plan1','breakable-rms','breakable-rms-qk','breakable-rms-experts') else 'off',
         SLIME_QWEN3_RESIDUAL_RMS_AUDIT='0',SGLANG_MEMORY_SAVER_CUDA_GRAPH='0')
+    os.environ['SLIME_QWEN3_RESIDUAL_RMS_CUDA_GRAPH']='1' if args.mode in ('breakable-rms','breakable-rms-qk','breakable-rms-experts') else '0'
     sources=torch.load(guard.FROZEN,map_location='cpu',weights_only=False)['samples']
     prompts=[list(map(int,s['tokens'][:-int(s['response_length'])])) for s in sources]
     reference=guard.PREP/'gpu_runs/remaining-profile-hgx03-qk-20261011-01/sanity-candidate/manifest.json'
@@ -80,7 +81,7 @@ def compare(args):
 
 def main():
     parser=argparse.ArgumentParser(description=__doc__);sub=parser.add_subparsers(dest='action',required=True)
-    cap=sub.add_parser('capture');cap.add_argument('--mode',choices=['eager','breakable','plan1'],required=True);cap.add_argument('--output',type=Path,required=True)
+    cap=sub.add_parser('capture');cap.add_argument('--mode',choices=['eager','breakable','breakable-rms','breakable-rms-qk','breakable-rms-experts','plan1'],required=True);cap.add_argument('--output',type=Path,required=True)
     cmp=sub.add_parser('compare')
     for name in ('reference','candidate','output'):cmp.add_argument('--'+name,type=Path,required=True)
     args=parser.parse_args();capture(args) if args.action=='capture' else compare(args)

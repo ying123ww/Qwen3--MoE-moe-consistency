@@ -1,24 +1,37 @@
 """Explicit Plan 2 configuration and one-time successful replay evidence."""
 import inspect
 import json
+import os
 from pathlib import Path
 
 
 def configure(config, mode, evidence):
     result = dict(config)
-    if mode not in ('eager', 'breakable', 'plan1', 'baseline'):
+    if mode not in ('eager', 'breakable', 'breakable-rms', 'breakable-rms-qk', 'breakable-rms-experts', 'plan1', 'baseline'):
         raise ValueError(mode)
-    result.update(disable_cuda_graph=mode != 'breakable', disable_prefill_cuda_graph=True)
+    use_graph = mode.startswith('breakable')
+    result.update(disable_cuda_graph=not use_graph, disable_prefill_cuda_graph=True)
     result['cuda_graph_config'] = {
-        'decode': dict(backend='breakable' if mode == 'breakable' else 'disabled',
+        'decode': dict(backend='breakable' if use_graph else 'disabled',
                        bs=[2, 4], max_bs=4),
         'prefill': dict(backend='disabled'),
     }
     result['forward_hooks'] = [dict(name='breakable-proof', target_modules=['model'],
         hook_factory='breakable_experiment:install', config=dict(output_dir=str(evidence)))]
-    if mode == 'plan1':
+    if mode in ('plan1', 'breakable-rms-qk'):
         result['forward_hooks'].append(dict(name='qk-experiment', target_modules=['model'],
-            hook_factory='qk_runtime_hooks:install', config=dict(mode='joint', audit_dir=None)))
+            hook_factory='qk_runtime_hooks:install', config=dict(mode='joint', audit_dir=None,
+                allow_cuda_graph=mode == 'breakable-rms-qk'),
+            before_cuda_graph_capture=mode == 'breakable-rms-qk'))
+    if mode in ('breakable-rms', 'breakable-rms-qk', 'breakable-rms-experts'):
+        result['forward_hooks'].append(dict(name='fusion-capture-proof', target_modules=['model'],
+            hook_factory='graph_fusion_proof:install', config=dict(mode=mode, output_dir=str(evidence)),
+            before_cuda_graph_capture=True))
+    if mode=='breakable-rms-experts':
+        result['forward_hooks'].append(dict(name='expert-graph',target_modules=['model'],
+            hook_factory='expert_graph_hooks:install',before_cuda_graph_capture=True,
+            config=dict(max_rows=16,shadow=os.environ.get('SLIME_EXPERT_GRAPH_SHADOW','0')=='1',
+                        output_dir=str(evidence))))
     return result
 
 
