@@ -109,6 +109,8 @@ class ForwardMetadata:
     # PHYSICAL full-attn write target for the unified pool (eager: translated tensor;
     # cuda-graph: capture-stable buffer view). None for non-unified pools.
     out_cache_loc_full_physical: Optional[torch.Tensor] = None
+    # Positive KV lengths checked during batch planning, before model/capture/replay.
+    unified_decode_kv_validated_rows: Optional[int] = None
 
 
 class TritonAttnBackend(AttentionBackend):
@@ -352,6 +354,19 @@ class TritonAttnBackend(AttentionBackend):
         )
         return kv_indptr
 
+    def _validate_unified_decode_kv_lengths(
+        self, kv_indptr: torch.Tensor, batch_size: int, forward_mode: ForwardMode
+    ) -> Optional[int]:
+        if not self.use_unified_attention_for_decode or not forward_mode.is_decode_or_idle():
+            return None
+        if kv_indptr is None or kv_indptr.numel() < batch_size + 1:
+            raise ValueError("Unified decode alignment received incomplete KV metadata")
+        if kv_indptr.is_cuda and torch.cuda.is_current_stream_capturing():
+            raise RuntimeError("Unified decode KV validation must run before CUDA graph capture/replay")
+        if batch_size and bool(torch.any(kv_indptr[1 : batch_size + 1] <= kv_indptr[:batch_size]).item()):
+            raise ValueError("Unified decode alignment received an empty KV sequence")
+        return batch_size
+
     def _update_decode_kv_buffers(
         self,
         bs: int,
@@ -551,6 +566,14 @@ class TritonAttnBackend(AttentionBackend):
             # Metadata view is reused from capture; just refill the buffers.
             self._translate_cuda_graph_shared_pool_locs(forward_batch, bs)
             self._fill_cuda_graph_swa_out_cache_loc(forward_batch)
+
+        # Read the live buffer for this replay size, not the metadata object's
+        # view left over from another captured bucket or an eager prefill.
+        validated_rows = self._validate_unified_decode_kv_lengths(
+            self.kv_indptr[: bs + 1], bs, forward_mode
+        )
+        if in_capture:
+            self.forward_metadata.unified_decode_kv_validated_rows = validated_rows
 
     def _fill_cuda_graph_swa_out_cache_loc(self, forward_batch: ForwardBatch) -> Optional[torch.Tensor]:
         """Refill the SWA write-target buffer from live out_cache_loc, returning the
@@ -819,6 +842,9 @@ class TritonAttnBackend(AttentionBackend):
             swa_attn_logits=swa_attn_logits,
             swa_out_cache_loc=swa_out_cache_loc,
             out_cache_loc_full_physical=out_cache_loc_full_physical,
+        )
+        self.forward_metadata.unified_decode_kv_validated_rows = self._validate_unified_decode_kv_lengths(
+            kv_indptr, bs, forward_batch.forward_mode
         )
 
     def init_cuda_graph_state(
@@ -1575,16 +1601,10 @@ class TritonAttnBackend(AttentionBackend):
             if forward_batch.spec_info is not None:
                 raise ValueError("Unified decode alignment does not support speculative decoding")
             batch_size = q.shape[0]
+            validated_rows = self.forward_metadata.unified_decode_kv_validated_rows
+            if validated_rows is None or validated_rows < batch_size:
+                raise RuntimeError("Unified decode KV metadata was not validated for this batch")
             kv_lens = kv_indptr[1 : batch_size + 1] - kv_indptr[:batch_size]
-            if torch.cuda.is_current_stream_capturing():
-                # Keep the dynamic validation in every replay without a D2H
-                # .item(), which is forbidden during CUDA graph capture.
-                torch._assert_async(
-                    torch.all(kv_lens > 0),
-                    "Unified decode alignment received an empty KV sequence",
-                )
-            elif bool(torch.any(kv_lens <= 0).item()):
-                raise ValueError("Unified decode alignment received an empty KV sequence")
             qo_indptr = torch.arange(batch_size + 1, dtype=torch.int32, device=q.device)
             prefix_lens = (kv_lens - 1).to(torch.int32)
             self.extend_attention_fwd_unified(
