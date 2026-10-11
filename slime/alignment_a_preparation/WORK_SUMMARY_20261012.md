@@ -471,8 +471,9 @@ combine、LM head；metadata准备、调度、sampling及输出处理仍在图�
 不代表整个请求或在线训练流程全部进入Graph。
 
 报告：[专家Graph](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/P6_EXPERT_COMPUTE_CUDA_GRAPH_20261011.md)、
-[动态Normal失败](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/P4_FULL_GRAPH_BASELINE_PROBE_20261011.md)、
 [固定容量full](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/P7_FIXED_CAPACITY_FULL_DECODE_20261011.md)。
+普通动态Normal捕获失败的独立P4报告和探针代码仅保留在历史实验分支，按用户
+要求不纳入main；此处保留原因说明，便于理解成功方案为何需要固定容量。
 
 ## 12. 非确定性 baseline 的可迁移优化
 
@@ -589,7 +590,23 @@ cd /public/home/yingxy2024/moe-consistency
 
 ## 16. Git、结果保存与下一步
 
-已保存的阶段提交记录：
+验证通过的六个阶段已直接选择合入main并保留原始实验分支的提交记录。
+失败探针 `d5441e77` 的代码及独立P4报告未合入main；原始失败运行目录保留本地。
+main整合核验确认保留的运行时代码与GPU测量source SHA完全一致；Breakable输出/
+配置和KV-once的13项CPU检查通过，仓库规则及文档链接检查通过。CPU检查期间
+将FlashInfer缓存重定向到项目可写临时目录，解决导入阶段默认用户缓存只读的问题；
+没有为此修改实现，也未重新计时GPU。
+
+| 成功阶段 | 原分支提交 | main提交 |
+|---|---|---|
+| Breakable Plan2 | a94d2423 | 77c8f7ec |
+| KV每batch验证 | 962a79d4 | de696d5d |
+| Graph融合及专家Graph | fb87cd28 | 6fbdd4a3 |
+| 固定容量确定性full | 92558305 | 0e9e2430 |
+| baseline Breakable优化 | 0a3a91cd | 3788f6fe |
+| baseline full和总览 | 195fb228 | adafc97a |
+
+以下为历史分支记录，失败探针一项仅供来源审计，不表示它已进入main：
 
 | 分支/提交 | 内容 |
 |---|---|
@@ -597,15 +614,15 @@ cd /public/home/yingxy2024/moe-consistency
 | main `f99fd917` | Q/K布局联合候选和dense调查 |
 | `codex/breakable-cuda-graph-plan2` / `a94d2423` | Plan2及KV审计 |
 | `codex/kv-validation-once-per-batch` / `962a79d4` | KV每批一次 |
-| 同分支 `d5441e77` | 普通baseline full失败探针 |
+| 同分支 `d5441e77` | 普通baseline full失败探针，仅历史分支，未合入main |
 | 同分支 `fb87cd28` | Graph融合及expert Graph |
 | `codex/fixed-capacity-full-decode` / `92558305` | 固定容量确定性full decode |
 | `codex/baseline-breakable-optimizations` / `0a3a91cd` | 非确定性baseline四模式、专家缓存配置及P8报告；已推送 |
-| `codex/baseline-full-decode` | 本次baseline完整decode实现、P9、本总览及README入口；提交号以最终Git交接为准 |
+| `codex/baseline-full-decode` / `195fb228` | baseline完整decode实现、P9、本总览及README；成功内容已选择合入main |
 
-本次开始时baseline迁移工具/P8报告为工作区改动；按用户追加要求，现已单独
-提交并推送 `0a3a91cd`。用户另要求本次完成后也保存Git，本次full工具、P9、总览
-与README入口单独保存于 `codex/baseline-full-decode`，推送结果以最终交接为准。
+本次开始时baseline迁移工具/P8报告为工作区改动，随后保存并推送 `0a3a91cd`；
+full工具、P9、总览和README另保存并推送 `195fb228`。按用户最新要求，现直接
+在main整合成功内容，后续工作也直接使用main；失败独立探针不合入。
 `gpu_runs`、`cpu_runs`、routepack数组等按仓库约定保留本地，不能force-add
 大数据、权重或trace。这里只新增入口和文档，不移动或删除历史证据。
 

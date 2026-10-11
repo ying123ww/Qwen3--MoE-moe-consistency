@@ -99,9 +99,10 @@ MoE路由不完全固定。没有进行跨框架训练、权重更新/offload生
 - `exact-full/graph-evidence/` 与 `full/graph-evidence/`：每rank/bucket捕获及回放。
 - `source-snapshots/`、`manifest.json`：本次实际源码及SHA256。
 
-上一步baseline Breakable工具和P8报告已单独推送 `0a3a91cd`，分支
-`codex/baseline-breakable-optimizations`。本次full实现、P9和目录总览使用
-`codex/baseline-full-decode`分支保存；原始运行结果按约定留本地、不纳入Git。
+上一步baseline Breakable工具/P8原提交为 `0a3a91cd`，本次full实现/P9/总览原提交
+为 `195fb228`；均已推送。按用户最新要求，成功内容直接选择合入main，分别为
+`3788f6fe` 和 `adafc97a`。失败的普通Normal全图探针及P4独立报告未合入main。
+原始运行结果按约定留本地、不纳入Git；后续工作直接使用main。
 
 Driver实际PID/PGID127310及全部worker已退出，最后GPU compute列表为空，
 8卡均1MiB、0%利用率。Slurm1031236保留RUNNING，按用户此前要求不恢复保号。

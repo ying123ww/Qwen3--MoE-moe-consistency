@@ -115,6 +115,6 @@ baseline 不提供跨 batch 数值不变性，不把这一项当作它的要求�
 8 张 GPU 均 1 MiB、0% 利用率、无 compute process；Slurm 1031236 保留 RUNNING。
 按此前用户要求未恢复保号。日志位于项目
 `.a-tmp/baseline-breakable-opt-hgx03-20261012-02-driver.log`。
-本阶段实现与报告保存于 `codex/baseline-breakable-optimizations` 分支。
-本次提交范围仅包含上述已完成的 baseline Breakable 优化；后续 baseline full
-实验与整个目录的总览文档另行整理，不混入此阶段提交。
+本阶段实现与报告原保存于 `codex/baseline-breakable-optimizations` 的 `0a3a91cd`，
+已按用户要求选择合入main，对应 `3788f6fe`。本阶段只包含上述已完成的
+baseline Breakable优化；后续baseline full与目录总览作为独立成功阶段合入main。
