@@ -16,6 +16,7 @@ import residual_rms_performance as shared
 def main():
     parser=argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--run-id',required=True)
+    parser.add_argument('--repro',action='store_true')
     args=parser.parse_args()
     if not re.fullmatch(r'remaining-profile-[a-z0-9-]+',args.run_id):
         parser.error('Use a fresh remaining-profile- ID')
@@ -27,6 +28,13 @@ def main():
         'inference_benchmark.py','profiling_annotations.py','residual_rms_performance.py',
         'resource_preflight.py','summarize_matmul.py','summarize_remaining_inference.py',
         'run_remaining_inference_profile.py','queue_remaining_profile.py')]
+    if args.repro:
+        sources += [str(shared.PREP/'gpu_tools'/name) for name in ('run_inference_repro.py','runtime_diagnostics.py')]
+        srt=shared.PROJECT/'experiments/sglang-main-sm80/python/sglang/srt'
+        sources += [str(srt/name) for name in (
+            'server_args.py','models/utils.py','layers/linear.py','layers/attention/triton_backend.py',
+            'model_executor/model_runner.py','model_executor/runner/eager_runner.py',
+            'layers/moe/fused_moe_triton/layer.py')]
     digests={name:hashlib.sha256(Path(name).read_bytes()).hexdigest() for name in sources}
     expected=queue/'expected-sources.json'
     shared.save(expected,digests)
@@ -44,7 +52,7 @@ def main():
           '--cpus-per-task=64','--mem=1T','--gres=gpu:8','-x','ai_hgx_04','-t','2-00:00:00',
           'srun','-N','1','-n','1','-c','64','--kill-on-bad-exit=1',
           '--chdir='+str(shared.PROJECT),str(shared.PYTHON),
-          str(shared.PREP/'gpu_tools/run_remaining_inference_profile.py'),
+          str(shared.PREP/'gpu_tools'/('run_inference_repro.py' if args.repro else 'run_remaining_inference_profile.py')),
           '--run-id',args.run_id,'--expected-sources',str(expected)]
     state=dict(status='submitting',queue_pid=os.getpid(),queue_pgid=os.getpgrp(),
                submitted_at=datetime.now(ZoneInfo('Asia/Shanghai')).isoformat(),argv=argv,

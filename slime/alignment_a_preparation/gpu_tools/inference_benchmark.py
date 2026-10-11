@@ -37,6 +37,7 @@ def main():
     ap.add_argument('--profile', action='store_true', help='One full generate capture after warmup; not a benchmark')
     ap.add_argument('--profile-shapes', action='store_true', help='Record CPU op shapes for attribution')
     ap.add_argument('--profile-attribution', action='store_true', help='Install CPU component scopes only in profiling Engines')
+    ap.add_argument('--runtime-diagnostics', action='store_true', help='Record worker fingerprint once during first warmup')
     ap.add_argument('--response-tokens', type=int, default=128)
     args = ap.parse_args()
     if args.profile and args.steps != 1:
@@ -78,6 +79,9 @@ def main():
     if args.profile_attribution:
         config['forward_hooks'] = [dict(name='p1-attribution', target_modules=[''],
                                        hook_factory='profiling_annotations:install', config={})]
+    if args.runtime_diagnostics:
+        config.setdefault('forward_hooks',[]).append(dict(name='runtime-fingerprint',target_modules=['model'],
+            hook_factory='runtime_diagnostics:install',config=dict(output_dir=str(args.run/'worker-diagnostics'))))
     sampling = dict(temperature=0.6, max_new_tokens=args.response_tokens, ignore_eos=True)
     manifest = dict(cache_flush_policy='require_success_with_bounded_idle_retry', variant=args.variant, residual_rms_mode=args.residual_rms_mode, router_tile_mode=args.router_tile_mode,
                     router_tile_audit=False, source_sha256={
