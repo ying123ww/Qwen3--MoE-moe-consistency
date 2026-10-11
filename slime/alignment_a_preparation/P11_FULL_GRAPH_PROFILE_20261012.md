@@ -133,6 +133,11 @@ A100有108SM，尤其Router只有1个CTA；这证明launch规模很小，
 有限QKV standalone原kernel与保存输出逐bit一致；O保存输出可能被后续
 inplace操作改写，不能作为raw GEMM逐bit参考。P12仍需原始输出快照及完整模型门禁。
 
+原始输出快照已在独立运行中补齐：见
+[P11原始投影门禁](P11_RAW_PROJECTION_GATE_20261012.md)。24份实际矩阵、
+112,128个输出元素及批次前缀全部逐bit一致。原Nsight运行中保存的O模块
+输出仍保持其限制，不能用新门禁追认旧数据为raw参考。
+
 ## 复跑与验证
 
 ```bash
