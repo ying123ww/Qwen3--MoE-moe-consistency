@@ -34,6 +34,7 @@ def install(config):
     rank=dist.get_rank();directory=Path(config['output_dir']);directory.mkdir(parents=True,exist_ok=True)
     records={};operand_refs={};operand_values={};saved_components=[]
     steps=0;armed=False;last_size=None;capture_started=False
+    profile_capture=False;profile_captured_sizes=set()
     counters=Counter();targets=int(config.get('steps',32));tagged=False
 
     def annotate(owner,name,component):
@@ -92,13 +93,15 @@ def install(config):
     def capture(self,shape_key,*args,**kwargs):
         nonlocal capture_started
         size=shape_key.size;token=_CAPTURE_SIZE.set(size)
-        if config.get('nsys') and not capture_started:
+        records[size]=[]
+        if config.get('nsys') and profile_capture and not capture_started:
             torch.cuda.synchronize();dist.barrier(group=get_tp_group().cpu_group)
             torch.cuda.cudart().cudaProfilerStart();capture_started=True
         try:return original_capture(self,shape_key,*args,**kwargs)
         finally:
             _CAPTURE_SIZE.reset(token)
-            if len(self._graphs)==2 and config.get('nsys'):
+            profile_captured_sizes.add(size)
+            if profile_capture and profile_captured_sizes=={2,4} and config.get('nsys'):
                 torch.cuda.synchronize();dist.barrier(group=get_tp_group().cpu_group)
                 torch.cuda.cudart().cudaProfilerStop()
     FullCudaGraphBackend.capture_one=capture
@@ -130,10 +133,21 @@ def install(config):
 
     original_control=Scheduler.set_internal_state
     def control(self,request):
-        nonlocal armed,steps,last_size
+        nonlocal armed,steps,last_size,profile_capture,capture_started
         if set(request.server_args)=={'_slime_full_graph_profile'}:
             command=request.server_args['_slime_full_graph_profile']
             if command==1:armed=True;steps=0;last_size=None;counters.clear()
+            elif command==3:
+                # First prewarm real prefill, decode and sampling requests. Lazy
+                # JIT loads after a profiling start/stop can crash Nsight even
+                # outside its active range. Recapture the original model only
+                # once all request paths have been warmed, for node provenance.
+                if armed or not config.get('nsys'):raise RuntimeError('Invalid recapture state')
+                if profile_capture:raise RuntimeError('Only one profiled recapture is allowed')
+                profile_capture=True;capture_started=False;profile_captured_sizes.clear()
+                self.tp_worker.model_runner.decode_cuda_graph_runner.capture()
+                if profile_captured_sizes!={2,4}:raise RuntimeError('Incomplete profiled recapture')
+                profile_capture=False
             elif command==2:
                 armed=False;torch.cuda.synchronize()
                 if last_size is None or steps!=targets:raise RuntimeError('Incomplete steady decode profile')

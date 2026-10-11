@@ -41,7 +41,10 @@ def main():
         engine.generate(input_ids=prompts[:3],sampling_params=dict(temperature=0,max_new_tokens=2,ignore_eos=True))
         for _ in range(3):
             flush_cache_until_idle(engine)
-            engine.generate(input_ids=prompts,sampling_params=dict(temperature=.6,max_new_tokens=128,ignore_eos=True))
+            engine.generate(input_ids=prompts,sampling_params=dict(temperature=.6,max_new_tokens=128,ignore_eos=True),
+                return_logprob=True,logprob_start_len=-1,return_routed_experts=True,routed_experts_start_len=0)
+        if args.nsys:
+            flush_cache_until_idle(engine);command(engine,3)
         flush_cache_until_idle(engine);command(engine,1)
         outputs=engine.generate(input_ids=prompts,sampling_params=dict(temperature=.6,max_new_tokens=32,ignore_eos=True),
             return_logprob=True,logprob_start_len=-1,return_routed_experts=True,routed_experts_start_len=0)
