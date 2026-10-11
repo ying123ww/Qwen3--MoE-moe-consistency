@@ -85,13 +85,31 @@ def summarize(events):
     names, mm_shapes = Counter(), Counter()
     intervals, gpu_events, devices = [], [], set()
     unlinked = 0
+    recovered_matrix_links = []
     for event in events:
         category = event.get('cat')
         if event.get('ph') != 'X' or category not in ('kernel', 'gpu_memcpy', 'gpu_memset'): continue
         name, duration = event.get('name', ''), event.get('dur', 0)
         launch = launches.get(event.get('args', {}).get('correlation'))
         component, phase = scope_at(scopes, launch) if launch else ('unscoped', 'unknown')
-        matrix = matrix_family(ops.get(event.get('args', {}).get('External id')))
+        external = event.get('args', {}).get('External id')
+        if external is None and launch:
+            external = launch.get('args', {}).get('External id')
+        op = ops.get(external)
+        # CUPTI occasionally omits External id on both a kernel and its API.
+        # The correlation still identifies the API. Require exactly one enclosing
+        # mm on that same CPU thread; do not infer from kernel duration or grid.
+        if op is None and launch and 'matmul_kernel_persistent' in name:
+            candidates = [row for row in ops.values()
+                          if (row.get('pid'), row.get('tid')) == (launch.get('pid'), launch.get('tid'))
+                          and row['ts'] <= launch['ts']
+                          and row['ts'] + row['dur'] >= launch['ts'] + launch.get('dur', 0)]
+            if len(candidates) == 1:
+                op = candidates[0]
+                recovered_matrix_links.append(dict(correlation=event.get('args', {}).get('correlation'),
+                    cpu_external_id=op.get('args', {}).get('External id'), input_dims=op.get('args', {}).get('Input Dims'),
+                    method='unique CPU mm enclosing the correlated launch on the same pid/tid'))
+        matrix = matrix_family(op)
         low = name.lower()
         if category != 'kernel': family = category
         elif 'nccl' in low: family = 'communication_nccl'
@@ -144,6 +162,7 @@ def summarize(events):
                 cpu_scope_counts=dict(scope_counts),cpu_scope_exclusive_s={k:v/1e6 for k,v in exclusive.items()},
                 gpu_gap_s=dict(before_next_launch=late/1e6,after_launch_started=queued/1e6,unlinked=unknown/1e6),
                 matrix_shapes=dict(mm_shapes),unlinked_persistent_matmul=unlinked,
+                recovered_matrix_links=recovered_matrix_links,
                 top_gpu_events=[dict(name=k,seconds=v/1e6) for k,v in names.most_common(25)],
                 top_cpu_apis=[dict(name=k,count=api_counts[k],seconds=v/1e6) for k,v in api_totals.most_common(20)],
                 limitation='Profiled durations. CPU scopes/API sums and GPU sums overlap and are not an elapsed partition. Before-launch gaps can include host scheduling and cross-rank waits, not solely CPU computation.')
