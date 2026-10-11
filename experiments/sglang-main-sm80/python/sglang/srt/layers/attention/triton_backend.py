@@ -1576,7 +1576,14 @@ class TritonAttnBackend(AttentionBackend):
                 raise ValueError("Unified decode alignment does not support speculative decoding")
             batch_size = q.shape[0]
             kv_lens = kv_indptr[1 : batch_size + 1] - kv_indptr[:batch_size]
-            if bool(torch.any(kv_lens <= 0).item()):
+            if torch.cuda.is_current_stream_capturing():
+                # Keep the dynamic validation in every replay without a D2H
+                # .item(), which is forbidden during CUDA graph capture.
+                torch._assert_async(
+                    torch.all(kv_lens > 0),
+                    "Unified decode alignment received an empty KV sequence",
+                )
+            elif bool(torch.any(kv_lens <= 0).item()):
                 raise ValueError("Unified decode alignment received an empty KV sequence")
             qo_indptr = torch.arange(batch_size + 1, dtype=torch.int32, device=q.device)
             prefix_lens = (kv_lens - 1).to(torch.int32)
