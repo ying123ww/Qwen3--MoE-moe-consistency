@@ -73,9 +73,12 @@ def install(config):
     max_rows=int(config.get('max_rows',16))
     if max_rows != 16:
         raise ValueError('This experiment is bounded to decode<=4 and EP4')
+    cache_rows=sorted(set(map(int,config.get('cache_rows',range(1,max_rows+1)))))
+    if not cache_rows or any(m<1 or m>max_rows for m in cache_rows):
+        raise ValueError('Invalid expert graph receive-row cache selection')
     shadow=bool(config.get('shadow',False))
     state=dict(ready=False,replays=0,zero_fallbacks=0,unsupported_fallbacks=0,
-               shadow_calls=0,shadow_elements=0,synthetic_calls=0,synthetic_elements=0)
+               shadow_calls=0,shadow_elements=0,synthetic_calls=0,synthetic_elements=0,cache_rows=cache_rows)
     row_hist=Counter()
     layer_hist=Counter()
     caches={}
@@ -119,7 +122,7 @@ def install(config):
                 return original(dispatch_output)
             supported=(isinstance(dispatch_output,DeepEPNormalDispatchOutput)
                 and dispatch_output.hidden_states_scale is None
-                and 1<=m<=max_rows and x.is_cuda and x.dtype==torch.bfloat16
+                and m in cache and x.is_cuda and x.dtype==torch.bfloat16
                 and x.shape[1]==2048 and x.is_contiguous()
                 and dispatch_output.topk_ids.shape==(m,8)
                 and dispatch_output.topk_ids.dtype==torch.int64
@@ -168,7 +171,7 @@ def install(config):
                 raise RuntimeError('Unexpected Qwen3 expert shape')
             original=layer.run_moe_core
             cache={m:ExpertGraph(original,m,2048,8,layer.w13_weight.device,stream)
-                   for m in range(1,max_rows+1)}
+                   for m in cache_rows}
             caches[layer.layer_id]=cache
             if shadow and layer.layer_id in (0,47):
                 for m,entry in cache.items():
@@ -190,7 +193,7 @@ def install(config):
         state.update(ready=True,build_seconds=time.perf_counter()-started,
                      allocated_memory_delta_bytes=torch.cuda.memory_allocated()-before)
         record('expert-cache')
-        print('EXPERT_GRAPH_CACHE_READY '+json.dumps(dict(rank=rank,graphs=48*max_rows,
+        print('EXPERT_GRAPH_CACHE_READY '+json.dumps(dict(rank=rank,graphs=48*len(cache_rows),
             build_seconds=state['build_seconds'],allocated_memory_delta_bytes=state['allocated_memory_delta_bytes'])),flush=True)
         return None
     return prepare
