@@ -6649,9 +6649,24 @@ class ServerArgs:
                         "--deepep-mode low_latency or auto."
                     )
             if self.deepep_mode == "normal":
-                logger.warning("Cuda graph is disabled because deepep_mode=`normal`")
-                self.cuda_graph_config.decode.backend = Backend.DISABLED
-                self.cuda_graph_config.prefill.backend = Backend.DISABLED
+                enabled_breakable = []
+                for phase in Phase.ALL:
+                    phase_config = self.cuda_graph_config[phase]
+                    if (
+                        (phase, "backend") in self._cuda_graph_config_locked
+                        and phase_config.backend == Backend.BREAKABLE
+                    ):
+                        enabled_breakable.append(phase)
+                    else:
+                        phase_config.backend = Backend.DISABLED
+                if enabled_breakable:
+                    logger.warning(
+                        "Experimental DeepEP normal breakable CUDA graph for %s: "
+                        "the entire MoE forward remains eager.",
+                        enabled_breakable,
+                    )
+                else:
+                    logger.warning("Cuda graph is disabled because deepep_mode=`normal`")
 
         if (
             self.moe_a2a_backend == "none" and is_npu()

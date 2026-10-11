@@ -23,6 +23,7 @@ from typing import TYPE_CHECKING, Any, Callable, Dict, Optional
 
 import torch
 
+from sglang.srt.layers.logits_processor import LogitsProcessorOutput
 from sglang.srt.distributed.device_communicators.pynccl_allocator import (
     set_graph_pool_id,
 )
@@ -150,6 +151,13 @@ class BreakableCudaGraphBackend(DedupedCudaGraphMixin, BaseCudaGraphBackend):
         """
         if torch.is_tensor(output):
             return min(cap, output.shape[0])
+        if isinstance(output, LogitsProcessorOutput):
+            rows = [
+                tensor.shape[0]
+                for tensor in (output.next_token_logits, output.hidden_states, output.full_logits)
+                if tensor is not None
+            ]
+            return min([cap, *rows])
         if isinstance(output, PPProxyTensors):
             rows = [t.shape[0] for t in output.tensors.values()]
             return min([cap, *rows])
@@ -163,6 +171,19 @@ class BreakableCudaGraphBackend(DedupedCudaGraphMixin, BaseCudaGraphBackend):
             return None
         if torch.is_tensor(output):
             return output.new_empty((size, *output.shape[1:]))
+        if isinstance(output, LogitsProcessorOutput):
+            # Decode sampling/logprobs run after replay. Capture only owns
+            # these model-produced tensors, matching DecodeCudaGraphRunner.
+            allowed = {"next_token_logits", "hidden_states", "full_logits", "customized_info"}
+            if any(value is not None for name, value in vars(output).items() if name not in allowed):
+                raise ValueError("BCG capture received non-decode logits metadata")
+            if output.customized_info is not None:
+                raise ValueError("BCG decode customized_info is not supported")
+            return LogitsProcessorOutput(
+                next_token_logits=self._alloc_full_buffer(output.next_token_logits, size),
+                hidden_states=self._alloc_full_buffer(output.hidden_states, size),
+                full_logits=self._alloc_full_buffer(output.full_logits, size),
+            )
         if isinstance(output, PPProxyTensors):
             return PPProxyTensors(
                 {
@@ -181,6 +202,12 @@ class BreakableCudaGraphBackend(DedupedCudaGraphMixin, BaseCudaGraphBackend):
             return None
         if torch.is_tensor(output):
             return output[:num_tokens]
+        if isinstance(output, LogitsProcessorOutput):
+            return LogitsProcessorOutput(
+                next_token_logits=self._slice_output(output.next_token_logits, num_tokens),
+                hidden_states=self._slice_output(output.hidden_states, num_tokens),
+                full_logits=self._slice_output(output.full_logits, num_tokens),
+            )
         if isinstance(output, PPProxyTensors):
             return output[:num_tokens]
         if isinstance(output, tuple):
@@ -201,6 +228,10 @@ class BreakableCudaGraphBackend(DedupedCudaGraphMixin, BaseCudaGraphBackend):
             )
         if torch.is_tensor(output) and torch.is_tensor(output_buffer):
             output_buffer[:num_tokens].copy_(output[:num_tokens])
+            return
+        if isinstance(output, LogitsProcessorOutput) and isinstance(output_buffer, LogitsProcessorOutput):
+            for name in ("next_token_logits", "hidden_states", "full_logits"):
+                self._copy_output_to_buffer(getattr(output, name), getattr(output_buffer, name), num_tokens)
             return
         if isinstance(output, PPProxyTensors) and isinstance(
             output_buffer, PPProxyTensors
