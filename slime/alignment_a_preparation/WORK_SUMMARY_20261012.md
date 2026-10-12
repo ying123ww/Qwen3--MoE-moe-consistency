@@ -649,7 +649,7 @@ Driver日志为项目 `.a-tmp/baseline-full-hgx03-20261012-01-driver.log`。
 ## 17. P10–P14：公平 Full Graph 对照、归因与更新生命周期
 
 P10、P12 已完成 GPU 数值和性能验收；P11 按用户取消剩余 NCU 采集后的范围完成。
-P13 真实在线生命周期回归也已完成；P14 尚未验收。以下结果不追认第16节的历史进程或资源状态仍有效。
+P13 真实在线生命周期和 P14 容量边界回归也已完成。以下结果不追认第16节的历史进程或资源状态仍有效。
 
 ### 17.1 P10：比较执行方案的实际剩余差距
 
@@ -702,6 +702,16 @@ O模块输出被后续inplace改写的问题已通过独立、逐bucket立即保
 快照解决：24份真实矩阵，112128输出元素和适用批次前缀逐bit门禁通过。
 失败的原始O快照没有被新证据追认为正确。
 
+最终验收另补实际prefill+sampling窗口：A/C相同8prompts/1218输入、各1响应，
+每rank2次eager prefill与1次附带full replay，8rank报告齐全；解析器以同线程
+NVTX和runtime/driver correlation拆分prefill、局部decode/idle、sampling和附带
+Graph，而非把一token请求称为纯prefill。rank0/4全窗口GPU并集A为
+129.383/118.133ms，C为145.849/155.635ms；sampling kernel sum约0.55/1.28ms。
+Prefill也有Router、投影、norm和attention差异，不能把duration sum当整轮
+关键路径。详见 [P11图外补充](P11_PREFILL_OUTSIDE_GRAPH_20261012.md)。
+成功补采 `p11-outer-prefill-hgx03-20261012-03` 和发布版归因通过；先前过严
+no-decode假设与rank7报告/关闭竞争的失败证据保留，失败实现未发布main。
+
 证据：[P11完整归因](P11_FULL_GRAPH_PROFILE_20261012.md)、
 [原始投影门禁](P11_RAW_PROJECTION_GATE_20261012.md)。成功提交 `89cb2f2e`、
 `52196c0b`，用户范围调整提交 `3545a52d`。失败NCU实现没有进入main。
@@ -734,7 +744,7 @@ mismatch，每种均16/16矩阵有差异。尽管微基准可能更快，严格a
 失败Split-K源码只在忽略目录，不进入main。成功实现和报告提交 `9419498a`。
 证据：[P12完整报告](P12_FULL_GRAPH_TILES_FUSIONS_20261012.md)。
 
-### 17.4 P13：真实更新生命周期完成；P14仍待GPU验收
+### 17.4 P13：真实更新生命周期完成
 
 P13的推理隔离生命周期补充测试已经实际执行：435个模型参数和96个KV张量的
 地址被记录，synthetic原地norm更新后旧图与重新捕获相同，sleep/wake恢复相同，
@@ -758,8 +768,31 @@ object/pool ID保持一致，旧图与重新捕获输出相同，v1/v2实际gree
 独立验收。成功runtime发布到 `gpu_tools/p13_online/`，不是任意partial update
 或标准有状态Adam的通用保证。见 [P13完整报告](P13_ONLINE_FULL_GRAPH_LIFECYCLE_20261012.md)。
 
-P14准备cap16/cap8全rank物理发送上界与guard、多batch/变长请求、零接收/idle
-路由、完整模型与eager shadow、PyTorch allocated/reserved及NVML驻留采样、
-捕获成本和允许范围外拒绝。CPU上界检查或准备好入口均不等于实际GPU验收，
-P14当前尚未执行GPU测试。P14完成后会补充独立报告和此处结果，再逐项
-审计 [实验计划](P10_P14_EXPERIMENT_PLAN_20261012.md)，才宣布五阶段全部完成。
+### 17.5 P14：容量上界、显存、多batch和零接收边界完成
+
+三组独立GPU运行分别完成完整模型cap16/cap8、受控normal dispatch/combine
+路由、eager padding shadow。完整模型每容量10case、53请求、837 targets，
+涵盖batch1/2/3/4/7/8/12、实际输入17/63/129/137、输出1/4/16/32与重复prompt。
+cap16/8及对应eager/full tokens、logprob bits、route形状与哈希全部相同。
+各rank/bucket48层native full捕获/回放、0纯decode eager回退、实际超界拒绝
+均通过。两种容量分别67584次expert shadow、687022080输出元素零bit差异，
+含各1710次空接收。8rank×5路由case覆盖集中/均衡/分散/idle及全零接收，
+实际接收行数和identityexpert combine输出均经独立检查；不替代模型门禁。
+
+cap8不靠平均路由缩容：global max_running_requests8在DP2实际每scheduler4，
+CP2/buckets2/4保证物理send≤2，EP4最坏receive≤8；入口也在通信前拒绝
+任一rank超界。cap16保守界为EP4×4=16。12请求通过队列进入受约束shape，
+不支持任意更大并发自动扩图；其他拓扑和跨节点仍未验证。
+
+Torch peak allocated cap16约50981.46–50981.52MiB，cap8约50981.45–50981.51MiB，
+总显存节省仅约0.01MiB；模型/KV等占用主导，NVML sampled peak两容量均
+55214–55506MiB。Torch峰值在模型/pool设置后reset，不覆盖此前加载峰值；
+NVML 1秒采样包含非Torch分配，可能漏瞬时峰值。两bucket capture+warmup
+最慢rank总和67.450/1.741秒，Engine初始化308.274/125.292秒；先cap16后cap8
+共享缓存，不能将顺序/冷编译差异当容量加速，cap8正式生成延迟收益未测。
+
+默认保留cap16，cap8是有明确边界的实验选项。成功源码发布到
+`gpu_tools/p14_capacity/`；发布版独立三运行验收器及6项CPU上界检查通过。
+完整记录见 [P14报告](P14_CAPACITY_MEMORY_BOUNDARIES_20261012.md)。
+最终逐项证据见 [P10–P14验收清单](P10_P14_COMPLETION_AUDIT_20261012.md)。
+本轮GPU任务均已结束，无保号任务；历史PID/分支仅供审计，成功实现直接提交main。

@@ -159,4 +159,10 @@ CPU检查共10项：source event嵌套/完整性6项，活动并集、线程来�
 进程隔离4项。实际A/C图内kernel来源完整性也经SQLite检验。
 O 原始操作数参考已由上述独立门禁补齐；NCU 补采经用户取消。
 P12 的实际完整模型门禁和无 profiler 计时见
-[P12报告](P12_FULL_GRAPH_TILES_FUSIONS_20261012.md)。后续继续 P13–P14。
+[P12报告](P12_FULL_GRAPH_TILES_FUSIONS_20261012.md)。P13/P14也已完成。
+
+最终验收补齐了32decode窗口之外的实际prefill与sampling来源，见
+[P11图外prefill补充](P11_PREFILL_OUTSIDE_GRAPH_20261012.md)。该补充将eager
+prefill、附带decode/idle/Graph分别记录，不把一token请求称为纯prefill；
+两模式8rank报告、workload门禁和发布版SQLite归因通过。整体证据见
+[最终验收清单](P10_P14_COMPLETION_AUDIT_20261012.md)。
