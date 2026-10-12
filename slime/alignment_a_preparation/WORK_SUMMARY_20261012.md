@@ -649,7 +649,7 @@ Driver日志为项目 `.a-tmp/baseline-full-hgx03-20261012-01-driver.log`。
 ## 17. P10–P14：公平 Full Graph 对照、归因与更新生命周期
 
 P10、P12 已完成 GPU 数值和性能验收；P11 按用户取消剩余 NCU 采集后的范围完成。
-P13 和 P14 尚未验收。以下结果不追认第16节的历史进程或资源状态仍有效。
+P13 真实在线生命周期回归也已完成；P14 尚未验收。以下结果不追认第16节的历史进程或资源状态仍有效。
 
 ### 17.1 P10：比较执行方案的实际剩余差距
 
@@ -734,7 +734,7 @@ mismatch，每种均16/16矩阵有差异。尽管微基准可能更快，严格a
 失败Split-K源码只在忽略目录，不进入main。成功实现和报告提交 `9419498a`。
 证据：[P12完整报告](P12_FULL_GRAPH_TILES_FUSIONS_20261012.md)。
 
-### 17.4 P13/P14：仍需实际验收的工作
+### 17.4 P13：真实更新生命周期完成；P14仍待GPU验收
 
 P13的推理隔离生命周期补充测试已经实际执行：435个模型参数和96个KV张量的
 地址被记录，synthetic原地norm更新后旧图与重新捕获相同，sleep/wake恢复相同，
@@ -749,10 +749,17 @@ P13的推理隔离生命周期补充测试已经实际执行：435个模型参�
 `--colocate` 条件下选择 `UpdateWeightFromTensor`，含训练侧NCCL收集及Gloo/IPC
 向SGLang投递，不能只凭CLI字符串称最后投递为纯NCCL广播。验收重点是完整
 权重同步、实际更新后旧图读取新值、地址/graph pool生命周期，以及版本0/1/2
-严格logprob门禁。P13尚未有全部通过的真实在线结果，也尚未发布临时实现。
+严格logprob门禁。成功运行 `p13-full-online-hgx03-20261012-06` 已完成该回归：
+三版本各1024个target logprob bits零差异，8rank前两轮梯度均非零，抽样master
+参数变化分别47250–69715、44490–65662个元素。所有rank全量同步后旧graph
+object/pool ID保持一致，旧图与重新捕获输出相同，v1/v2实际greedy输出与前一
+版本不同；每rank记录435个weight parameters、96个KV张量和request指针。
+地址替换负例实际被拒绝，重建后恢复，sleep/wake与50bucket完整恢复同步均经
+独立验收。成功runtime发布到 `gpu_tools/p13_online/`，不是任意partial update
+或标准有状态Adam的通用保证。见 [P13完整报告](P13_ONLINE_FULL_GRAPH_LIFECYCLE_20261012.md)。
 
 P14准备cap16/cap8全rank物理发送上界与guard、多batch/变长请求、零接收/idle
 路由、完整模型与eager shadow、PyTorch allocated/reserved及NVML驻留采样、
 捕获成本和允许范围外拒绝。CPU上界检查或准备好入口均不等于实际GPU验收，
-P14当前尚未执行GPU测试。P13/P14完成后会补充独立报告和此处结果，再逐项
+P14当前尚未执行GPU测试。P14完成后会补充独立报告和此处结果，再逐项
 审计 [实验计划](P10_P14_EXPERIMENT_PLAN_20261012.md)，才宣布五阶段全部完成。
