@@ -28,6 +28,11 @@
 - 同时报告GPU活动并集、重叠、依赖/等待及host窗口；duration sum不等于generate关键路径。
 - 使用实际shape/来源关联，不能按一个kernel名猜测全部调用归属。性能数字来自无profiler运行。
 
+范围调整（2026-10-12）：用户明确表示“我没有这个nsight，那算了”，取消
+剩余 Nsight Compute 硬件计数器采集要求。已有 A/C Nsight Systems 实测、
+原始操作数逐bit门禁保留；未取得的 occupancy/SM 利用率等指标注明未测。
+此调整不取消 P13/P14 或最终总结与验收。
+
 ## P12 候选完整模型与Full Graph验证
 
 - 首先QKV/O小tile BM16/BN64/BK64，保留K归约与累加顺序；真实张量、模型、batch及graph门禁。

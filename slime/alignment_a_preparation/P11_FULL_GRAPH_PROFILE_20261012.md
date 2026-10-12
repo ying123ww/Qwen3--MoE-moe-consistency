@@ -1,8 +1,10 @@
 # P11 Full Decode Graph 的 CPU/GPU 归因
 
-**A/C Nsight Systems 采集与来源关联完成；P11 整阶段尚未完成。**
+**A/C Nsight Systems 采集与来源关联完成；P11 按用户调整后的范围完成。**
 选定 kernel 的 Nsight Compute 在当前账户下返回 `ERR_NVGPUCTRPERM`，
 没有取得硬件计数器数据。不能把尝试执行 NCU 记成成功采集。
+2026-10-12 用户明确表示“我没有这个nsight，那算了”，取消剩余 NCU
+硬件计数器采集要求。以下时间线与来源归因仍有效；占用率等硬件指标保持未测状态。
 P12–P14 仍待完成；本报告只提交经过验证的 Nsight Systems 工具与结果。
 
 ## 条件与采集边界
@@ -116,7 +118,8 @@ DeepEP可在通信stream异步执行，因此方法周围的event区间不会完
 选定QKV/O真实操作数上的原始persistent kernel实际尝试了SpeedOfLight+
 LaunchStats、仅LaunchStats、仅launch指标及instruction-level source指标。
 当前账户均返回 `ERR_NVGPUCTRPERM`；没有成功的NCU报告，也没有测得
-achieved occupancy、SM利用率或memory throughput。管理员权限处理尚待完成。
+achieved occupancy、SM利用率或memory throughput。用户已取消补采要求，
+不再等待管理员权限处理；这些指标不得作为已有测量结果引用。
 失败日志和临时NCU入口只保留本地，未作为成功实现提交。
 
 Nsight Systems已有实际launch metadata，但它不替代硬件计数器。
@@ -154,4 +157,6 @@ raw `.nsys-rep`、SQLite、组件JSON和实际操作数位于忽略的gpu_runs�
 
 CPU检查共10项：source event嵌套/完整性6项，活动并集、线程来源、克隆链、
 进程隔离4项。实际A/C图内kernel来源完整性也经SQLite检验。
-后续先补齐受权限限制的NCU与O原始操作数参考，再按计划完成P12–P14。
+O 原始操作数参考已由上述独立门禁补齐；NCU 补采经用户取消。
+P12 的实际完整模型门禁和无 profiler 计时见
+[P12报告](P12_FULL_GRAPH_TILES_FUSIONS_20261012.md)。后续继续 P13–P14。
