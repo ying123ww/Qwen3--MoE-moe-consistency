@@ -2,9 +2,22 @@
 
 最新整理：2026-10-12。整个目录的工作、结果、实现状态、失败原因和复跑入口见
 [详尽总览 WORK_SUMMARY_20261012.md](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/WORK_SUMMARY_20261012.md)。
-最新baseline完整decode Graph测量为1.890481秒，较同轮最佳Breakable的3.093301秒
+历史 P9 baseline 完整 decode Graph 测量为1.890481秒，较同轮最佳Breakable的3.093301秒
 降低38.885%；prefill仍eager。配置和验证边界见
 [P9_BASELINE_FULL_DECODE_20261012.md](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/P9_BASELINE_FULL_DECODE_20261012.md)。
+
+P10–P14 的当前验收状态如下；未完成项不会由历史结果代替。
+
+| 阶段 | 当前结论 | 报告或验收要求 |
+|---|---|---|
+| P10 | 同轮 Full/Full 三模式完成；C/B 配对额外开销中位 +69.939% | [P10报告](P10_FULL_GRAPH_DETERMINISTIC_AB_20261012.md)，包含真实 route 回传成本 |
+| P11 | A/C 32 decode steps 时间线归因完成；用户取消剩余 NCU 硬件计数器采集 | [P11报告](P11_FULL_GRAPH_PROFILE_20261012.md)、[原始投影门禁](P11_RAW_PROJECTION_GATE_20261012.md) |
+| P12 | 小tile、残差 RMS、Q/K、Router 叠加，完整 generate 配对延迟下降中位 19.93% | [P12报告](P12_FULL_GRAPH_TILES_FUSIONS_20261012.md)；Split-K 有 bit mismatch，未发布失败实现 |
+| P13 | 真实在线回归仍在验证，未验收 | 两轮非零更新、v0/v1/v2 各1024 target logprob bits、旧图/重捕获、sleep/wake 与地址替换恢复 |
+| P14 | 工具已准备，GPU 验收尚未运行 | cap8/16 全rank上界、模型多batch、零接收/idle、显存与捕获成本、边界拒绝 |
+
+P10/P12 与 P9 的 route 观测及配置不同，不能直接相除发布新的额外开销。
+范围和最终验收清单见 [P10–P14计划](P10_P14_EXPERIMENT_PLAN_20261012.md)。
 
 以下正文保留2026-09-09 CPU准备阶段的原始实验设计，其中“未完成”“下一步”等
 均为当时状态，不代表后续GPU实验仍未完成。早期启动记录保留于 `gpu_runs/PROGRESS.md`、

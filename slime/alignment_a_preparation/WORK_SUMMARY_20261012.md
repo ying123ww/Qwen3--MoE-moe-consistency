@@ -1,12 +1,13 @@
 # alignment_a_preparation 工作总览与实验总结
 
 整理日期：2026-10-12，Asia/Shanghai。目录实际名称为 `alignment_a_preparation`。
-覆盖 2026-09-09 至本次 baseline full decode Graph 实验的准备、训练一致性、
+覆盖 2026-09-09 至 P10–P14 实验的准备、训练一致性、
 性能测量、瓶颈调查、CPU optimizer、RoutePack/AutoPack 与推理优化工作。
 
 本文是总览，原始阶段报告和失败目录保留。旧报告中的“未运行”“进行中”和
 交接 PID 是对应日期的状态，不能直接作为今天的状态。
-本次baseline完整decode Graph已通过捕获/回放和有限模型门禁，20正式批中位数
+第1–16节记录 P9 及以前的历史总结。P10–P14 的最新结果与未完成范围见第17节。
+历史baseline完整decode Graph已通过捕获/回放和有限模型门禁，20正式批中位数
 1.890481秒，比同轮最佳baseline Breakable的3.093301秒下降38.885%。Prefill保持eager。
 完整记录见第13节；目录入口已更新，所有历史证据保留。
 
@@ -644,3 +645,114 @@ full工具、P9、总览和README另保存并推送 `195fb228`。按用户最新
 历史报告中保号PID仅是历史记录。
 Driver日志为项目 `.a-tmp/baseline-full-hgx03-20261012-01-driver.log`。
 本次未移动/删除历史运行目录，完成工作以阶段报告、总览和Git提交保存。
+
+## 17. P10–P14：公平 Full Graph 对照、归因与更新生命周期
+
+P10、P12 已完成 GPU 数值和性能验收；P11 按用户取消剩余 NCU 采集后的范围完成。
+P13 和 P14 尚未验收。以下结果不追认第16节的历史进程或资源状态仍有效。
+
+### 17.1 P10：比较执行方案的实际剩余差距
+
+三模式均采用同一提交、checkpoint、8×A100、TP8/DP2/CP2/EP4/MoE DP2、
+decode full、buckets2/4、接收容量16和 prefill eager。A 非确定性默认通信配置，
+B 非确定性显式20SM配置，C 确定性且使用B的通信配置与已验证残差RMS融合。
+每Engine3预热+20正式，三轮ABC/BCA/CAB，共9次独立启动、180正式批。
+实际token/routes被保存，route回传成本计入generate，文件保存和差异分析在计时外。
+
+| 模式 | 三个Engine中位数再取中位数 s | 与对应对照的三轮配对变化中位数 |
+|---|---:|---|
+| A：非确定性默认通信 | 2.019609 | 基线 |
+| B：非确定性固定通信 | 1.994497 | B/A −1.243% |
+| C：确定性固定通信 | 3.389224 | C/B +69.939% |
+
+默认A实际也使用20SM，区别主要是NVL/RDMA分块参数，不能说A→B仅改变SM数量。
+各rank正式区间2560次原生full replay，纯全局decode eager回退0；全局prefill期间
+DP局部decode允许eager，并单独记录。C改变GEMM、attention、sampling、all-reduce
+等多条数值路径，C/B不是RMS或纯GEMM开销。自然生成的A/B/C实际token/routes
+存在差异，因此这是一组完整执行方案的性能比较，不是固定每个GPU操作数的消融。
+P9没有相同route回传开销，1.890481秒不能与此表直接作同条件比较。
+
+证据：[P10测量](P10_FULL_GRAPH_DETERMINISTIC_AB_20261012.md)、
+[P10模型与通信门禁](P10_FULL_GRAPH_AB_GATE_20261012.md)。
+成功提交 `68b8fef3`、`ff82e68d`；独立验证器重算9个Engine、180正式批、
+NPZ实际工作负载和配对比例，原始数据留在 `gpu_runs/p10-full-ab-timing-hgx03-20261012-01`。
+
+### 17.2 P11：实际GPU时间线与来源，而非按名字猜测
+
+A/C 各选相同32个decode steps，保存rank0/4原始Nsight Systems报告和SQLite。
+GraphNodeId按进程区分，沿clone父链关联到同线程最内层来源NVTX，所有采样图内
+kernel都有来源；rank0/4均从A的57088个图内kernel增加到C的64768个，多7680个。
+这对应当前Full窗口，不能与历史eager的52210个GPU事件混作同一个计数口径。
+
+| rank0 / 32 steps | A ms | C ms | 解释 |
+|---|---:|---:|---|
+| GPU活动并集 | 456.066 | 814.080 | 同时考虑跨stream重叠，仍不是整轮generate |
+| GPU kernel duration sum | 457.880 | 815.903 | 不能相加解释关键路径 |
+| 所选GPU活动首尾窗口 | 765.127 | 1141.176 | 包含间隙，不能把每个间隙都归因CPU |
+
+来源归因显示 Router、QKV/O、attention 与专家计算均有实际GPU差异，通信差异相对小。
+Router只有1个CTA、QKV20、O16，相对108SM的A100是很小的launch规模；这属于
+launch metadata证据，未测achieved occupancy，不能把它称为硬件占用率测量。
+CPU `cudaGraphLaunch` 在profiler下明显膨胀，无profiler性能结论采用P10/P12。
+图内D2H为0；图外sampling/metadata/prefill仍有拷贝，不称整个请求无CPU同步。
+
+选定NCU指标实际返回 `ERR_NVGPUCTRPERM`。用户明确取消剩余采集后，P11按
+调整范围验收；occupancy、SM利用率和memory throughput保持未测。
+O模块输出被后续inplace改写的问题已通过独立、逐bucket立即保存的raw GEMM
+快照解决：24份真实矩阵，112128输出元素和适用批次前缀逐bit门禁通过。
+失败的原始O快照没有被新证据追认为正确。
+
+证据：[P11完整归因](P11_FULL_GRAPH_PROFILE_20261012.md)、
+[原始投影门禁](P11_RAW_PROJECTION_GATE_20261012.md)。成功提交 `89cb2f2e`、
+`52196c0b`，用户范围调整提交 `3545a52d`。失败NCU实现没有进入main。
+
+### 17.3 P12：先保持归约顺序，再验完整模型和实际性能
+
+QKV/O使用BM16/BN64/BK64，保留原K归约与累加顺序；Router沿用已验证的小tile。
+残差RMS和联合Q/K norm/layout均在捕获前安装，逐rank/bucket记录实际图中候选调用。
+七种候选完整模型有限门禁通过；RMS on捕获95次、off为0，Q/K on为48次，
+Router on覆盖48层，QKV/O两类各48层。正式运行还证明各rank实际full回放，无纯decode回退。
+
+| 同条件Full方案，首轮pilot | P50 s | P95 s |
+|---|---:|---:|
+| Reference，原QKV/O、RMS on | 3.390534 | 3.402511 |
+| QKV/O小tile、RMS on | 3.075585 | 3.124919 |
+| 原QKV/O、RMS off | 3.666562 | 3.809668 |
+| 小tile、RMS off | 3.342247 | 3.382743 |
+| 小tile + Q/K、RMS on | 3.050546 | 3.193955 |
+| 小tile + Router、RMS on | 2.751210 | 2.889395 |
+| 小tile + Q/K + Router、RMS on | 2.715794 | 2.852725 |
+
+最终选择小tile + RMS + Q/K + Router。与Reference的三轮配对变化分别为
+−19.9007%、−20.2348%、−19.9317%，中位−19.9317%；不是在线RL端到端提速。
+RMS关闭在两种投影路径均变慢，不支持“剩余慢主要来自RMSNorm”的归因。
+共11次独立Engine、220正式批；160个候选/参考批对的tokens/routes相同，
+163840个target logprob元素逐bit一致。所有GPU快照、测量和计数由独立验证器重算。
+
+条件性Split-K2/4对16份实际BF16矩阵、110592输出元素分别出现155/159个bit
+mismatch，每种均16/16矩阵有差异。尽管微基准可能更快，严格alignment拒绝它们。
+失败Split-K源码只在忽略目录，不进入main。成功实现和报告提交 `9419498a`。
+证据：[P12完整报告](P12_FULL_GRAPH_TILES_FUSIONS_20261012.md)。
+
+### 17.4 P13/P14：仍需实际验收的工作
+
+P13的推理隔离生命周期补充测试已经实际执行：435个模型参数和96个KV张量的
+地址被记录，synthetic原地norm更新后旧图与重新捕获相同，sleep/wake恢复相同，
+地址替换负例拒绝旧图并可重建恢复。它不替代两轮真实Slime/Megatron更新。
+真实在线测试保留v89的StatelessAdam/reset states和全量权重同步；用真实自然生成
+的8×128 response，每个版本与训练端1024 target logprob bits比较。
+原random reward曾使组内两条奖励相同、GRPO advantage和梯度全为0，该轮被拒绝。
+当前诊断奖励固定每两样本0/1，仍执行真实前后向、优化器和权重同步；不代表任务
+学习效果，也不冒称原随机reward的结果。路由器503失败也不计作成功训练回归。
+
+同步路径必须按实际源码和运行检查：CLI `--update-weight-transport nccl` 在
+`--colocate` 条件下选择 `UpdateWeightFromTensor`，含训练侧NCCL收集及Gloo/IPC
+向SGLang投递，不能只凭CLI字符串称最后投递为纯NCCL广播。验收重点是完整
+权重同步、实际更新后旧图读取新值、地址/graph pool生命周期，以及版本0/1/2
+严格logprob门禁。P13尚未有全部通过的真实在线结果，也尚未发布临时实现。
+
+P14准备cap16/cap8全rank物理发送上界与guard、多batch/变长请求、零接收/idle
+路由、完整模型与eager shadow、PyTorch allocated/reserved及NVML驻留采样、
+捕获成本和允许范围外拒绝。CPU上界检查或准备好入口均不等于实际GPU验收，
+P14当前尚未执行GPU测试。P13/P14完成后会补充独立报告和此处结果，再逐项
+审计 [实验计划](P10_P14_EXPERIMENT_PLAN_20261012.md)，才宣布五阶段全部完成。

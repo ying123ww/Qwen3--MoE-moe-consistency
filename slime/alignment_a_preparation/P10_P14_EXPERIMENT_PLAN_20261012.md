@@ -48,7 +48,10 @@
 - 记录全模型weight storage地址/版本；原地更新后旧图必须读取新值。
 - 用更新后replay与重新捕获参考比较，验证sleep/wake、weights/KV offload/onload和graph pool。
 - 若地址替换，必须失效/重建而非重放旧指针；包含可检测的负例和恢复检查。
-- 每轮1024 target tokens bitwise logprob gate、非零gradient、实际同步完成和graph回放证据。
+- 每轮1024 target tokens bitwise logprob gate、非零gradient、实际全量同步完成和graph回放证据。
+- 同步transport按实际源码与运行说明：v89 colocate配置即使CLI为nccl也选择
+  UpdateWeightFromTensor，训练侧NCCL收集后经Gloo/IPC向SGLang投递；不能凭CLI
+  字符串称最终投递为纯NCCL广播。保持原拓扑，验收完整权重更新而非更换同步实验。
 - 不用synthetic tensor更新替代两轮真实Megatron/Slime更新；隔离张量测试仅补机制证据。
 
 ## P14 容量、显存、多batch与边界
