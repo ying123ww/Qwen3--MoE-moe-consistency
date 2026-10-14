@@ -1,6 +1,10 @@
 # alignment_a_preparation：实验入口与历史准备说明
 
-最新整理：2026-10-12。整个目录的工作、结果、实现状态、失败原因和复跑入口见
+最新补充：2026-10-15。真实残差 RMSNorm、Q/K norm/layout 的原实现、手写融合与
+torch.compile 对照见 [COMPILE_NORM_COMPARISON_20261015.md](COMPILE_NORM_COMPARISON_20261015.md)。
+手写在本轮真实输入上逐 bit 通过且更快；默认 compile 的数值限制和两种计时口径均有记录。
+
+截至2026-10-12的整个目录工作、结果、实现状态、失败原因和复跑入口见
 [详尽总览 WORK_SUMMARY_20261012.md](/public/home/yingxy2024/moe-consistency/slime/alignment_a_preparation/WORK_SUMMARY_20261012.md)。
 历史 P9 baseline 完整 decode Graph 测量为1.890481秒，较同轮最佳Breakable的3.093301秒
 降低38.885%；prefill仍eager。配置和验证边界见
