@@ -1,0 +1,61 @@
+Node: ai_hgx_01
+GPU: NVIDIA A100-SXM4-80GB, GPU 0 only
+Date: 2026-10-15 (Asia/Shanghai)
+Command: CUDA_VISIBLE_DEVICES=0 TORCHINDUCTOR_COMPILE_THREADS=1 TORCH_LOGS=output_code OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python -u gpu_tools/compile_add_relu_cpu_probe.py --device cuda --benchmark
+Process exit code: 0
+Full compiler log on ai_hgx_01: /tmp/moe_compile_add_relu_gpu_20261015_02.log
+
+torch=2.4.1+cu121; device=cuda
+dtype=torch.float32 batch=1 strided=False mismatched_bytes=0
+dtype=torch.float32 batch=1 strided=True mismatched_bytes=0
+dtype=torch.float32 batch=2 strided=False mismatched_bytes=0
+dtype=torch.float32 batch=2 strided=True mismatched_bytes=0
+dtype=torch.float32 batch=4 strided=False mismatched_bytes=0
+dtype=torch.float32 batch=4 strided=True mismatched_bytes=0
+dtype=torch.float32 batch=8 strided=False mismatched_bytes=0
+dtype=torch.float32 batch=8 strided=True mismatched_bytes=0
+dtype=torch.float16 batch=1 strided=False mismatched_bytes=0
+dtype=torch.float16 batch=1 strided=True mismatched_bytes=0
+dtype=torch.float16 batch=2 strided=False mismatched_bytes=0
+dtype=torch.float16 batch=2 strided=True mismatched_bytes=0
+dtype=torch.float16 batch=4 strided=False mismatched_bytes=0
+dtype=torch.float16 batch=4 strided=True mismatched_bytes=0
+dtype=torch.float16 batch=8 strided=False mismatched_bytes=0
+dtype=torch.float16 batch=8 strided=True mismatched_bytes=0
+dtype=torch.bfloat16 batch=1 strided=False mismatched_bytes=0
+dtype=torch.bfloat16 batch=1 strided=True mismatched_bytes=0
+dtype=torch.bfloat16 batch=2 strided=False mismatched_bytes=0
+dtype=torch.bfloat16 batch=2 strided=True mismatched_bytes=0
+dtype=torch.bfloat16 batch=4 strided=False mismatched_bytes=0
+dtype=torch.bfloat16 batch=4 strided=True mismatched_bytes=0
+dtype=torch.bfloat16 batch=8 strided=False mismatched_bytes=0
+dtype=torch.bfloat16 batch=8 strided=True mismatched_bytes=0
+cases=24 failed_cases=0
+BENCH bf16 batch=1 width=2048 eager_us=29.3888 compile_us=48.1485 eager_graph_us=26.2605 compile_graph_us=26.1427
+GPU_GRAPH_100 bf16 batch=1 width=2048 eager_us=3.5860 compile_us=1.8207
+BENCH bf16 batch=2 width=2048 eager_us=29.0704 compile_us=54.0058 eager_graph_us=26.3987 compile_graph_us=26.3578
+GPU_GRAPH_100 bf16 batch=2 width=2048 eager_us=3.5978 compile_us=1.8678
+BENCH bf16 batch=4 width=2048 eager_us=29.3786 compile_us=53.5347 eager_graph_us=26.2758 compile_graph_us=26.3834
+GPU_GRAPH_100 bf16 batch=4 width=2048 eager_us=3.6567 compile_us=1.8898
+BENCH bf16 batch=8 width=2048 eager_us=29.5219 compile_us=53.6525 eager_graph_us=26.3219 compile_graph_us=26.3373
+GPU_GRAPH_100 bf16 batch=8 width=2048 eager_us=3.7299 compile_us=1.9753
+pid, process_name, used_gpu_memory [MiB]
+
+Compiler evidence from the first successful GPU run:
+Log: /tmp/moe_compile_add_relu_gpu_20261015.log
+Generated module: /tmp/torchinductor_yingxy2024/53/c53s6jkc2743iwfhgmusx7xpbt26bdk5x7bo5sdobtqdgmzbvz27.py
+# Source Nodes: [add, relu], Original ATen: [aten.add, aten.relu]
+triton_poi_fused_add_relu_0.run(arg1_1, arg2_1, buf0, triton_poi_fused_add_relu_0_xnumel, grid=grid(triton_poi_fused_add_relu_0_xnumel), stream=stream0)
+
+BENCH: median of 5 CUDA-event samples, 200 Python calls or single-op graph
+replays per sample. Includes GPU idle gaps caused by Python submission.
+GPU_GRAPH_100: capture 100 calls per graph, median of 5 samples, 20 graph
+replays per sample, divided by 2000 operations. Amortizes Python launch
+overhead and measures repeated GPU work, including graph execution overhead.
+Compilation and warmup excluded. Timing order rotated. Graph outputs checked
+against eager byte-for-byte. Each input shape is [batch, 2048], BF16.
+
+Results apply to plain Add + ReLU only. This is not a comparison against the
+project's handwritten residual RMSNorm or Q/K layout kernels, not proof of
+all-input equivalence, and not a full-model throughput benchmark.
+No GPU compute processes remained on the node after this test.

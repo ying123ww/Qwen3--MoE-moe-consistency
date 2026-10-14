@@ -1,0 +1,39 @@
+CPU check completed 2026-10-15 (Asia/Shanghai).
+Command: TORCH_LOGS=output_code OMP_NUM_THREADS=1 MKL_NUM_THREADS=1 python gpu_tools/compile_add_relu_cpu_probe.py
+Process exit code: 0
+torch=2.4.1+cu121; device=cpu
+dtype=torch.float32 batch=1 strided=False mismatched_bytes=0
+dtype=torch.float32 batch=1 strided=True mismatched_bytes=0
+dtype=torch.float32 batch=2 strided=False mismatched_bytes=0
+dtype=torch.float32 batch=2 strided=True mismatched_bytes=0
+dtype=torch.float32 batch=4 strided=False mismatched_bytes=0
+dtype=torch.float32 batch=4 strided=True mismatched_bytes=0
+dtype=torch.float32 batch=8 strided=False mismatched_bytes=0
+dtype=torch.float32 batch=8 strided=True mismatched_bytes=0
+dtype=torch.float16 batch=1 strided=False mismatched_bytes=0
+dtype=torch.float16 batch=1 strided=True mismatched_bytes=0
+dtype=torch.float16 batch=2 strided=False mismatched_bytes=0
+dtype=torch.float16 batch=2 strided=True mismatched_bytes=0
+dtype=torch.float16 batch=4 strided=False mismatched_bytes=0
+dtype=torch.float16 batch=4 strided=True mismatched_bytes=0
+dtype=torch.float16 batch=8 strided=False mismatched_bytes=0
+dtype=torch.float16 batch=8 strided=True mismatched_bytes=0
+dtype=torch.bfloat16 batch=1 strided=False mismatched_bytes=0
+dtype=torch.bfloat16 batch=1 strided=True mismatched_bytes=0
+dtype=torch.bfloat16 batch=2 strided=False mismatched_bytes=0
+dtype=torch.bfloat16 batch=2 strided=True mismatched_bytes=0
+dtype=torch.bfloat16 batch=4 strided=False mismatched_bytes=0
+dtype=torch.bfloat16 batch=4 strided=True mismatched_bytes=0
+dtype=torch.bfloat16 batch=8 strided=False mismatched_bytes=0
+dtype=torch.bfloat16 batch=8 strided=True mismatched_bytes=0
+cases=24 failed_cases=0
+
+Generated FP32 contiguous implementation:
+/tmp/torchinductor_yingxy2024/ju/cjujvusu3f6oupiay65c446fbhz6suuor32hhepk6nevh4m6bglv.py
+42: auto tmp2 = tmp0 + tmp1;
+43: auto tmp3 = at::vec::clamp_min(tmp2, decltype(tmp2)(0));
+70: cpp_fused_add_relu_0(arg1_1, arg2_1, buf0, s0)
+
+This proves CPU fusion for this plain PyTorch Add + ReLU probe.
+Random finite input tests do not prove all-input equivalence, RMSNorm correctness,
+CUDA fusion, A100 speedup, or full-model throughput.
